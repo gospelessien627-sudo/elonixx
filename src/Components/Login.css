@@ -1,0 +1,813 @@
+
+@import url(
+  "https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+);
+
+
+/* =========================
+   RESET
+========================= */
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+h1 {
+  font-size: clamp(2rem, 5vw, 3.5rem);
+  /* color: rgb(3, 3, 66); */
+  color: white;
+}
+
+h2 {
+  font-size: clamp(1.6rem, 4vw, 2.8rem);
+  /* color: rgb(3, 3, 66); */
+  color: white;
+}
+
+h3 {
+  font-size: clamp(1.3rem, 3vw, 2rem);
+  /* color: rgb(3, 3, 66); */
+  color: white;
+}
+
+h4 {
+  font-size: clamp(1.15rem, 2.5vw, 1.6rem);
+  /* color: rgb(3, 3, 66); */
+  color: white;
+}
+
+h5 {
+  font-size: clamp(1rem, 2vw, 1.4rem);
+  /* color:rgb(3, 3, 66); */
+    color: white;
+}
+
+h6 {
+  font-size: clamp(0.95rem, 1.5vw, 1.2rem);
+  /* color:rgb(3, 3, 66); */
+  color: white;
+}
+
+p {
+  font-size: clamp(0.95rem, 1.5vw, 1.1rem);
+  /* color:rgb(3, 3, 66); */
+  color: white;
+}
+svg {
+  width: clamp(1rem, 2vw, 1.5rem);
+  height: clamp(1rem, 2vw, 1.5rem);
+  /* color:rgb(3, 3, 66); */
+  color: dimgray;
+}
+a {
+  font-size: clamp(0.9rem, 1.5vw, 1.1rem);
+  /* color:rgb(3, 3, 66); */
+  color: white;
+  font-weight: bold;
+}
+
+button {
+  font-size: clamp(0.9rem, 1.5vw, 1.1rem);
+  padding: clamp(0.6rem, 1.2vw, 0.8rem)
+           clamp(1rem, 2vw, 1.5rem);
+  border-radius: clamp(6px, 1vw, 10px);
+}
+span {
+  /* font-size: clamp(0.85rem, 1.2vw, 1rem); */
+  /* color:rgb(3, 3, 66); */
+  color: dimgray;
+}
+
+/* body {
+  font-family: "Inter", sans-serif;
+  background: #f5f7fb;
+  color: #172033;
+} */
+
+button,
+input {
+  font-family: inherit;
+}
+
+
+/* =========================
+   MAIN PAGE
+========================= */
+
+.finwallet-page {
+  width: 100%;
+  min-height: 100vh;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  background:
+    linear-gradient(
+      135deg,
+      #f5f9ff,
+      #ffffff
+    );
+
+  padding: 30px 20px;
+}
+
+
+/* =========================
+   FORM SECTION
+========================= */
+
+.finwallet-right {
+  width: 100%;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+
+/* =========================
+   FORM CONTAINER
+========================= */
+
+.auth-container {
+  width: 100%;
+  max-width: 480px;
+
+  padding: 35px;
+
+  background: #ffffff;
+
+  border: 1px solid #e7ebf1;
+
+  border-radius: 20px;
+
+  box-shadow:
+    0 20px 60px rgba(25, 55, 95, 0.10);
+}
+
+
+/* =========================
+   LOGO
+========================= */
+
+.mobile-brand {
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  gap: 12px;
+
+  margin-bottom: 30px;
+}
+
+.mobile-brand-icon {
+  width: 48px;
+  height: 48px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 14px;
+
+  background:
+    linear-gradient(
+      135deg,
+      #0759b5,
+      #087bd9
+    );
+
+  color: white;
+
+  font-size: 21px;
+
+  box-shadow:
+    0 8px 20px rgba(8, 101, 199, 0.20);
+}
+
+.mobile-brand h2 {
+  color: #142039;
+
+  font-size: 23px;
+  font-weight: 800;
+}
+
+.mobile-brand p {
+  margin-top: 3px;
+
+  color: #8993a3;
+
+  font-size: clamp(0.7rem, 1.5vw, 1.1rem);
+}
+
+
+/* =========================
+   ACCOUNT SWITCH
+========================= */
+
+.account-switch {
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  gap: 7px;
+
+  margin-bottom: 25px;
+
+  color: #8992a1;
+
+  font-size: 11px;
+}
+
+.account-switch button {
+  display: flex;
+
+  align-items: center;
+
+  gap: 5px;
+
+  border: none;
+
+  background: transparent;
+
+  color: #0864c7;
+
+  font-size: clamp(0.9rem, 1.5vw, 1.1rem);
+  font-weight: 700;
+
+  cursor: pointer;
+}
+
+.account-switch button:hover {
+  color: #034c9a;
+}
+
+.account-switch span{
+  font-size: clamp(1.1rem, 1.2vw, 1rem);
+}
+
+/* =========================
+   TABS
+========================= */
+
+.tabs {
+  display: flex;
+
+  width: 100%;
+
+  border-bottom: 1px solid #e5e8ed;
+
+  margin-bottom: 30px;
+}
+
+.tab {
+  flex: 1;
+
+  position: relative;
+
+  padding: 14px 10px;
+
+  border: none;
+
+  background: transparent;
+
+  color: #a0a8b5;
+
+  font-size: 14px;
+
+  font-weight: 600;
+
+  cursor: pointer;
+
+  transition: 0.2s;
+}
+
+.tab:hover {
+  color: #0864c7;
+}
+
+.tab.active {
+  color: #0864c7;
+}
+
+.tab.active::after {
+  content: "";
+
+  position: absolute;
+
+  left: 15%;
+  right: 15%;
+
+  bottom: -1px;
+
+  height: 3px;
+
+  border-radius: 10px;
+
+  background: #0864c7;
+}
+
+
+/* =========================
+   FORM
+========================= */
+
+.form-box h2 {
+  margin-bottom: 9px;
+
+  color: #172033;
+
+  font-size: 27px;
+
+  font-weight: 800;
+
+  letter-spacing: -0.7px;
+}
+
+.description {
+  margin-bottom: 25px;
+
+  color: #8993a2;
+
+  font-size: clamp(0.2rem, 1.5vw, 1.1rem);
+
+  line-height: 1.4;
+}
+
+
+/* =========================
+   INPUT
+========================= */
+
+.input-icon {
+  flex-shrink: 0;
+  color: #9ca5b3;
+  font-size: 14px;
+}
+
+
+/* =========================
+   INPUT
+========================= */
+
+.input-box input {
+  width: 100%;
+  height: 100%;
+
+  min-width: 0;
+    padding: 18px 0;
+  outline: none;
+  border: none;
+  background: transparent;
+
+  color: #172033;
+  font-size: 16.6px;
+}
+
+.input-box input::placeholder {
+  color: #a5adba;
+}
+.input-box {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.7rem;
+    margin-top: 0.6rem;
+}
+
+
+/* =========================
+   PASSWORD EYE
+========================= */
+
+.eye-button {
+  width: 32px;
+  height: 32px;
+
+  flex: 0 0 32px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  padding: 0;
+  margin: 0;
+
+  border: none;
+  outline: none;
+
+  background: transparent;
+
+  color: #555f70;
+
+  cursor: pointer;
+
+  font-size: 16px;
+
+  z-index: 10;
+}
+
+.eye-button svg {
+  width: 16px;
+  height: 16px;
+
+  display: block;
+
+  pointer-events: none;
+}
+
+.eye-button:hover {
+  color: #0864c7;
+}
+
+.eye-button:focus {
+  outline: none;
+}
+
+.eye-button:active {
+  transform: scale(0.9);
+}
+
+
+
+/* =========================
+   FORM OPTIONS
+========================= */
+
+.form-options {
+  display: flex;
+
+  align-items: center;
+  justify-content: space-between;
+
+  margin: 5px 0 20px;
+
+  font-size: 10px;
+}
+
+.form-options label {
+  display: flex;
+
+  align-items: center;
+
+  gap: 6px;
+  font-size: 1rem;
+
+  color: #818a99;
+
+  cursor: pointer;
+}
+
+.form-options input {
+  width: 14px;
+  height: 14px;
+  
+
+  accent-color: #0864c7;
+}
+
+.form-options button {
+  border: none;
+
+  background: transparent;
+
+  color: #0864c7;
+
+  font-size: clamp(0.9rem, 1.5vw, 1.1rem);
+
+  cursor: pointer;
+}
+
+.form-options button:hover {
+  text-decoration: underline;
+}
+
+
+/* =========================
+   AUTH BUTTON
+========================= */
+
+.auth-button {
+  width: 100%;
+  height: 52px;
+
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  gap: 9px;
+
+  border: none;
+
+  border-radius: 12px;
+
+  background:
+    linear-gradient(
+      135deg,
+      #0758b3,
+      #087bd9
+    );
+
+  color: white;
+
+  font-size: clamp(0.9rem, 1.5vw, 1.1rem);
+
+  font-weight: 700;
+
+  cursor: pointer;
+
+  box-shadow:
+    0 10px 25px rgba(8, 101, 199, 0.20);
+
+  transition: 0.25s;
+}
+
+.auth-button:hover {
+  transform: translateY(-2px);
+
+  box-shadow:
+    0 14px 30px rgba(8, 101, 199, 0.28);
+}
+
+.auth-button:active {
+  transform: translateY(0);
+}
+
+.auth-button svg{
+  color: white;
+}
+
+/* =========================
+   DIVIDER
+========================= */
+
+.divider {
+  width: 100%;
+
+  display: flex;
+
+  align-items: center;
+
+  gap: 12px;
+
+  margin: 25px 0;
+}
+
+.divider span {
+  flex: 1;
+
+  height: 1px;
+
+  background: #e5e8ed;
+}
+
+.divider p {
+  color: #9ca4b1;
+
+  font-size: 9px;
+
+  font-weight: 600;
+}
+
+
+/* =========================
+   SOCIAL LOGIN
+========================= */
+
+.social-login {
+  display: grid;
+
+  grid-template-columns: repeat(3, 1fr);
+
+  gap: 9px;
+}
+
+.social-login button {
+  height: 43px;
+
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  gap: 6px;
+
+  border: 1px solid #e0e4e9;
+
+  border-radius: 10px;
+
+  background: #ffffff;
+
+  color: #596273;
+
+  font-size: 10px;
+
+  font-weight: 600;
+
+  cursor: pointer;
+
+  transition: 0.2s;
+}
+
+.social-login button:hover {
+  background: #f7f9fc;
+
+  border-color: #c8d0da;
+
+  transform: translateY(-1px);
+}
+
+.social-login button:nth-child(1) svg {
+  color: #db4437;
+}
+
+.social-login button:nth-child(2) svg {
+  color: #111111;
+}
+
+.social-login button:nth-child(3) svg {
+  color: #1877f2;
+}
+
+
+/* =========================
+   BOTTOM TEXT
+========================= */
+
+.bottom-text {
+  margin-top: 24px;
+
+  text-align: center;
+
+  color: #8a93a1;
+
+    font-size: clamp(0.95rem, 1.5vw, 1.1rem);
+}
+
+.bottom-text button {
+  margin-left: 5px;
+
+  border: none;
+
+  background: transparent;
+
+  color: #0864c7;
+
+  font-size: clamp(0.9rem, 1.5vw, 1.1rem);
+
+  font-weight: 700;
+
+  cursor: pointer;
+}
+
+.bottom-text button:hover {
+  text-decoration: underline;
+}
+
+
+/* =========================
+   TERMS
+========================= */
+
+.terms {
+  display: flex;
+
+  align-items: flex-start;
+
+  gap: 8px;
+
+  margin: 5px 0 18px;
+
+  color: #7e8796;
+
+  font-size: clamp(0.9rem, 1.5vw, 0.7rem);
+
+  line-height: 1.5;
+
+  cursor: pointer;
+}
+
+.terms input {
+  width: 13px;
+  height: 13px;
+
+  flex-shrink: 0;
+
+  margin-top: 1px;
+
+  accent-color: #0864c7;
+  position: relative;
+  top: 0.2rem;
+}
+
+
+/* =========================
+   TABLET
+========================= */
+
+@media (max-width: 600px) {
+
+  .finwallet-page {
+    padding: 20px 15px;
+  }
+
+  .auth-container {
+    padding: 28px 22px;
+
+    border-radius: 16px;
+  }
+
+}
+
+
+/* =========================
+   MOBILE
+========================= */
+
+@media (max-width: 480px) {
+
+  .finwallet-page {
+    min-height: 100vh;
+
+    padding: 15px 10px;
+  }
+
+  .auth-container {
+    padding: 25px 18px;
+
+    box-shadow:
+      0 10px 35px rgba(25, 55, 95, 0.08);
+  }
+
+  .mobile-brand {
+    margin-bottom: 25px;
+  }
+
+  .mobile-brand-icon {
+    width: 43px;
+    height: 43px;
+
+    font-size: 18px;
+  }
+
+  .mobile-brand h2 {
+    font-size: 21px;
+  }
+
+  .account-switch {
+    font-size: 10px;
+  }
+
+  .account-switch button {
+    font-size: 10px;
+  }
+
+  .form-box h2 {
+    font-size: 23px;
+  }
+
+  .description {
+    font-size: 11px;
+  }
+
+  .social-login {
+    grid-template-columns: 1fr;
+  }
+
+  .social-login button {
+    height: 46px;
+  }
+
+}
+
+
+/* =========================
+   VERY SMALL SCREEN
+========================= */
+
+@media (max-width: 350px) {
+
+  .auth-container {
+    padding: 22px 15px;
+  }
+
+  .form-box h2 {
+    font-size: 21px;
+  }
+
+  .tabs .tab {
+    font-size: 12px;
+  }
+
+  .form-options {
+    font-size: 9px;
+  }
+
+}
+
