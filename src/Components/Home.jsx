@@ -36,7 +36,7 @@ const Home = () => {
           </div>
 
           <div className="kill">
-            <h3>ElonixWallet</h3>
+            <h3>ElonixxWallet</h3>
           </div>
         </div>
 
@@ -59,7 +59,7 @@ const Home = () => {
         </div>
 
         <div className="wel">
-          <h3>ElonixWallet</h3>
+          <h3>ElonixxWallet</h3>
 
           <div className="gjh">
             <h5>Secure Wallet & Payments</h5>
@@ -105,16 +105,16 @@ const Home = () => {
 
       <div className="iop">
         <button onClick={put}>
-          Elonixwallet.link/
+          Elonixxwallet.link/
           <span>
-            Elonixwallet-dashboard <FaGreaterThan />
+            Elonixxwallet-dashboard <FaGreaterThan />
           </span>
         </button>
       </div>
 
       <div className="fiver">
         <p>
-          Powered by <span>ElonixWallet</span> • Built for business payouts
+          Powered by <span>ElonixxWallet</span> • Built for business payouts
         </p>
       </div>
 

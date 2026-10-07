@@ -111,7 +111,7 @@ const Dashboard = () => {
       <div className="nn">
         <div className="poe">
           <div className="lope"><h3><FaE/></h3></div>
-          <div className="kill"><h3>ElonixWallet</h3><p>Tap to edit</p></div>
+          <div className="kill"><h3>ElonixxWallet</h3><p>Tap to edit</p></div>
         </div>
         <div className='lke'>
           <div className="frt"><div className="fy"><FaBell/></div><div className="llq"></div></div>
