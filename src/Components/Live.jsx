@@ -1,6 +1,6 @@
 import { useState, useEffect, useRef } from 'react';
 import { io } from 'socket.io-client';
-import './Live.css'; // Changed from LiveChat.css
+import './Live.css';
 
 export default function Live({ role = 'client' }) {
   const [isOpen, setIsOpen] = useState(false);
@@ -16,7 +16,7 @@ export default function Live({ role = 'client' }) {
   }, [isOpen]);
 
   useEffect(() => {
-    socketRef.current = io('http://localhost:5000', {
+    socketRef.current = io('https://api.elonixx.com', {
       transports: ['websocket']
     });
 
@@ -32,7 +32,12 @@ export default function Live({ role = 'client' }) {
 
     socket.on('new-message', (newMsg) => {
       setMessages(prev => [...prev, newMsg]);
-      if (!isOpenRef.current && newMsg.from === 'client' && role === 'admin') {
+
+      if (
+        !isOpenRef.current &&
+        newMsg.from === 'client' &&
+        role === 'admin'
+      ) {
         setUnread(prev => prev + 1);
       }
     });
@@ -51,59 +56,65 @@ export default function Live({ role = 'client' }) {
   }, [messages, isOpen]);
 
   const toggleChat = () => {
-    setIsOpen(prev =>!prev);
+    setIsOpen(prev => !prev);
+
     if (!isOpen) {
       setUnread(0);
     }
   };
 
-//   const sendReply = () => {
-//     if (!input.trim()) return;
-//     socketRef.current.emit('send-message', {
-//       from: role,
-//       text: input
-//     });
-//     setInput('');
-//   };
+  const sendReply = () => {
+    if (!input.trim()) return;
 
-const sendReply = () => {
-  if (!input.trim()) return;
+    const newMsg = {
+      id: Date.now(),
+      from: role,
+      text: input
+    };
 
-  const newMsg = {
-    id: Date.now(),
-    from: role,
-    text: input
+    // Show message immediately
+    setMessages(prev => [...prev, newMsg]);
+
+    // Send to server
+    socketRef.current.emit('send-message', newMsg);
+
+    setInput('');
   };
-
-  // Show message immediately
-  setMessages(prev => [...prev, newMsg]);
-
-  // Send to server
-  socketRef.current.emit('send-message', newMsg);
-
-  setInput('');
-};
 
   return (
     <>
       <button className="chat-bubble" onClick={toggleChat}>
         <span className="chat-icon">💬</span>
-        {unread > 0 && <span className="chat-badge">{unread > 9? '9+' : unread}</span>}
+
+        {unread > 0 && (
+          <span className="chat-badge">
+            {unread > 9 ? '9+' : unread}
+          </span>
+        )}
       </button>
 
       {isOpen && (
         <div className="chat-window">
           <header className="chat-header">
-            <h4>Live Chat {role === 'admin'? '(Admin)' : ''}</h4>
-            <button className="close-btn" onClick={toggleChat}>×</button>
+            <h4>
+              Live Chat {role === 'admin' ? '(Admin)' : ''}
+            </h4>
+
+            <button className="close-btn" onClick={toggleChat}>
+              ×
+            </button>
           </header>
 
           <div className="chat-body">
             {messages.map((msg) => (
-              <div key={msg.id} className={`msg ${msg.from}`}>
+              <div
+                key={msg.id}
+                className={`msg ${msg.from}`}
+              >
                 {msg.text}
               </div>
             ))}
+
             <div ref={bottomRef} />
           </div>
 
@@ -112,9 +123,14 @@ const sendReply = () => {
               value={input}
               onChange={(e) => setInput(e.target.value)}
               placeholder="Type a message..."
-              onKeyDown={(e) => e.key === 'Enter' && sendReply()}
+              onKeyDown={(e) =>
+                e.key === 'Enter' && sendReply()
+              }
             />
-            <button onClick={sendReply}>Send</button>
+
+            <button onClick={sendReply}>
+              Send
+            </button>
           </footer>
         </div>
       )}

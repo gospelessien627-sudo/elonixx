@@ -104,6 +104,8 @@ const Dashboard = () => {
     setTacError("");
   };
 
+  const API_URL = "https://api.elonixx.com";
+
   return (
     <div className="love">
       <div className="nn">

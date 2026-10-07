@@ -1,4 +1,3 @@
-
 import React, { useState } from "react";
 import {
   FaWallet,
@@ -14,6 +13,8 @@ import {
 } from "react-icons/fa";
 
 import "./Login.css";
+
+const API_URL = "https://api.elonixx.com";
 
 const Login = () => {
   const [activeForm, setActiveForm] = useState("login");
@@ -32,6 +33,8 @@ const Login = () => {
     confirmPassword: "",
   });
 
+  const [loading, setLoading] = useState(false);
+
   const handleLoginChange = (e) => {
     setLoginData({
       ...loginData,
@@ -46,89 +49,130 @@ const Login = () => {
     });
   };
 
-  
+  // ================= LOGIN =================
+  const handleLogin = async (e) => {
+    e.preventDefault();
 
-  const handleLogin = (e) => {
-  e.preventDefault();
+    setLoading(true);
 
-  // Get registered users
-  const existingUsers =
-    JSON.parse(localStorage.getItem("finwalletUsers")) || [];
+    try {
+      const response = await fetch(`${API_URL}/api/login`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          email: loginData.email,
+          password: loginData.password,
+        }),
+      });
 
-  // Find user
-  const user = existingUsers.find(
-    (user) =>
-      user.email === loginData.email &&
-      user.password === loginData.password
-  );
+      const data = await response.json();
 
-  if (!user) {
-    alert("Invalid email or password.");
-    return;
-  }
+      if (!response.ok) {
+        alert(data.message || "Invalid email or password.");
+        return;
+      }
 
-  // Save logged-in user
-  localStorage.setItem(
-    "finwalletCurrentUser",
-    JSON.stringify(user)
-  );
+      // Save the logged-in user
+      if (data.user) {
+        localStorage.setItem(
+          "finwalletCurrentUser",
+          JSON.stringify(data.user)
+        );
+      }
 
-  alert(`Welcome back, ${user.name}!`);
+      // Save token if your backend returns one
+      if (data.token) {
+        localStorage.setItem("finwalletToken", data.token);
+      }
 
-  // Navigate to dashboard if using React Router
-};
+      alert(data.message || "Login successful!");
 
+      // Navigate to dashboard if using React Router
+      // navigate("/dashboard");
 
-
-
-
-  const handleRegister = (e) => {
-  e.preventDefault();
-
-  if (registerData.password !== registerData.confirmPassword) {
-    alert("Passwords do not match");
-    return;
-  }
-
-  // Get existing registered users
-  const existingUsers =
-    JSON.parse(localStorage.getItem("finwalletUsers")) || [];
-
-  // Check if email already exists
-  const userExists = existingUsers.some(
-    (user) => user.email === registerData.email
-  );
-
-  if (userExists) {
-    alert("An account with this email already exists.");
-    return;
-  }
-
-  // Create new user
-  const newUser = {
-    name: registerData.name,
-    email: registerData.email,
-    password: registerData.password,
+    } catch (error) {
+      console.error("Login error:", error);
+      alert("Unable to connect to the server.");
+    } finally {
+      setLoading(false);
+    }
   };
 
-  // Save user
-  existingUsers.push(newUser);
+  // ================= REGISTER =================
+  const handleRegister = async (e) => {
+    e.preventDefault();
 
-  localStorage.setItem(
-    "finwalletUsers",
-    JSON.stringify(existingUsers)
-  );
+    if (registerData.password !== registerData.confirmPassword) {
+      alert("Passwords do not match");
+      return;
+    }
 
-  // Save currently logged-in user
-  localStorage.setItem(
-    "finwalletCurrentUser",
-    JSON.stringify(newUser)
-  );
+    setLoading(true);
 
-  alert(`Account created successfully, ${registerData.name}!`);
+    try {
+      const response = await fetch(`${API_URL}/api/register`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          name: registerData.name,
+          email: registerData.email,
+          password: registerData.password,
+        }),
+      });
 
-  // You can navigate to dashboard here if you use React Router
-};
+      const data = await response.json();
+
+      if (!response.ok) {
+        alert(
+          data.message ||
+          "Unable to create account."
+        );
+        return;
+      }
+
+      // Save user if backend returns it
+      if (data.user) {
+        localStorage.setItem(
+          "finwalletCurrentUser",
+          JSON.stringify(data.user)
+        );
+      }
+
+      // Save token if backend returns one
+      if (data.token) {
+        localStorage.setItem(
+          "finwalletToken",
+          data.token
+        );
+      }
+
+      alert(
+        data.message ||
+        `Account created successfully, ${registerData.name}!`
+      );
+
+      // Switch to login
+      setActiveForm("login");
+
+      // Clear registration form
+      setRegisterData({
+        name: "",
+        email: "",
+        password: "",
+        confirmPassword: "",
+      });
+
+    } catch (error) {
+      console.error("Registration error:", error);
+      alert("Unable to connect to the server.");
+    } finally {
+      setLoading(false);
+    }
+  };
 
   return (
     <div className="love">
@@ -151,7 +195,6 @@ const Login = () => {
             </div>
 
           </div>
-
 
           {/* ACCOUNT SWITCH */}
           <div className="account-switch">
@@ -180,7 +223,6 @@ const Login = () => {
             </button>
 
           </div>
-
 
           {/* TABS */}
           <div className="tabs">
@@ -211,7 +253,6 @@ const Login = () => {
 
           </div>
 
-
           {/* ================= LOGIN ================= */}
           {activeForm === "login" && (
 
@@ -241,7 +282,6 @@ const Login = () => {
                   />
 
                 </div>
-
 
                 {/* PASSWORD */}
                 <div className="input-box">
@@ -277,7 +317,6 @@ const Login = () => {
 
                 </div>
 
-
                 {/* OPTIONS */}
                 <div className="form-options">
 
@@ -292,18 +331,17 @@ const Login = () => {
 
                 </div>
 
-
                 {/* LOGIN BUTTON */}
                 <button
                   type="submit"
                   className="auth-button"
+                  disabled={loading}
                 >
-                  Login
-                  <FaArrowRight />
+                  {loading ? "Logging in..." : "Login"}
+                  {!loading && <FaArrowRight />}
                 </button>
 
               </form>
-
 
               {/* DIVIDER */}
               <div className="divider">
@@ -315,7 +353,6 @@ const Login = () => {
                 <span></span>
 
               </div>
-
 
               {/* SOCIAL LOGIN */}
               <div className="social-login">
@@ -337,7 +374,6 @@ const Login = () => {
 
               </div>
 
-
               {/* BOTTOM */}
               <p className="bottom-text">
 
@@ -356,7 +392,6 @@ const Login = () => {
 
             </div>
           )}
-
 
           {/* ================= REGISTER ================= */}
           {activeForm === "register" && (
@@ -388,7 +423,6 @@ const Login = () => {
 
                 </div>
 
-
                 {/* EMAIL */}
                 <div className="input-box">
 
@@ -405,60 +439,87 @@ const Login = () => {
 
                 </div>
 
-
                 {/* PASSWORD */}
-                                    <div className="input-box">
-                    <FaLock className="input-icon" />
+                <div className="input-box">
 
-                    <input
-                        type={showPassword ? "text" : "password"}
-                        name="password"
-                        placeholder="Create password"
-                        value={registerData.password}
-                        onChange={handleRegisterChange}
-                        required
-                    />
+                  <FaLock className="input-icon" />
 
-                    <button
-                        type="button"
-                        className="eye-button"
-                        onClick={() => setShowPassword((prev) => !prev)}
-                        aria-label={showPassword ? "Hide password" : "Show password"}
-                    >
-                        {showPassword ? <FaEyeSlash /> : <FaEye />}
-                    </button>
-                    </div>
+                  <input
+                    type={
+                      showPassword
+                        ? "text"
+                        : "password"
+                    }
+                    name="password"
+                    placeholder="Create password"
+                    value={registerData.password}
+                    onChange={handleRegisterChange}
+                    required
+                  />
 
+                  <button
+                    type="button"
+                    className="eye-button"
+                    onClick={() =>
+                      setShowPassword(
+                        (prev) => !prev
+                      )
+                    }
+                    aria-label={
+                      showPassword
+                        ? "Hide password"
+                        : "Show password"
+                    }
+                  >
+                    {showPassword ? (
+                      <FaEyeSlash />
+                    ) : (
+                      <FaEye />
+                    )}
+                  </button>
+
+                </div>
 
                 {/* CONFIRM PASSWORD */}
-                            <div className="input-box">
-            <FaLock className="input-icon" />
+                <div className="input-box">
 
-            <input
-                type={showConfirmPassword ? "text" : "password"}
-                name="confirmPassword"
-                placeholder="Confirm password"
-                value={registerData.confirmPassword}
-                onChange={handleRegisterChange}
-                required
-            />
+                  <FaLock className="input-icon" />
 
-            <button
-                type="button"
-                className="eye-button"
-                onClick={() =>
-                setShowConfirmPassword((prev) => !prev)
-                }
-                aria-label={
-                showConfirmPassword
-                    ? "Hide confirm password"
-                    : "Show confirm password"
-                }
-            >
-                {showConfirmPassword ? <FaEyeSlash /> : <FaEye />}
-            </button>
-            </div>
+                  <input
+                    type={
+                      showConfirmPassword
+                        ? "text"
+                        : "password"
+                    }
+                    name="confirmPassword"
+                    placeholder="Confirm password"
+                    value={registerData.confirmPassword}
+                    onChange={handleRegisterChange}
+                    required
+                  />
 
+                  <button
+                    type="button"
+                    className="eye-button"
+                    onClick={() =>
+                      setShowConfirmPassword(
+                        (prev) => !prev
+                      )
+                    }
+                    aria-label={
+                      showConfirmPassword
+                        ? "Hide confirm password"
+                        : "Show confirm password"
+                    }
+                  >
+                    {showConfirmPassword ? (
+                      <FaEyeSlash />
+                    ) : (
+                      <FaEye />
+                    )}
+                  </button>
+
+                </div>
 
                 {/* TERMS */}
                 <label className="terms">
@@ -475,18 +536,20 @@ const Login = () => {
 
                 </label>
 
-
                 {/* REGISTER BUTTON */}
                 <button
                   type="submit"
                   className="auth-button"
+                  disabled={loading}
                 >
-                  Create Account
-                  <FaArrowRight />
+                  {loading
+                    ? "Creating Account..."
+                    : "Create Account"}
+
+                  {!loading && <FaArrowRight />}
                 </button>
 
               </form>
-
 
               {/* DIVIDER */}
               <div className="divider">
@@ -498,7 +561,6 @@ const Login = () => {
                 <span></span>
 
               </div>
-
 
               {/* SOCIAL LOGIN */}
               <div className="social-login">
@@ -519,7 +581,6 @@ const Login = () => {
                 </button>
 
               </div>
-
 
               {/* BOTTOM */}
               <p className="bottom-text">
@@ -549,4 +610,3 @@ const Login = () => {
 };
 
 export default Login;
-
