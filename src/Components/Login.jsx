@@ -134,6 +134,51 @@ const Login = () => {
         return;
       }
 
+      /* =================================================
+         ADMIN LOGIN
+      ================================================= */
+
+      if (
+        data.role === "admin" &&
+        data.token
+      ) {
+        localStorage.setItem(
+          "elonixxAdminToken",
+          data.token
+        );
+
+        localStorage.setItem(
+          "elonixxAdminEmail",
+          data.email || email
+        );
+
+        /*
+         * Remove old admin session if another
+         * administrator was previously logged in.
+         */
+
+        localStorage.removeItem(
+          "finwalletToken"
+        );
+
+        localStorage.removeItem(
+          "finwalletCurrentUser"
+        );
+
+        alert(
+          data.message ||
+            "Admin login successful!"
+        );
+
+        navigate("/admin");
+
+        return;
+      }
+
+      /* =================================================
+         NORMAL USER LOGIN
+      ================================================= */
+
       if (data.user) {
         localStorage.setItem(
           "finwalletCurrentUser",
@@ -147,6 +192,19 @@ const Login = () => {
           data.token
         );
       }
+
+      /*
+       * Make sure an old admin session does not
+       * remain active when a normal user logs in.
+       */
+
+      localStorage.removeItem(
+        "elonixxAdminToken"
+      );
+
+      localStorage.removeItem(
+        "elonixxAdminEmail"
+      );
 
       alert(
         data.message ||
@@ -280,6 +338,14 @@ const Login = () => {
           data.token
         );
       }
+
+      localStorage.removeItem(
+        "elonixxAdminToken"
+      );
+
+      localStorage.removeItem(
+        "elonixxAdminEmail"
+      );
 
       alert(
         data.message ||
