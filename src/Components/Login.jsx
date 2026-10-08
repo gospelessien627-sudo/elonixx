@@ -16,62 +16,78 @@ import {
 
 import "./Login.css";
 
-/* =====================================================
-   BACKEND API
-===================================================== */
-
-const API_URL = "https://api.elonixx.com";
-
-/* =====================================================
-   LOGIN COMPONENT
-===================================================== */
+const API_URL =
+  "https://api.elonixx.com";
 
 const Login = () => {
   const navigate = useNavigate();
 
-  const [activeForm, setActiveForm] = useState("login");
+  const [
+    activeForm,
+    setActiveForm,
+  ] = useState("login");
 
-  const [showPassword, setShowPassword] = useState(false);
+  const [
+    showPassword,
+    setShowPassword,
+  ] = useState(false);
 
   const [
     showConfirmPassword,
     setShowConfirmPassword,
   ] = useState(false);
 
-  const [loginData, setLoginData] = useState({
+  const [
+    loginData,
+    setLoginData,
+  ] = useState({
     email: "",
     password: "",
   });
 
-  const [registerData, setRegisterData] = useState({
+  const [
+    registerData,
+    setRegisterData,
+  ] = useState({
     name: "",
     email: "",
     password: "",
     confirmPassword: "",
   });
 
-  const [loading, setLoading] = useState(false);
+  const [
+    loading,
+    setLoading,
+  ] = useState(false);
 
   /* =====================================================
      LOGIN INPUT
   ===================================================== */
 
   const handleLoginChange = (e) => {
-    setLoginData((previous) => ({
-      ...previous,
-      [e.target.name]: e.target.value,
-    }));
+    setLoginData(
+      (previous) => ({
+        ...previous,
+        [e.target.name]:
+          e.target.value,
+      })
+    );
   };
 
   /* =====================================================
      REGISTER INPUT
   ===================================================== */
 
-  const handleRegisterChange = (e) => {
-    setRegisterData((previous) => ({
-      ...previous,
-      [e.target.name]: e.target.value,
-    }));
+  const handleRegisterChange = (
+    e
+  ) => {
+    setRegisterData(
+      (previous) => ({
+        ...previous,
+        [e.target.name]:
+          e.target.value,
+      })
+    );
   };
 
   /* =====================================================
@@ -83,38 +99,55 @@ const Login = () => {
 
     if (loading) return;
 
-    const email = loginData.email.trim().toLowerCase();
-    const password = loginData.password;
+    const email =
+      loginData.email
+        .trim()
+        .toLowerCase();
+
+    const password =
+      loginData.password;
 
     if (!email || !password) {
-      alert("Email and password are required.");
+      alert(
+        "Email and password are required."
+      );
+
       return;
     }
 
     setLoading(true);
 
     try {
-      const response = await fetch(`${API_URL}/api/login`, {
-        method: "POST",
+      const response =
+        await fetch(
+          `${API_URL}/api/login`,
+          {
+            method: "POST",
 
-        headers: {
-          "Content-Type": "application/json",
-        },
+            headers: {
+              "Content-Type":
+                "application/json",
+            },
 
-        body: JSON.stringify({
-          email,
-          password,
-        }),
-      });
+            body: JSON.stringify({
+              email,
+              password,
+            }),
+          }
+        );
 
-      const responseText = await response.text();
+      const responseText =
+        await response.text();
 
       let data = {};
 
       try {
-        data = responseText
-          ? JSON.parse(responseText)
-          : {};
+        data =
+          responseText
+            ? JSON.parse(
+                responseText
+              )
+            : {};
       } catch {
         data = {};
       }
@@ -139,22 +172,12 @@ const Login = () => {
       ================================================= */
 
       if (
-        data.role === "admin" &&
+        data.role ===
+          "admin" &&
         data.token
       ) {
-        localStorage.setItem(
-          "elonixxAdminToken",
-          data.token
-        );
-
-        localStorage.setItem(
-          "elonixxAdminEmail",
-          data.email || email
-        );
-
         /*
-         * Remove old admin session if another
-         * administrator was previously logged in.
+         * Clear normal user session.
          */
 
         localStorage.removeItem(
@@ -165,12 +188,47 @@ const Login = () => {
           "finwalletCurrentUser"
         );
 
+        /*
+         * Save admin session.
+         */
+
+        localStorage.setItem(
+          "elonixxAdminToken",
+          data.token
+        );
+
+        localStorage.setItem(
+          "elonixxAdminEmail",
+          data.email ||
+            email
+        );
+
+        /*
+         * Verify that the token
+         * was actually stored.
+         */
+
+        const savedAdminToken =
+          localStorage.getItem(
+            "elonixxAdminToken"
+          );
+
+        if (!savedAdminToken) {
+          alert(
+            "Admin login succeeded, but the admin session could not be saved."
+          );
+
+          return;
+        }
+
         alert(
           data.message ||
             "Admin login successful!"
         );
 
-        navigate("/admin");
+        navigate("/admin", {
+          replace: true,
+        });
 
         return;
       }
@@ -182,7 +240,9 @@ const Login = () => {
       if (data.user) {
         localStorage.setItem(
           "finwalletCurrentUser",
-          JSON.stringify(data.user)
+          JSON.stringify(
+            data.user
+          )
         );
       }
 
@@ -194,8 +254,7 @@ const Login = () => {
       }
 
       /*
-       * Make sure an old admin session does not
-       * remain active when a normal user logs in.
+       * Remove admin session.
        */
 
       localStorage.removeItem(
@@ -211,9 +270,14 @@ const Login = () => {
           "Login successful!"
       );
 
-      navigate("/dashboard");
+      navigate("/dashboard", {
+        replace: true,
+      });
     } catch (error) {
-      console.error("Login error:", error);
+      console.error(
+        "Login error:",
+        error
+      );
 
       alert(
         "Unable to connect to the server. Please check that the backend is online."
@@ -227,152 +291,171 @@ const Login = () => {
      REGISTER
   ===================================================== */
 
-  const handleRegister = async (e) => {
-    e.preventDefault();
+  const handleRegister =
+    async (e) => {
+      e.preventDefault();
 
-    if (loading) return;
+      if (loading) return;
 
-    const name = registerData.name.trim();
+      const name =
+        registerData.name.trim();
 
-    const email = registerData.email
-      .trim()
-      .toLowerCase();
+      const email =
+        registerData.email
+          .trim()
+          .toLowerCase();
 
-    const password = registerData.password;
+      const password =
+        registerData.password;
 
-    const confirmPassword =
-      registerData.confirmPassword;
+      const confirmPassword =
+        registerData.confirmPassword;
 
-    /* ---------------------------------------------
-       VALIDATION
-    --------------------------------------------- */
-
-    if (!name || !email || !password) {
-      alert(
-        "Name, email and password are required."
-      );
-
-      return;
-    }
-
-    if (name.length < 2) {
-      alert(
-        "Name must contain at least 2 characters."
-      );
-
-      return;
-    }
-
-    if (password.length < 6) {
-      alert(
-        "Password must contain at least 6 characters."
-      );
-
-      return;
-    }
-
-    if (password !== confirmPassword) {
-      alert("Passwords do not match.");
-      return;
-    }
-
-    setLoading(true);
-
-    try {
-      const response = await fetch(
-        `${API_URL}/api/register`,
-        {
-          method: "POST",
-
-          headers: {
-            "Content-Type":
-              "application/json",
-          },
-
-          body: JSON.stringify({
-            name,
-            email,
-            password,
-          }),
-        }
-      );
-
-      const responseText =
-        await response.text();
-
-      let data = {};
-
-      try {
-        data = responseText
-          ? JSON.parse(responseText)
-          : {};
-      } catch {
-        data = {};
-      }
-
-      if (!response.ok) {
-        console.error(
-          "Registration API error:",
-          response.status,
-          data
-        );
-
+      if (
+        !name ||
+        !email ||
+        !password
+      ) {
         alert(
-          data.message ||
-            `Registration failed. Server returned ${response.status}.`
+          "Name, email and password are required."
         );
 
         return;
       }
 
-      if (data.user) {
-        localStorage.setItem(
-          "finwalletCurrentUser",
-          JSON.stringify(data.user)
+      if (name.length < 2) {
+        alert(
+          "Name must contain at least 2 characters."
         );
+
+        return;
       }
 
-      if (data.token) {
-        localStorage.setItem(
-          "finwalletToken",
-          data.token
+      if (password.length < 6) {
+        alert(
+          "Password must contain at least 6 characters."
         );
+
+        return;
       }
 
-      localStorage.removeItem(
-        "elonixxAdminToken"
-      );
+      if (
+        password !==
+        confirmPassword
+      ) {
+        alert(
+          "Passwords do not match."
+        );
 
-      localStorage.removeItem(
-        "elonixxAdminEmail"
-      );
+        return;
+      }
 
-      alert(
-        data.message ||
-          "Account created successfully!"
-      );
+      setLoading(true);
 
-      setRegisterData({
-        name: "",
-        email: "",
-        password: "",
-        confirmPassword: "",
-      });
+      try {
+        const response =
+          await fetch(
+            `${API_URL}/api/register`,
+            {
+              method: "POST",
 
-      navigate("/dashboard");
-    } catch (error) {
-      console.error(
-        "Registration error:",
-        error
-      );
+              headers: {
+                "Content-Type":
+                  "application/json",
+              },
 
-      alert(
-        "Unable to connect to the server. Please check that the backend is online."
-      );
-    } finally {
-      setLoading(false);
-    }
-  };
+              body: JSON.stringify({
+                name,
+                email,
+                password,
+              }),
+            }
+          );
+
+        const responseText =
+          await response.text();
+
+        let data = {};
+
+        try {
+          data =
+            responseText
+              ? JSON.parse(
+                  responseText
+                )
+              : {};
+        } catch {
+          data = {};
+        }
+
+        if (!response.ok) {
+          console.error(
+            "Registration API error:",
+            response.status,
+            data
+          );
+
+          alert(
+            data.message ||
+              `Registration failed. Server returned ${response.status}.`
+          );
+
+          return;
+        }
+
+        if (data.user) {
+          localStorage.setItem(
+            "finwalletCurrentUser",
+            JSON.stringify(
+              data.user
+            )
+          );
+        }
+
+        if (data.token) {
+          localStorage.setItem(
+            "finwalletToken",
+            data.token
+          );
+        }
+
+        localStorage.removeItem(
+          "elonixxAdminToken"
+        );
+
+        localStorage.removeItem(
+          "elonixxAdminEmail"
+        );
+
+        alert(
+          data.message ||
+            "Account created successfully!"
+        );
+
+        setRegisterData({
+          name: "",
+          email: "",
+          password: "",
+          confirmPassword:
+            "",
+        });
+
+        navigate("/dashboard", {
+          replace: true,
+        });
+      } catch (error) {
+        console.error(
+          "Registration error:",
+          error
+        );
+
+        alert(
+          "Unable to connect to the server. Please check that the backend is online."
+        );
+      } finally {
+        setLoading(false);
+      }
+    };
 
   /* =====================================================
      UI
@@ -380,13 +463,12 @@ const Login = () => {
 
   return (
     <div className="love">
+
       <div className="finwallet-right">
 
         <div className="auth-container">
 
-          {/* =================================================
-              LOGO
-          ================================================= */}
+          {/* LOGO */}
 
           <div className="mobile-brand">
 
@@ -406,14 +488,13 @@ const Login = () => {
 
           </div>
 
-          {/* =================================================
-              ACCOUNT SWITCH
-          ================================================= */}
+          {/* ACCOUNT SWITCH */}
 
           <div className="account-switch">
 
             <span>
-              {activeForm === "login"
+              {activeForm ===
+              "login"
                 ? "Don't have an account?"
                 : "Already have an account?"}
             </span>
@@ -422,36 +503,40 @@ const Login = () => {
               type="button"
               onClick={() =>
                 setActiveForm(
-                  activeForm === "login"
+                  activeForm ===
+                    "login"
                     ? "register"
                     : "login"
                 )
               }
             >
-              {activeForm === "login"
+              {activeForm ===
+              "login"
                 ? "Create one"
                 : "Login"}
 
               <FaArrowRight />
+
             </button>
 
           </div>
 
-          {/* =================================================
-              TABS
-          ================================================= */}
+          {/* TABS */}
 
           <div className="tabs">
 
             <button
               type="button"
               className={
-                activeForm === "login"
+                activeForm ===
+                "login"
                   ? "tab active"
                   : "tab"
               }
               onClick={() =>
-                setActiveForm("login")
+                setActiveForm(
+                  "login"
+                )
               }
             >
               Login
@@ -460,12 +545,15 @@ const Login = () => {
             <button
               type="button"
               className={
-                activeForm === "register"
+                activeForm ===
+                "register"
                   ? "tab active"
                   : "tab"
               }
               onClick={() =>
-                setActiveForm("register")
+                setActiveForm(
+                  "register"
+                )
               }
             >
               Register
@@ -474,10 +562,11 @@ const Login = () => {
           </div>
 
           {/* =================================================
-              LOGIN FORM
+              LOGIN
           ================================================= */}
 
-          {activeForm === "login" && (
+          {activeForm ===
+            "login" && (
             <div className="form-box">
 
               <h2>
@@ -491,9 +580,11 @@ const Login = () => {
                 your money with ease.
               </p>
 
-              <form onSubmit={handleLogin}>
-
-                {/* EMAIL */}
+              <form
+                onSubmit={
+                  handleLogin
+                }
+              >
 
                 <div className="input-box">
 
@@ -503,14 +594,16 @@ const Login = () => {
                     type="email"
                     name="email"
                     placeholder="Email address"
-                    value={loginData.email}
-                    onChange={handleLoginChange}
+                    value={
+                      loginData.email
+                    }
+                    onChange={
+                      handleLoginChange
+                    }
                     required
                   />
 
                 </div>
-
-                {/* PASSWORD */}
 
                 <div className="input-box">
 
@@ -524,8 +617,12 @@ const Login = () => {
                     }
                     name="password"
                     placeholder="Password"
-                    value={loginData.password}
-                    onChange={handleLoginChange}
+                    value={
+                      loginData.password
+                    }
+                    onChange={
+                      handleLoginChange
+                    }
                     required
                   />
 
@@ -548,59 +645,62 @@ const Login = () => {
 
                 </div>
 
-                {/* OPTIONS */}
-
                 <div className="form-options">
 
                   <label>
+
                     <input
                       type="checkbox"
                     />
 
                     Remember me
+
                   </label>
 
-                  <button type="button">
+                  <button
+                    type="button"
+                  >
                     Forgot password?
                   </button>
 
                 </div>
-
-                {/* LOGIN BUTTON */}
 
                 <button
                   type="submit"
                   className="auth-button"
                   disabled={loading}
                 >
+
                   {loading ? (
                     <>
-                      <span className="button-spinner"></span>
-                      <span>Logging in...</span>
+                      <span className="button-spinner" />
+                      <span>
+                        Logging in...
+                      </span>
                     </>
                   ) : (
                     <>
-                      <span>Login</span>
+                      <span>
+                        Login
+                      </span>
+
                       <FaArrowRight />
                     </>
                   )}
+
                 </button>
 
               </form>
 
-              {/* DIVIDER */}
-
               <div className="divider">
 
-                <span></span>
+                <span />
 
                 <p>OR</p>
 
-                <span></span>
+                <span />
 
               </div>
-
-              {/* SOCIAL LOGIN */}
 
               <div className="social-login">
 
@@ -620,8 +720,6 @@ const Login = () => {
                 </button>
 
               </div>
-
-              {/* BOTTOM */}
 
               <p className="bottom-text">
 
@@ -644,10 +742,11 @@ const Login = () => {
           )}
 
           {/* =================================================
-              REGISTER FORM
+              REGISTER
           ================================================= */}
 
-          {activeForm === "register" && (
+          {activeForm ===
+            "register" && (
             <div className="form-box">
 
               <h2>
@@ -660,9 +759,11 @@ const Login = () => {
                 money with ease.
               </p>
 
-              <form onSubmit={handleRegister}>
-
-                {/* NAME */}
+              <form
+                onSubmit={
+                  handleRegister
+                }
+              >
 
                 <div className="input-box">
 
@@ -672,14 +773,16 @@ const Login = () => {
                     type="text"
                     name="name"
                     placeholder="Full name"
-                    value={registerData.name}
-                    onChange={handleRegisterChange}
+                    value={
+                      registerData.name
+                    }
+                    onChange={
+                      handleRegisterChange
+                    }
                     required
                   />
 
                 </div>
-
-                {/* EMAIL */}
 
                 <div className="input-box">
 
@@ -689,14 +792,16 @@ const Login = () => {
                     type="email"
                     name="email"
                     placeholder="Email address"
-                    value={registerData.email}
-                    onChange={handleRegisterChange}
+                    value={
+                      registerData.email
+                    }
+                    onChange={
+                      handleRegisterChange
+                    }
                     required
                   />
 
                 </div>
-
-                {/* PASSWORD */}
 
                 <div className="input-box">
 
@@ -710,8 +815,12 @@ const Login = () => {
                     }
                     name="password"
                     placeholder="Create password"
-                    value={registerData.password}
-                    onChange={handleRegisterChange}
+                    value={
+                      registerData.password
+                    }
+                    onChange={
+                      handleRegisterChange
+                    }
                     required
                   />
 
@@ -733,8 +842,6 @@ const Login = () => {
                   </button>
 
                 </div>
-
-                {/* CONFIRM PASSWORD */}
 
                 <div className="input-box">
 
@@ -776,8 +883,6 @@ const Login = () => {
 
                 </div>
 
-                {/* TERMS */}
-
                 <label className="terms">
 
                   <input
@@ -793,41 +898,42 @@ const Login = () => {
 
                 </label>
 
-                {/* REGISTER BUTTON */}
-
                 <button
                   type="submit"
                   className="auth-button"
                   disabled={loading}
                 >
+
                   {loading ? (
                     <>
-                      <span className="button-spinner"></span>
-                      <span>Creating Account...</span>
+                      <span className="button-spinner" />
+                      <span>
+                        Creating Account...
+                      </span>
                     </>
                   ) : (
                     <>
-                      <span>Create Account</span>
+                      <span>
+                        Create Account
+                      </span>
+
                       <FaArrowRight />
                     </>
                   )}
+
                 </button>
 
               </form>
 
-              {/* DIVIDER */}
-
               <div className="divider">
 
-                <span></span>
+                <span />
 
                 <p>OR</p>
 
-                <span></span>
+                <span />
 
               </div>
-
-              {/* SOCIAL LOGIN */}
 
               <div className="social-login">
 
@@ -848,8 +954,6 @@ const Login = () => {
 
               </div>
 
-              {/* BOTTOM */}
-
               <p className="bottom-text">
 
                 Already have an account?
@@ -857,7 +961,9 @@ const Login = () => {
                 <button
                   type="button"
                   onClick={() =>
-                    setActiveForm("login")
+                    setActiveForm(
+                      "login"
+                    )
                   }
                 >
                   Login
@@ -871,6 +977,7 @@ const Login = () => {
         </div>
 
       </div>
+
     </div>
   );
 };

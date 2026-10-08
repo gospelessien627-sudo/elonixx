@@ -5,8 +5,6 @@ import React, {
 
 import {
   FaArrowRight,
-  FaArrowTrendUp,
-  FaArrowTrendDown,
   FaBars,
   FaBell,
   FaCircleCheck,
@@ -14,11 +12,9 @@ import {
   FaMoneyBillTransfer,
   FaUsers,
   FaWallet,
-  FaXmark,
   FaRotate,
   FaRightFromBracket,
   FaShieldHalved,
-  FaTriangleExclamation,
 } from "react-icons/fa6";
 
 import { useNavigate } from "react-router-dom";
@@ -27,11 +23,14 @@ import Live from "./Live";
 
 import "./Admin.css";
 
-const API_URL =
-  "https://api.elonixx.com";
+const API_URL = "https://api.elonixx.com";
 
 const Admin = () => {
   const navigate = useNavigate();
+
+  /* =====================================================
+     ADMIN TOKEN
+  ===================================================== */
 
   const [
     adminToken,
@@ -41,6 +40,10 @@ const Admin = () => {
       "elonixxAdminToken"
     )
   );
+
+  /* =====================================================
+     STATISTICS
+  ===================================================== */
 
   const [
     statistics,
@@ -53,63 +56,132 @@ const Admin = () => {
     completedWithdrawals: 0,
   });
 
+  /* =====================================================
+     USERS
+  ===================================================== */
+
   const [
     users,
     setUsers,
   ] = useState([]);
+
+  /* =====================================================
+     WITHDRAWALS
+  ===================================================== */
 
   const [
     withdrawals,
     setWithdrawals,
   ] = useState([]);
 
+  /* =====================================================
+     ACTIVE PAGE
+  ===================================================== */
+
   const [
     activePage,
     setActivePage,
   ] = useState("overview");
+
+  /* =====================================================
+     LOADING
+  ===================================================== */
 
   const [
     loading,
     setLoading,
   ] = useState(true);
 
+  /* =====================================================
+     UPDATING WITHDRAWAL
+  ===================================================== */
+
   const [
     updatingId,
     setUpdatingId,
   ] = useState("");
+
+  /* =====================================================
+     SIDEBAR
+  ===================================================== */
 
   const [
     sidebarOpen,
     setSidebarOpen,
   ] = useState(false);
 
-  const adminEmail =
-    localStorage.getItem(
-      "elonixxAdminEmail"
-    ) ||
-    "Admin";
+  /* =====================================================
+     ERROR
+  ===================================================== */
+
+  const [
+    dashboardError,
+    setDashboardError,
+  ] = useState("");
+
+  /* =====================================================
+     ADMIN EMAIL
+  ===================================================== */
+
+  const [
+    adminEmail,
+    setAdminEmail,
+  ] = useState(
+    () =>
+      localStorage.getItem(
+        "elonixxAdminEmail"
+      ) || "Administrator"
+  );
 
   /* =====================================================
      AUTHENTICATION CHECK
   ===================================================== */
 
   useEffect(() => {
-    if (!adminToken) {
-      navigate("/");
+    const token =
+      localStorage.getItem(
+        "elonixxAdminToken"
+      );
+
+    const email =
+      localStorage.getItem(
+        "elonixxAdminEmail"
+      );
+
+    if (!token) {
+      navigate("/", {
+        replace: true,
+      });
+
+      return;
     }
-  }, [
-    adminToken,
-    navigate,
-  ]);
+
+    setAdminToken(token);
+
+    if (email) {
+      setAdminEmail(email);
+    }
+  }, [navigate]);
 
   /* =====================================================
-     API HELPER
+     ADMIN API HELPER
   ===================================================== */
 
   const adminFetch = async (
     endpoint,
     options = {}
   ) => {
+    const token =
+      localStorage.getItem(
+        "elonixxAdminToken"
+      );
+
+    if (!token) {
+      throw new Error(
+        "Admin authentication token is missing."
+      );
+    }
+
     const response =
       await fetch(
         `${API_URL}${endpoint}`,
@@ -120,44 +192,49 @@ const Admin = () => {
             "Content-Type":
               "application/json",
 
-            Authorization:
-              `Bearer ${adminToken}`,
+            ...(options.headers || {}),
 
-            ...(options.headers ||
-              {}),
+            Authorization:
+              `Bearer ${token}`,
           },
         }
       );
 
-    const data =
-      await response.json()
-        .catch(() => ({}));
+    const responseText =
+      await response.text();
+
+    let data = {};
+
+    try {
+      data = responseText
+        ? JSON.parse(responseText)
+        : {};
+    } catch {
+      data = {};
+    }
+
+    /* =================================================
+       AUTH ERROR
+    ================================================= */
 
     if (
       response.status === 401 ||
       response.status === 403
     ) {
-      localStorage.removeItem(
-        "elonixxAdminToken"
-      );
-
-      localStorage.removeItem(
-        "elonixxAdminEmail"
-      );
-
-      setAdminToken(null);
-
-      navigate("/");
-
       throw new Error(
-        "Admin session expired."
+        data.message ||
+          "Admin authentication failed. Your admin session may be invalid or expired."
       );
     }
+
+    /* =================================================
+       OTHER SERVER ERROR
+    ================================================= */
 
     if (!response.ok) {
       throw new Error(
         data.message ||
-          "Request failed."
+          `Server returned ${response.status}.`
       );
     }
 
@@ -165,14 +242,28 @@ const Admin = () => {
   };
 
   /* =====================================================
-     LOAD DASHBOARD
+     LOAD ADMIN DASHBOARD
   ===================================================== */
 
   const loadDashboard =
     async () => {
-      if (!adminToken) return;
+      const token =
+        localStorage.getItem(
+          "elonixxAdminToken"
+        );
+
+      if (!token) {
+        setDashboardError(
+          "Admin token is missing."
+        );
+
+        setLoading(false);
+
+        return;
+      }
 
       setLoading(true);
+      setDashboardError("");
 
       try {
         const [
@@ -188,17 +279,63 @@ const Admin = () => {
           ),
         ]);
 
-        setStatistics(
-          overviewData.statistics
-        );
+        /* =================================================
+           SAFE STATISTICS
+        ================================================= */
+
+        const safeStatistics =
+          overviewData?.statistics ||
+          {};
+
+        setStatistics({
+          totalUsers:
+            Number(
+              safeStatistics.totalUsers
+            ) || 0,
+
+          totalTransactions:
+            Number(
+              safeStatistics.totalTransactions
+            ) || 0,
+
+          totalWithdrawals:
+            Number(
+              safeStatistics.totalWithdrawals
+            ) || 0,
+
+          pendingWithdrawals:
+            Number(
+              safeStatistics.pendingWithdrawals
+            ) || 0,
+
+          completedWithdrawals:
+            Number(
+              safeStatistics.completedWithdrawals
+            ) || 0,
+        });
+
+        /* =================================================
+           SAFE USERS
+        ================================================= */
 
         setUsers(
-          overviewData.users || []
+          Array.isArray(
+            overviewData?.users
+          )
+            ? overviewData.users
+            : []
         );
 
+        /* =================================================
+           SAFE WITHDRAWALS
+        ================================================= */
+
         setWithdrawals(
-          withdrawalsData.withdrawals ||
-            []
+          Array.isArray(
+            withdrawalsData?.withdrawals
+          )
+            ? withdrawalsData.withdrawals
+            : []
         );
       } catch (error) {
         console.error(
@@ -206,26 +343,38 @@ const Admin = () => {
           error
         );
 
-        if (
-          error.message !==
-          "Admin session expired."
-        ) {
-          alert(
-            error.message ||
-              "Unable to load admin dashboard."
-          );
-        }
+        setDashboardError(
+          error.message ||
+            "Unable to load admin dashboard."
+        );
+
+        /*
+         * IMPORTANT:
+         *
+         * We DO NOT immediately navigate
+         * back to "/" here.
+         *
+         * This allows you to actually see
+         * what went wrong instead of the
+         * dashboard disappearing.
+         */
       } finally {
         setLoading(false);
       }
     };
 
+  /* =====================================================
+     LOAD DASHBOARD WHEN TOKEN EXISTS
+  ===================================================== */
+
   useEffect(() => {
-    loadDashboard();
+    if (adminToken) {
+      loadDashboard();
+    }
   }, [adminToken]);
 
   /* =====================================================
-     UPDATE WITHDRAWAL
+     UPDATE WITHDRAWAL STATUS
   ===================================================== */
 
   const updateWithdrawalStatus =
@@ -262,13 +411,15 @@ const Admin = () => {
             )
         );
 
-        setStatistics(
-          (previous) => ({
-            ...previous,
-          })
-        );
+        /*
+         * Reload dashboard so that
+         * statistics stay accurate.
+         */
+
+        await loadDashboard();
       } catch (error) {
         console.error(
+          "Withdrawal update error:",
           error
         );
 
@@ -294,9 +445,19 @@ const Admin = () => {
       "elonixxAdminEmail"
     );
 
+    localStorage.removeItem(
+      "finwalletToken"
+    );
+
+    localStorage.removeItem(
+      "finwalletCurrentUser"
+    );
+
     setAdminToken(null);
 
-    navigate("/");
+    navigate("/", {
+      replace: true,
+    });
   };
 
   /* =====================================================
@@ -326,13 +487,23 @@ const Admin = () => {
   ) => {
     if (!date) return "-";
 
-    return new Date(
-      date
-    ).toLocaleString(
+    const parsedDate =
+      new Date(date);
+
+    if (
+      Number.isNaN(
+        parsedDate.getTime()
+      )
+    ) {
+      return "-";
+    }
+
+    return parsedDate.toLocaleString(
       "en-US",
       {
         dateStyle:
           "medium",
+
         timeStyle:
           "short",
       }
@@ -346,14 +517,22 @@ const Admin = () => {
   const statusClass = (
     status
   ) => {
-    return (
-      `status status-${status}`
-    );
+    return `status status-${
+      status || "pending"
+    }`;
   };
+
+  /* =====================================================
+     IF NO ADMIN TOKEN
+  ===================================================== */
 
   if (!adminToken) {
     return null;
   }
+
+  /* =====================================================
+     UI
+  ===================================================== */
 
   return (
     <div className="admin-layout">
@@ -369,6 +548,8 @@ const Admin = () => {
             : "admin-sidebar"
         }
       >
+
+        {/* LOGO */}
 
         <div className="admin-logo">
 
@@ -388,10 +569,17 @@ const Admin = () => {
 
         </div>
 
+        {/* PROFILE */}
+
         <div className="admin-profile">
 
           <div className="admin-avatar">
-            S
+            {(
+              adminEmail ||
+              "A"
+            )
+              .charAt(0)
+              .toUpperCase()}
           </div>
 
           <div>
@@ -406,9 +594,12 @@ const Admin = () => {
 
         </div>
 
+        {/* NAVIGATION */}
+
         <nav className="admin-nav">
 
           <button
+            type="button"
             className={
               activePage ===
               "overview"
@@ -419,7 +610,10 @@ const Admin = () => {
               setActivePage(
                 "overview"
               );
-              setSidebarOpen(false);
+
+              setSidebarOpen(
+                false
+              );
             }}
           >
             <FaWallet />
@@ -427,6 +621,7 @@ const Admin = () => {
           </button>
 
           <button
+            type="button"
             className={
               activePage ===
               "users"
@@ -437,7 +632,10 @@ const Admin = () => {
               setActivePage(
                 "users"
               );
-              setSidebarOpen(false);
+
+              setSidebarOpen(
+                false
+              );
             }}
           >
             <FaUsers />
@@ -445,6 +643,7 @@ const Admin = () => {
           </button>
 
           <button
+            type="button"
             className={
               activePage ===
               "withdrawals"
@@ -455,7 +654,10 @@ const Admin = () => {
               setActivePage(
                 "withdrawals"
               );
-              setSidebarOpen(false);
+
+              setSidebarOpen(
+                false
+              );
             }}
           >
             <FaMoneyBillTransfer />
@@ -463,6 +665,7 @@ const Admin = () => {
           </button>
 
           <button
+            type="button"
             className={
               activePage ===
               "chat"
@@ -473,7 +676,10 @@ const Admin = () => {
               setActivePage(
                 "chat"
               );
-              setSidebarOpen(false);
+
+              setSidebarOpen(
+                false
+              );
             }}
           >
             <FaBell />
@@ -482,7 +688,10 @@ const Admin = () => {
 
         </nav>
 
+        {/* LOGOUT */}
+
         <button
+          type="button"
           className="admin-logout"
           onClick={
             handleLogout
@@ -513,14 +722,15 @@ const Admin = () => {
 
       <main className="admin-main">
 
+        {/* HEADER */}
+
         <header className="admin-header">
 
           <button
+            type="button"
             className="admin-menu"
             onClick={() =>
-              setSidebarOpen(
-                true
-              )
+              setSidebarOpen(true)
             }
           >
             <FaBars />
@@ -550,6 +760,7 @@ const Admin = () => {
           <div className="header-actions">
 
             <button
+              type="button"
               onClick={
                 loadDashboard
               }
@@ -559,12 +770,45 @@ const Admin = () => {
             </button>
 
             <div className="admin-header-avatar">
-              S
+              {(
+                adminEmail ||
+                "A"
+              )
+                .charAt(0)
+                .toUpperCase()}
             </div>
 
           </div>
 
         </header>
+
+        {/* =================================================
+            ERROR MESSAGE
+        ================================================= */}
+
+        {dashboardError && (
+          <div className="admin-error">
+
+            <strong>
+              Admin dashboard could not
+              load.
+            </strong>
+
+            <p>
+              {dashboardError}
+            </p>
+
+            <button
+              type="button"
+              onClick={
+                loadDashboard
+              }
+            >
+              Try Again
+            </button>
+
+          </div>
+        )}
 
         {/* =================================================
             OVERVIEW
@@ -717,6 +961,7 @@ const Admin = () => {
                   </div>
 
                   <button
+                    type="button"
                     onClick={() =>
                       setActivePage(
                         "users"
@@ -734,6 +979,7 @@ const Admin = () => {
                   <table>
 
                     <thead>
+
                       <tr>
                         <th>
                           User
@@ -751,6 +997,7 @@ const Admin = () => {
                           Joined
                         </th>
                       </tr>
+
                     </thead>
 
                     <tbody>
@@ -769,7 +1016,9 @@ const Admin = () => {
                                 user._id
                               }
                             >
+
                               <td>
+
                                 <div className="table-user">
 
                                   <div className="mini-avatar">
@@ -790,6 +1039,7 @@ const Admin = () => {
                                   </strong>
 
                                 </div>
+
                               </td>
 
                               <td>
@@ -812,9 +1062,21 @@ const Admin = () => {
                                   )
                                 }
                               </td>
+
                             </tr>
                           )
                         )}
+
+                      {users.length ===
+                        0 && (
+                        <tr>
+                          <td
+                            colSpan="4"
+                          >
+                            No users found.
+                          </td>
+                        </tr>
+                      )}
 
                     </tbody>
 
@@ -842,6 +1104,7 @@ const Admin = () => {
                   </div>
 
                   <button
+                    type="button"
                     onClick={() =>
                       setActivePage(
                         "withdrawals"
@@ -862,12 +1125,14 @@ const Admin = () => {
                       "pending"
                   ).length === 0 ? (
                     <div className="empty-state">
+
                       <FaCircleCheck />
 
                       <p>
                         No pending
                         withdrawals.
                       </p>
+
                     </div>
                   ) : (
                     withdrawals
@@ -915,7 +1180,8 @@ const Admin = () => {
 
                               <span>
                                 {
-                                  item.paymentMethod
+                                  item.paymentMethod ||
+                                  "Bank Transfer"
                                 }
                               </span>
 
@@ -978,6 +1244,7 @@ const Admin = () => {
                 <thead>
 
                   <tr>
+
                     <th>
                       User
                     </th>
@@ -1001,6 +1268,7 @@ const Admin = () => {
                     <th>
                       Created
                     </th>
+
                   </tr>
 
                 </thead>
@@ -1079,6 +1347,17 @@ const Admin = () => {
 
                       </tr>
                     )
+                  )}
+
+                  {users.length ===
+                    0 && (
+                    <tr>
+                      <td
+                        colSpan="6"
+                      >
+                        No users found.
+                      </td>
+                    </tr>
                   )}
 
                 </tbody>
@@ -1228,19 +1507,25 @@ const Admin = () => {
                         </td>
 
                         <td>
+
                           <div className="account-info">
+
                             <strong>
                               {
-                                item.accountName
+                                item.accountName ||
+                                "-"
                               }
                             </strong>
 
                             <small>
                               {
-                                item.accountNumber
+                                item.accountNumber ||
+                                "-"
                               }
                             </small>
+
                           </div>
+
                         </td>
 
                         <td>
@@ -1252,20 +1537,26 @@ const Admin = () => {
                         </td>
 
                         <td>
+
                           <span
                             className={statusClass(
                               item.status
                             )}
                           >
-                            {item.status}
+                            {
+                              item.status ||
+                              "pending"
+                            }
                           </span>
+
                         </td>
 
                         <td>
 
                           <select
                             value={
-                              item.status
+                              item.status ||
+                              "pending"
                             }
                             disabled={
                               updatingId ===
@@ -1306,6 +1597,18 @@ const Admin = () => {
                     )
                   )}
 
+                  {withdrawals.length ===
+                    0 && (
+                    <tr>
+                      <td
+                        colSpan="7"
+                      >
+                        No withdrawal
+                        requests found.
+                      </td>
+                    </tr>
+                  )}
+
                 </tbody>
 
               </table>
@@ -1340,14 +1643,19 @@ const Admin = () => {
               </div>
 
               <div className="online-indicator">
+
                 <span />
+
                 Support online
+
               </div>
 
             </div>
 
             <div className="admin-live-container">
+
               <Live role="admin" />
+
             </div>
 
           </section>
@@ -1359,8 +1667,11 @@ const Admin = () => {
 
         {loading && (
           <div className="admin-loading">
+
             <div className="admin-spinner" />
+
             Loading admin data...
+
           </div>
         )}
 
