@@ -16,7 +16,15 @@ import {
 
 import "./Login.css";
 
+/* =====================================================
+   BACKEND API
+===================================================== */
+
 const API_URL = "https://api.elonixx.com";
+
+/* =====================================================
+   LOGIN COMPONENT
+===================================================== */
 
 const Login = () => {
   const navigate = useNavigate();
@@ -56,8 +64,7 @@ const Login = () => {
   const handleLoginChange = (e) => {
     setLoginData((previous) => ({
       ...previous,
-      [e.target.name]:
-        e.target.value,
+      [e.target.name]: e.target.value,
     }));
   };
 
@@ -68,8 +75,7 @@ const Login = () => {
   const handleRegisterChange = (e) => {
     setRegisterData((previous) => ({
       ...previous,
-      [e.target.name]:
-        e.target.value,
+      [e.target.name]: e.target.value,
     }));
   };
 
@@ -81,6 +87,20 @@ const Login = () => {
     e.preventDefault();
 
     if (loading) return;
+
+    const email =
+      loginData.email.trim().toLowerCase();
+
+    const password =
+      loginData.password;
+
+    if (!email || !password) {
+      alert(
+        "Email and password are required."
+      );
+
+      return;
+    }
 
     setLoading(true);
 
@@ -96,35 +116,61 @@ const Login = () => {
           },
 
           body: JSON.stringify({
-            email:
-              loginData.email.trim(),
-
-            password:
-              loginData.password,
+            email,
+            password,
           }),
         }
       );
 
-      const data =
-        await response.json();
+      /*
+       * Safely read the response.
+       * This prevents the frontend from crashing
+       * if the backend returns something that is
+       * not valid JSON.
+       */
+
+      const responseText =
+        await response.text();
+
+      let data = {};
+
+      try {
+        data = responseText
+          ? JSON.parse(responseText)
+          : {};
+      } catch {
+        data = {};
+      }
 
       if (!response.ok) {
+        console.error(
+          "Login API error:",
+          response.status,
+          data
+        );
+
         alert(
           data.message ||
-            "Invalid email or password."
+            `Login failed. Server returned ${response.status}.`
         );
 
         return;
       }
 
+      /*
+       * Save logged-in user.
+       */
+
       if (data.user) {
         localStorage.setItem(
           "finwalletCurrentUser",
-          JSON.stringify(
-            data.user
-          )
+          JSON.stringify(data.user)
         );
       }
+
+      /*
+       * Save JWT token.
+       */
 
       if (data.token) {
         localStorage.setItem(
@@ -162,23 +208,54 @@ const Login = () => {
 
     if (loading) return;
 
-    if (
-      registerData.password !==
-      registerData.confirmPassword
-    ) {
+    const name =
+      registerData.name.trim();
+
+    const email =
+      registerData.email
+        .trim()
+        .toLowerCase();
+
+    const password =
+      registerData.password;
+
+    const confirmPassword =
+      registerData.confirmPassword;
+
+    /* ---------------------------------------------
+       VALIDATION
+    --------------------------------------------- */
+
+    if (!name || !email || !password) {
       alert(
-        "Passwords do not match."
+        "Name, email and password are required."
+      );
+
+      return;
+    }
+
+    if (name.length < 2) {
+      alert(
+        "Name must contain at least 2 characters."
+      );
+
+      return;
+    }
+
+    if (password.length < 6) {
+      alert(
+        "Password must contain at least 6 characters."
       );
 
       return;
     }
 
     if (
-      registerData.password.length <
-      6
+      password !==
+      confirmPassword
     ) {
       alert(
-        "Password must contain at least 6 characters."
+        "Passwords do not match."
       );
 
       return;
@@ -198,40 +275,59 @@ const Login = () => {
           },
 
           body: JSON.stringify({
-            name:
-              registerData.name.trim(),
-
-            email:
-              registerData.email
-                .trim()
-                .toLowerCase(),
-
-            password:
-              registerData.password,
+            name,
+            email,
+            password,
           }),
         }
       );
 
-      const data =
-        await response.json();
+      /*
+       * Safely read the backend response.
+       */
+
+      const responseText =
+        await response.text();
+
+      let data = {};
+
+      try {
+        data = responseText
+          ? JSON.parse(responseText)
+          : {};
+      } catch {
+        data = {};
+      }
 
       if (!response.ok) {
+        console.error(
+          "Registration API error:",
+          response.status,
+          data
+        );
+
         alert(
           data.message ||
-            "Unable to create account."
+            `Registration failed. Server returned ${response.status}.`
         );
 
         return;
       }
 
+      /*
+       * Save newly created user.
+       */
+
       if (data.user) {
         localStorage.setItem(
           "finwalletCurrentUser",
-          JSON.stringify(
-            data.user
-          )
+          JSON.stringify(data.user)
         );
       }
+
+      /*
+       * Save JWT returned by backend.
+       */
 
       if (data.token) {
         localStorage.setItem(
@@ -245,6 +341,10 @@ const Login = () => {
           "Account created successfully!"
       );
 
+      /*
+       * Clear registration form.
+       */
+
       setRegisterData({
         name: "",
         email: "",
@@ -253,9 +353,8 @@ const Login = () => {
       });
 
       /*
-       * Since registration already returns
-       * a JWT, send the user directly
-       * to the dashboard.
+       * User is already authenticated because
+       * the backend returned a JWT.
        */
 
       navigate("/dashboard");
@@ -283,7 +382,9 @@ const Login = () => {
 
         <div className="auth-container">
 
-          {/* LOGO */}
+          {/* =================================================
+              LOGO
+          ================================================= */}
 
           <div className="mobile-brand">
 
@@ -303,7 +404,9 @@ const Login = () => {
 
           </div>
 
-          {/* ACCOUNT SWITCH */}
+          {/* =================================================
+              ACCOUNT SWITCH
+          ================================================= */}
 
           <div className="account-switch">
 
@@ -317,8 +420,7 @@ const Login = () => {
               type="button"
               onClick={() =>
                 setActiveForm(
-                  activeForm ===
-                    "login"
+                  activeForm === "login"
                     ? "register"
                     : "login"
                 )
@@ -333,22 +435,21 @@ const Login = () => {
 
           </div>
 
-          {/* TABS */}
+          {/* =================================================
+              TABS
+          ================================================= */}
 
           <div className="tabs">
 
             <button
               type="button"
               className={
-                activeForm ===
-                "login"
+                activeForm === "login"
                   ? "tab active"
                   : "tab"
               }
               onClick={() =>
-                setActiveForm(
-                  "login"
-                )
+                setActiveForm("login")
               }
             >
               Login
@@ -357,15 +458,12 @@ const Login = () => {
             <button
               type="button"
               className={
-                activeForm ===
-                "register"
+                activeForm === "register"
                   ? "tab active"
                   : "tab"
               }
               onClick={() =>
-                setActiveForm(
-                  "register"
-                )
+                setActiveForm("register")
               }
             >
               Register
@@ -377,8 +475,7 @@ const Login = () => {
               LOGIN FORM
           ================================================= */}
 
-          {activeForm ===
-            "login" && (
+          {activeForm === "login" && (
             <div className="form-box">
 
               <h2>
@@ -393,10 +490,10 @@ const Login = () => {
               </p>
 
               <form
-                onSubmit={
-                  handleLogin
-                }
+                onSubmit={handleLogin}
               >
+
+                {/* EMAIL */}
 
                 <div className="input-box">
 
@@ -416,6 +513,8 @@ const Login = () => {
                   />
 
                 </div>
+
+                {/* PASSWORD */}
 
                 <div className="input-box">
 
@@ -457,12 +556,15 @@ const Login = () => {
 
                 </div>
 
+                {/* OPTIONS */}
+
                 <div className="form-options">
 
                   <label>
                     <input
                       type="checkbox"
                     />
+
                     Remember me
                   </label>
 
@@ -473,6 +575,8 @@ const Login = () => {
                   </button>
 
                 </div>
+
+                {/* LOGIN BUTTON */}
 
                 <button
                   type="submit"
@@ -490,6 +594,8 @@ const Login = () => {
 
               </form>
 
+              {/* DIVIDER */}
+
               <div className="divider">
 
                 <span></span>
@@ -499,6 +605,8 @@ const Login = () => {
                 <span></span>
 
               </div>
+
+              {/* SOCIAL LOGIN */}
 
               <div className="social-login">
 
@@ -518,6 +626,8 @@ const Login = () => {
                 </button>
 
               </div>
+
+              {/* BOTTOM */}
 
               <p className="bottom-text">
 
@@ -543,8 +653,7 @@ const Login = () => {
               REGISTER FORM
           ================================================= */}
 
-          {activeForm ===
-            "register" && (
+          {activeForm === "register" && (
             <div className="form-box">
 
               <h2>
@@ -562,6 +671,8 @@ const Login = () => {
                   handleRegister
                 }
               >
+
+                {/* NAME */}
 
                 <div className="input-box">
 
@@ -582,6 +693,8 @@ const Login = () => {
 
                 </div>
 
+                {/* EMAIL */}
+
                 <div className="input-box">
 
                   <FaEnvelope />
@@ -600,6 +713,8 @@ const Login = () => {
                   />
 
                 </div>
+
+                {/* PASSWORD */}
 
                 <div className="input-box">
 
@@ -641,6 +756,8 @@ const Login = () => {
 
                 </div>
 
+                {/* CONFIRM PASSWORD */}
+
                 <div className="input-box">
 
                   <FaLock />
@@ -681,6 +798,8 @@ const Login = () => {
 
                 </div>
 
+                {/* TERMS */}
+
                 <label className="terms">
 
                   <input
@@ -695,6 +814,8 @@ const Login = () => {
                   </span>
 
                 </label>
+
+                {/* REGISTER BUTTON */}
 
                 <button
                   type="submit"
@@ -712,6 +833,8 @@ const Login = () => {
 
               </form>
 
+              {/* DIVIDER */}
+
               <div className="divider">
 
                 <span></span>
@@ -721,6 +844,8 @@ const Login = () => {
                 <span></span>
 
               </div>
+
+              {/* SOCIAL LOGIN */}
 
               <div className="social-login">
 
@@ -740,6 +865,8 @@ const Login = () => {
                 </button>
 
               </div>
+
+              {/* BOTTOM */}
 
               <p className="bottom-text">
 
