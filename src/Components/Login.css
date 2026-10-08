@@ -706,6 +706,50 @@ input {
   top: 0.2rem;
 }
 
+/* =====================================================
+   LOADING BUTTON
+===================================================== */
+
+.auth-button {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+}
+
+.auth-button:disabled {
+  cursor: not-allowed;
+  opacity: 0.8;
+}
+
+/* =====================================================
+   BUTTON SPINNER
+===================================================== */
+
+.button-spinner {
+  width: 18px;
+  height: 18px;
+
+  border: 3px solid rgba(255, 255, 255, 0.35);
+  border-top: 3px solid #ffffff;
+
+  border-radius: 50%;
+
+  animation: buttonSpin 0.7s linear infinite;
+
+  flex-shrink: 0;
+}
+
+@keyframes buttonSpin {
+  from {
+    transform: rotate(0deg);
+  }
+
+  to {
+    transform: rotate(360deg);
+  }
+}
 
 /* =========================
    TABLET

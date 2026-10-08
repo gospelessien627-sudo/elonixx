@@ -29,33 +29,28 @@ const API_URL = "https://api.elonixx.com";
 const Login = () => {
   const navigate = useNavigate();
 
-  const [activeForm, setActiveForm] =
-    useState("login");
+  const [activeForm, setActiveForm] = useState("login");
 
-  const [showPassword, setShowPassword] =
-    useState(false);
+  const [showPassword, setShowPassword] = useState(false);
 
   const [
     showConfirmPassword,
     setShowConfirmPassword,
   ] = useState(false);
 
-  const [loginData, setLoginData] =
-    useState({
-      email: "",
-      password: "",
-    });
+  const [loginData, setLoginData] = useState({
+    email: "",
+    password: "",
+  });
 
-  const [registerData, setRegisterData] =
-    useState({
-      name: "",
-      email: "",
-      password: "",
-      confirmPassword: "",
-    });
+  const [registerData, setRegisterData] = useState({
+    name: "",
+    email: "",
+    password: "",
+    confirmPassword: "",
+  });
 
-  const [loading, setLoading] =
-    useState(false);
+  const [loading, setLoading] = useState(false);
 
   /* =====================================================
      LOGIN INPUT
@@ -88,49 +83,31 @@ const Login = () => {
 
     if (loading) return;
 
-    const email =
-      loginData.email.trim().toLowerCase();
-
-    const password =
-      loginData.password;
+    const email = loginData.email.trim().toLowerCase();
+    const password = loginData.password;
 
     if (!email || !password) {
-      alert(
-        "Email and password are required."
-      );
-
+      alert("Email and password are required.");
       return;
     }
 
     setLoading(true);
 
     try {
-      const response = await fetch(
-        `${API_URL}/api/login`,
-        {
-          method: "POST",
+      const response = await fetch(`${API_URL}/api/login`, {
+        method: "POST",
 
-          headers: {
-            "Content-Type":
-              "application/json",
-          },
+        headers: {
+          "Content-Type": "application/json",
+        },
 
-          body: JSON.stringify({
-            email,
-            password,
-          }),
-        }
-      );
+        body: JSON.stringify({
+          email,
+          password,
+        }),
+      });
 
-      /*
-       * Safely read the response.
-       * This prevents the frontend from crashing
-       * if the backend returns something that is
-       * not valid JSON.
-       */
-
-      const responseText =
-        await response.text();
+      const responseText = await response.text();
 
       let data = {};
 
@@ -157,20 +134,12 @@ const Login = () => {
         return;
       }
 
-      /*
-       * Save logged-in user.
-       */
-
       if (data.user) {
         localStorage.setItem(
           "finwalletCurrentUser",
           JSON.stringify(data.user)
         );
       }
-
-      /*
-       * Save JWT token.
-       */
 
       if (data.token) {
         localStorage.setItem(
@@ -186,10 +155,7 @@ const Login = () => {
 
       navigate("/dashboard");
     } catch (error) {
-      console.error(
-        "Login error:",
-        error
-      );
+      console.error("Login error:", error);
 
       alert(
         "Unable to connect to the server. Please check that the backend is online."
@@ -208,16 +174,13 @@ const Login = () => {
 
     if (loading) return;
 
-    const name =
-      registerData.name.trim();
+    const name = registerData.name.trim();
 
-    const email =
-      registerData.email
-        .trim()
-        .toLowerCase();
+    const email = registerData.email
+      .trim()
+      .toLowerCase();
 
-    const password =
-      registerData.password;
+    const password = registerData.password;
 
     const confirmPassword =
       registerData.confirmPassword;
@@ -250,14 +213,8 @@ const Login = () => {
       return;
     }
 
-    if (
-      password !==
-      confirmPassword
-    ) {
-      alert(
-        "Passwords do not match."
-      );
-
+    if (password !== confirmPassword) {
+      alert("Passwords do not match.");
       return;
     }
 
@@ -281,10 +238,6 @@ const Login = () => {
           }),
         }
       );
-
-      /*
-       * Safely read the backend response.
-       */
 
       const responseText =
         await response.text();
@@ -314,20 +267,12 @@ const Login = () => {
         return;
       }
 
-      /*
-       * Save newly created user.
-       */
-
       if (data.user) {
         localStorage.setItem(
           "finwalletCurrentUser",
           JSON.stringify(data.user)
         );
       }
-
-      /*
-       * Save JWT returned by backend.
-       */
 
       if (data.token) {
         localStorage.setItem(
@@ -341,21 +286,12 @@ const Login = () => {
           "Account created successfully!"
       );
 
-      /*
-       * Clear registration form.
-       */
-
       setRegisterData({
         name: "",
         email: "",
         password: "",
         confirmPassword: "",
       });
-
-      /*
-       * User is already authenticated because
-       * the backend returned a JWT.
-       */
 
       navigate("/dashboard");
     } catch (error) {
@@ -489,9 +425,7 @@ const Login = () => {
                 your money with ease.
               </p>
 
-              <form
-                onSubmit={handleLogin}
-              >
+              <form onSubmit={handleLogin}>
 
                 {/* EMAIL */}
 
@@ -503,12 +437,8 @@ const Login = () => {
                     type="email"
                     name="email"
                     placeholder="Email address"
-                    value={
-                      loginData.email
-                    }
-                    onChange={
-                      handleLoginChange
-                    }
+                    value={loginData.email}
+                    onChange={handleLoginChange}
                     required
                   />
 
@@ -528,12 +458,8 @@ const Login = () => {
                     }
                     name="password"
                     placeholder="Password"
-                    value={
-                      loginData.password
-                    }
-                    onChange={
-                      handleLoginChange
-                    }
+                    value={loginData.password}
+                    onChange={handleLoginChange}
                     required
                   />
 
@@ -568,9 +494,7 @@ const Login = () => {
                     Remember me
                   </label>
 
-                  <button
-                    type="button"
-                  >
+                  <button type="button">
                     Forgot password?
                   </button>
 
@@ -583,12 +507,16 @@ const Login = () => {
                   className="auth-button"
                   disabled={loading}
                 >
-                  {loading
-                    ? "Logging in..."
-                    : "Login"}
-
-                  {!loading && (
-                    <FaArrowRight />
+                  {loading ? (
+                    <>
+                      <span className="button-spinner"></span>
+                      <span>Logging in...</span>
+                    </>
+                  ) : (
+                    <>
+                      <span>Login</span>
+                      <FaArrowRight />
+                    </>
                   )}
                 </button>
 
@@ -666,11 +594,7 @@ const Login = () => {
                 money with ease.
               </p>
 
-              <form
-                onSubmit={
-                  handleRegister
-                }
-              >
+              <form onSubmit={handleRegister}>
 
                 {/* NAME */}
 
@@ -682,12 +606,8 @@ const Login = () => {
                     type="text"
                     name="name"
                     placeholder="Full name"
-                    value={
-                      registerData.name
-                    }
-                    onChange={
-                      handleRegisterChange
-                    }
+                    value={registerData.name}
+                    onChange={handleRegisterChange}
                     required
                   />
 
@@ -703,12 +623,8 @@ const Login = () => {
                     type="email"
                     name="email"
                     placeholder="Email address"
-                    value={
-                      registerData.email
-                    }
-                    onChange={
-                      handleRegisterChange
-                    }
+                    value={registerData.email}
+                    onChange={handleRegisterChange}
                     required
                   />
 
@@ -728,12 +644,8 @@ const Login = () => {
                     }
                     name="password"
                     placeholder="Create password"
-                    value={
-                      registerData.password
-                    }
-                    onChange={
-                      handleRegisterChange
-                    }
+                    value={registerData.password}
+                    onChange={handleRegisterChange}
                     required
                   />
 
@@ -822,12 +734,16 @@ const Login = () => {
                   className="auth-button"
                   disabled={loading}
                 >
-                  {loading
-                    ? "Creating Account..."
-                    : "Create Account"}
-
-                  {!loading && (
-                    <FaArrowRight />
+                  {loading ? (
+                    <>
+                      <span className="button-spinner"></span>
+                      <span>Creating Account...</span>
+                    </>
+                  ) : (
+                    <>
+                      <span>Create Account</span>
+                      <FaArrowRight />
+                    </>
                   )}
                 </button>
 
@@ -875,9 +791,7 @@ const Login = () => {
                 <button
                   type="button"
                   onClick={() =>
-                    setActiveForm(
-                      "login"
-                    )
+                    setActiveForm("login")
                   }
                 >
                   Login
