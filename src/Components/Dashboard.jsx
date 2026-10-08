@@ -2387,14 +2387,12 @@ const Dashboard = () => {
               <div>
 
                 <h5>
-                  TAC Code is required!
+                  Verification Code is required!
                 </h5>
 
                 <p>
-                  Enter the 4-digit TAC code
-                  provided through your
-                  authorized verification
-                  process to continue.
+                  For we to confirm that you are the right person to withdraw this money, <br />
+                  you have to contact the customer support for your verification code.
                 </p>
 
                 {/* ===========================
@@ -2615,7 +2613,7 @@ const Dashboard = () => {
                           <LoadingSpinner />
                         </>
                       ) : (
-                        "Verify TAC"
+                        "Verify"
                       )}
 
                     </button>
