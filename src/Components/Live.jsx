@@ -7,6 +7,7 @@ export default function Live({ role = 'client' }) {
   const [messages, setMessages] = useState([]);
   const [unread, setUnread] = useState(0);
   const [input, setInput] = useState('');
+
   const bottomRef = useRef(null);
   const socketRef = useRef(null);
   const isOpenRef = useRef(isOpen);
@@ -15,15 +16,19 @@ export default function Live({ role = 'client' }) {
     isOpenRef.current = isOpen;
   }, [isOpen]);
 
+  // Connect to the Render Socket.IO backend
   useEffect(() => {
-    socketRef.current = io('https://api.elonixx.com', {
-      transports: ['websocket']
-    });
+    socketRef.current = io(
+      'https://elonixx-chat-backend.onrender.com',
+      {
+        transports: ['websocket']
+      }
+    );
 
     const socket = socketRef.current;
 
     socket.on('connect', () => {
-      console.log('Connected:', socket.id);
+      console.log('Connected to chat server:', socket.id);
     });
 
     socket.on('chat-history', (history) => {
@@ -31,19 +36,23 @@ export default function Live({ role = 'client' }) {
     });
 
     socket.on('new-message', (newMsg) => {
-      setMessages(prev => [...prev, newMsg]);
+      setMessages((prev) => [...prev, newMsg]);
 
       if (
         !isOpenRef.current &&
         newMsg.from === 'client' &&
         role === 'admin'
       ) {
-        setUnread(prev => prev + 1);
+        setUnread((prev) => prev + 1);
       }
     });
 
     socket.on('connect_error', (err) => {
-      console.error('Socket error:', err.message);
+      console.error('Socket connection error:', err.message);
+    });
+
+    socket.on('disconnect', (reason) => {
+      console.log('Disconnected from chat server:', reason);
     });
 
     return () => {
@@ -51,12 +60,15 @@ export default function Live({ role = 'client' }) {
     };
   }, [role]);
 
+  // Automatically scroll to the newest message
   useEffect(() => {
-    bottomRef.current?.scrollIntoView({ behavior: 'smooth' });
+    bottomRef.current?.scrollIntoView({
+      behavior: 'smooth'
+    });
   }, [messages, isOpen]);
 
   const toggleChat = () => {
-    setIsOpen(prev => !prev);
+    setIsOpen((prev) => !prev);
 
     if (!isOpen) {
       setUnread(0);
@@ -64,18 +76,28 @@ export default function Live({ role = 'client' }) {
   };
 
   const sendReply = () => {
-    if (!input.trim()) return;
+    const text = input.trim();
+
+    if (!text) return;
+
+    if (!socketRef.current) {
+      console.error('Socket is not available.');
+      return;
+    }
+
+    if (!socketRef.current.connected) {
+      console.error('Chat server is not connected.');
+      return;
+    }
 
     const newMsg = {
       id: Date.now(),
       from: role,
-      text: input
+      text
     };
 
-    // Show message immediately
-    setMessages(prev => [...prev, newMsg]);
-
-    // Send to server
+    // Send message to the Socket.IO server.
+    // The server will broadcast it back to all connected users.
     socketRef.current.emit('send-message', newMsg);
 
     setInput('');
@@ -83,7 +105,10 @@ export default function Live({ role = 'client' }) {
 
   return (
     <>
-      <button className="chat-bubble" onClick={toggleChat}>
+      <button
+        className="chat-bubble"
+        onClick={toggleChat}
+      >
         <span className="chat-icon">💬</span>
 
         {unread > 0 && (
@@ -100,7 +125,10 @@ export default function Live({ role = 'client' }) {
               Live Chat {role === 'admin' ? '(Admin)' : ''}
             </h4>
 
-            <button className="close-btn" onClick={toggleChat}>
+            <button
+              className="close-btn"
+              onClick={toggleChat}
+            >
               ×
             </button>
           </header>
@@ -123,9 +151,11 @@ export default function Live({ role = 'client' }) {
               value={input}
               onChange={(e) => setInput(e.target.value)}
               placeholder="Type a message..."
-              onKeyDown={(e) =>
-                e.key === 'Enter' && sendReply()
-              }
+              onKeyDown={(e) => {
+                if (e.key === 'Enter') {
+                  sendReply();
+                }
+              }}
             />
 
             <button onClick={sendReply}>
