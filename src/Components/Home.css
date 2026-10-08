@@ -309,10 +309,10 @@ span {
 }
 
 
-/* .iop button{
+.iop button{
     padding-left: 1rem;
     position: relative;
-} */
+}
 .iop button::before{
  position: absolute;
     content: "";
