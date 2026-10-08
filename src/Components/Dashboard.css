@@ -2406,6 +2406,72 @@ position: relative;
     /* position: none; */
 }
 
+/* =========================================
+   DASHBOARD BUTTON LOADING SPINNER
+========================================= */
+
+.dashboard-loading-spinner {
+  width: 17px;
+  height: 17px;
+
+  display: inline-block;
+
+  margin-left: 9px;
+
+  border: 3px solid rgba(255, 255, 255, 0.35);
+  border-top: 3px solid #ffffff;
+
+  border-radius: 50%;
+
+  animation: dashboardButtonSpin
+    0.7s linear infinite;
+
+  vertical-align: middle;
+
+  flex-shrink: 0;
+}
+
+@keyframes dashboardButtonSpin {
+  from {
+    transform: rotate(0deg);
+  }
+
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* =========================================
+   LOADING BUTTON STATE
+========================================= */
+
+button:disabled {
+  cursor: not-allowed;
+  opacity: 0.7;
+}
+
+/* Keep spinner and button text aligned */
+
+.pw button,
+.bhhhh button,
+.plk button,
+.divg button,
+.mbkbe button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+}
+
+/* =========================================
+   SPINNER FOR LIGHT BUTTONS
+========================================= */
+
+.plk button:first-child .dashboard-loading-spinner,
+.vwmb button .dashboard-loading-spinner {
+  border-color: rgba(15, 45, 45, 0.2);
+  border-top-color: #0f2d2d;
+}
 
 /* ================================
    MOBILE
