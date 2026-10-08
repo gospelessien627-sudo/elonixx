@@ -252,7 +252,7 @@ span {
     font-size: 1.4rem;
     text-align: center;
     padding-top: 0.5rem;
-    padding-left: 1rem;
+    padding-left: 2.3rem;
     border-radius: clamp(22px, 1vw, 10px);   
     /* display: inline-flex; */
     cursor: pointer;
