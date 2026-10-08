@@ -1,4 +1,5 @@
 import React, {
+  useCallback,
   useEffect,
   useState,
 } from "react";
@@ -23,7 +24,16 @@ import Live from "./Live";
 
 import "./Admin.css";
 
-const API_URL = "https://api.elonixx.com";
+const API_URL =
+  "https://api.elonixx.com";
+
+const DEFAULT_STATISTICS = {
+  totalUsers: 0,
+  totalTransactions: 0,
+  totalWithdrawals: 0,
+  pendingWithdrawals: 0,
+  completedWithdrawals: 0,
+};
 
 const Admin = () => {
   const navigate = useNavigate();
@@ -32,83 +42,61 @@ const Admin = () => {
      ADMIN TOKEN
   ===================================================== */
 
-  const [
-    adminToken,
-    setAdminToken,
-  ] = useState(() =>
-    localStorage.getItem(
-      "elonixxAdminToken"
-    )
-  );
+  const [adminToken, setAdminToken] =
+    useState(() =>
+      localStorage.getItem(
+        "elonixxAdminToken"
+      )
+    );
 
   /* =====================================================
      STATISTICS
   ===================================================== */
 
-  const [
-    statistics,
-    setStatistics,
-  ] = useState({
-    totalUsers: 0,
-    totalTransactions: 0,
-    totalWithdrawals: 0,
-    pendingWithdrawals: 0,
-    completedWithdrawals: 0,
-  });
+  const [statistics, setStatistics] =
+    useState(DEFAULT_STATISTICS);
 
   /* =====================================================
      USERS
   ===================================================== */
 
-  const [
-    users,
-    setUsers,
-  ] = useState([]);
+  const [users, setUsers] =
+    useState([]);
 
   /* =====================================================
      WITHDRAWALS
   ===================================================== */
 
-  const [
-    withdrawals,
-    setWithdrawals,
-  ] = useState([]);
+  const [withdrawals, setWithdrawals] =
+    useState([]);
 
   /* =====================================================
      ACTIVE PAGE
   ===================================================== */
 
-  const [
-    activePage,
-    setActivePage,
-  ] = useState("overview");
+  const [activePage, setActivePage] =
+    useState("overview");
 
   /* =====================================================
      LOADING
   ===================================================== */
 
-  const [
-    loading,
-    setLoading,
-  ] = useState(true);
+  const [loading, setLoading] =
+    useState(true);
 
   /* =====================================================
      UPDATING WITHDRAWAL
   ===================================================== */
 
-  const [
-    updatingId,
-    setUpdatingId,
-  ] = useState("");
+  const [updatingId, setUpdatingId] =
+    useState("");
 
   /* =====================================================
      SIDEBAR
   ===================================================== */
 
-  const [
-    sidebarOpen,
-    setSidebarOpen,
-  ] = useState(false);
+  const [sidebarOpen, setSidebarOpen] =
+    useState(false);
 
   /* =====================================================
      ERROR
@@ -123,18 +111,16 @@ const Admin = () => {
      ADMIN EMAIL
   ===================================================== */
 
-  const [
-    adminEmail,
-    setAdminEmail,
-  ] = useState(
-    () =>
-      localStorage.getItem(
-        "elonixxAdminEmail"
-      ) || "Administrator"
-  );
+  const [adminEmail, setAdminEmail] =
+    useState(
+      () =>
+        localStorage.getItem(
+          "elonixxAdminEmail"
+        ) || "Administrator"
+    );
 
   /* =====================================================
-     AUTHENTICATION CHECK
+     CHECK ADMIN SESSION
   ===================================================== */
 
   useEffect(() => {
@@ -149,6 +135,8 @@ const Admin = () => {
       );
 
     if (!token) {
+      setAdminToken(null);
+
       navigate("/", {
         replace: true,
       });
@@ -164,89 +152,87 @@ const Admin = () => {
   }, [navigate]);
 
   /* =====================================================
-     ADMIN API HELPER
+     ADMIN API
   ===================================================== */
 
-  const adminFetch = async (
-    endpoint,
-    options = {}
-  ) => {
-    const token =
-      localStorage.getItem(
-        "elonixxAdminToken"
-      );
+  const adminFetch = useCallback(
+    async (
+      endpoint,
+      options = {}
+    ) => {
+      const token =
+        localStorage.getItem(
+          "elonixxAdminToken"
+        );
 
-    if (!token) {
-      throw new Error(
-        "Admin authentication token is missing."
-      );
-    }
+      if (!token) {
+        throw new Error(
+          "Admin authentication token is missing."
+        );
+      }
 
-    const response =
-      await fetch(
-        `${API_URL}${endpoint}`,
-        {
-          ...options,
+      const response =
+        await fetch(
+          `${API_URL}${endpoint}`,
+          {
+            ...options,
 
-          headers: {
-            "Content-Type":
-              "application/json",
+            headers: {
+              "Content-Type":
+                "application/json",
 
-            ...(options.headers || {}),
+              ...(options.headers || {}),
 
-            Authorization:
-              `Bearer ${token}`,
-          },
-        }
-      );
+              Authorization:
+                `Bearer ${token}`,
+            },
+          }
+        );
 
-    const responseText =
-      await response.text();
+      const responseText =
+        await response.text();
 
-    let data = {};
+      let data = {};
 
-    try {
-      data = responseText
-        ? JSON.parse(responseText)
-        : {};
-    } catch {
-      data = {};
-    }
+      try {
+        data =
+          responseText
+            ? JSON.parse(
+                responseText
+              )
+            : {};
+      } catch {
+        data = {};
+      }
 
-    /* =================================================
-       AUTH ERROR
-    ================================================= */
+      if (
+        response.status === 401 ||
+        response.status === 403
+      ) {
+        throw new Error(
+          data.message ||
+            "Admin authentication failed."
+        );
+      }
 
-    if (
-      response.status === 401 ||
-      response.status === 403
-    ) {
-      throw new Error(
-        data.message ||
-          "Admin authentication failed. Your admin session may be invalid or expired."
-      );
-    }
+      if (!response.ok) {
+        throw new Error(
+          data.message ||
+            `Server returned ${response.status}.`
+        );
+      }
 
-    /* =================================================
-       OTHER SERVER ERROR
-    ================================================= */
-
-    if (!response.ok) {
-      throw new Error(
-        data.message ||
-          `Server returned ${response.status}.`
-      );
-    }
-
-    return data;
-  };
+      return data;
+    },
+    []
+  );
 
   /* =====================================================
-     LOAD ADMIN DASHBOARD
+     LOAD DASHBOARD
   ===================================================== */
 
   const loadDashboard =
-    async () => {
+    useCallback(async () => {
       const token =
         localStorage.getItem(
           "elonixxAdminToken"
@@ -266,21 +252,26 @@ const Admin = () => {
       setDashboardError("");
 
       try {
-        const [
-          overviewData,
-          withdrawalsData,
-        ] = await Promise.all([
-          adminFetch(
-            "/api/admin/overview"
-          ),
+        /*
+         * Load overview first.
+         */
 
-          adminFetch(
+        const overviewData =
+          await adminFetch(
+            "/api/admin/overview"
+          );
+
+        /*
+         * Load withdrawals second.
+         */
+
+        const withdrawalsData =
+          await adminFetch(
             "/api/admin/withdrawals"
-          ),
-        ]);
+          );
 
         /* =================================================
-           SAFE STATISTICS
+           STATISTICS
         ================================================= */
 
         const safeStatistics =
@@ -315,7 +306,7 @@ const Admin = () => {
         });
 
         /* =================================================
-           SAFE USERS
+           USERS
         ================================================= */
 
         setUsers(
@@ -327,7 +318,7 @@ const Admin = () => {
         );
 
         /* =================================================
-           SAFE WITHDRAWALS
+           WITHDRAWALS
         ================================================= */
 
         setWithdrawals(
@@ -337,44 +328,38 @@ const Admin = () => {
             ? withdrawalsData.withdrawals
             : []
         );
+
+        setDashboardError("");
       } catch (error) {
         console.error(
-          "Admin dashboard error:",
+          "ADMIN DASHBOARD ERROR:",
           error
         );
 
         setDashboardError(
-          error.message ||
+          error?.message ||
             "Unable to load admin dashboard."
         );
-
-        /*
-         * IMPORTANT:
-         *
-         * We DO NOT immediately navigate
-         * back to "/" here.
-         *
-         * This allows you to actually see
-         * what went wrong instead of the
-         * dashboard disappearing.
-         */
       } finally {
         setLoading(false);
       }
-    };
+    }, [adminFetch]);
 
   /* =====================================================
-     LOAD DASHBOARD WHEN TOKEN EXISTS
+     LOAD WHEN ADMIN TOKEN EXISTS
   ===================================================== */
 
   useEffect(() => {
     if (adminToken) {
       loadDashboard();
     }
-  }, [adminToken]);
+  }, [
+    adminToken,
+    loadDashboard,
+  ]);
 
   /* =====================================================
-     UPDATE WITHDRAWAL STATUS
+     UPDATE WITHDRAWAL
   ===================================================== */
 
   const updateWithdrawalStatus =
@@ -398,33 +383,19 @@ const Admin = () => {
           }
         );
 
-        setWithdrawals(
-          (previous) =>
-            previous.map(
-              (item) =>
-                item._id === id
-                  ? {
-                      ...item,
-                      status,
-                    }
-                  : item
-            )
-        );
-
-        /*
-         * Reload dashboard so that
-         * statistics stay accurate.
-         */
-
         await loadDashboard();
+
+        alert(
+          "Withdrawal status updated successfully."
+        );
       } catch (error) {
         console.error(
-          "Withdrawal update error:",
+          "WITHDRAWAL UPDATE ERROR:",
           error
         );
 
         alert(
-          error.message ||
+          error?.message ||
             "Unable to update withdrawal."
         );
       } finally {
@@ -445,14 +416,6 @@ const Admin = () => {
       "elonixxAdminEmail"
     );
 
-    localStorage.removeItem(
-      "finwalletToken"
-    );
-
-    localStorage.removeItem(
-      "finwalletCurrentUser"
-    );
-
     setAdminToken(null);
 
     navigate("/", {
@@ -461,7 +424,7 @@ const Admin = () => {
   };
 
   /* =====================================================
-     FORMAT MONEY
+     MONEY
   ===================================================== */
 
   const formatMoney = (
@@ -479,7 +442,7 @@ const Admin = () => {
   };
 
   /* =====================================================
-     FORMAT DATE
+     DATE
   ===================================================== */
 
   const formatDate = (
@@ -523,7 +486,7 @@ const Admin = () => {
   };
 
   /* =====================================================
-     IF NO ADMIN TOKEN
+     NO TOKEN
   ===================================================== */
 
   if (!adminToken) {
@@ -537,9 +500,7 @@ const Admin = () => {
   return (
     <div className="admin-layout">
 
-      {/* =================================================
-          SIDEBAR
-      ================================================= */}
+      {/* SIDEBAR */}
 
       <aside
         className={
@@ -548,8 +509,6 @@ const Admin = () => {
             : "admin-sidebar"
         }
       >
-
-        {/* LOGO */}
 
         <div className="admin-logo">
 
@@ -568,8 +527,6 @@ const Admin = () => {
           </div>
 
         </div>
-
-        {/* PROFILE */}
 
         <div className="admin-profile">
 
@@ -594,8 +551,6 @@ const Admin = () => {
 
         </div>
 
-        {/* NAVIGATION */}
-
         <nav className="admin-nav">
 
           <button
@@ -610,7 +565,6 @@ const Admin = () => {
               setActivePage(
                 "overview"
               );
-
               setSidebarOpen(
                 false
               );
@@ -632,7 +586,6 @@ const Admin = () => {
               setActivePage(
                 "users"
               );
-
               setSidebarOpen(
                 false
               );
@@ -654,7 +607,6 @@ const Admin = () => {
               setActivePage(
                 "withdrawals"
               );
-
               setSidebarOpen(
                 false
               );
@@ -676,7 +628,6 @@ const Admin = () => {
               setActivePage(
                 "chat"
               );
-
               setSidebarOpen(
                 false
               );
@@ -687,8 +638,6 @@ const Admin = () => {
           </button>
 
         </nav>
-
-        {/* LOGOUT */}
 
         <button
           type="button"
@@ -703,10 +652,6 @@ const Admin = () => {
 
       </aside>
 
-      {/* =================================================
-          MOBILE OVERLAY
-      ================================================= */}
-
       {sidebarOpen && (
         <div
           className="admin-mobile-overlay"
@@ -716,13 +661,9 @@ const Admin = () => {
         />
       )}
 
-      {/* =================================================
-          MAIN
-      ================================================= */}
+      {/* MAIN */}
 
       <main className="admin-main">
-
-        {/* HEADER */}
 
         <header className="admin-header">
 
@@ -782,9 +723,7 @@ const Admin = () => {
 
         </header>
 
-        {/* =================================================
-            ERROR MESSAGE
-        ================================================= */}
+        {/* ERROR */}
 
         {dashboardError && (
           <div className="admin-error">
@@ -810,9 +749,7 @@ const Admin = () => {
           </div>
         )}
 
-        {/* =================================================
-            OVERVIEW
-        ================================================= */}
+        {/* OVERVIEW */}
 
         {activePage ===
           "overview" && (
@@ -821,6 +758,7 @@ const Admin = () => {
             <div className="admin-welcome">
 
               <div>
+
                 <span>
                   ADMINISTRATION
                 </span>
@@ -835,6 +773,7 @@ const Admin = () => {
                   happening with
                   your platform.
                 </p>
+
               </div>
 
               <FaShieldHalved />
@@ -850,6 +789,7 @@ const Admin = () => {
                 </div>
 
                 <div>
+
                   <span>
                     TOTAL USERS
                   </span>
@@ -863,6 +803,7 @@ const Admin = () => {
                   <p>
                     Registered accounts
                   </p>
+
                 </div>
 
               </div>
@@ -874,6 +815,7 @@ const Admin = () => {
                 </div>
 
                 <div>
+
                   <span>
                     TRANSACTIONS
                   </span>
@@ -887,6 +829,7 @@ const Admin = () => {
                   <p>
                     All transactions
                   </p>
+
                 </div>
 
               </div>
@@ -898,6 +841,7 @@ const Admin = () => {
                 </div>
 
                 <div>
+
                   <span>
                     PENDING
                   </span>
@@ -911,6 +855,7 @@ const Admin = () => {
                   <p>
                     Awaiting review
                   </p>
+
                 </div>
 
               </div>
@@ -922,6 +867,7 @@ const Admin = () => {
                 </div>
 
                 <div>
+
                   <span>
                     COMPLETED
                   </span>
@@ -935,6 +881,7 @@ const Admin = () => {
                   <p>
                     Completed withdrawals
                   </p>
+
                 </div>
 
               </div>
@@ -943,13 +890,14 @@ const Admin = () => {
 
             <div className="admin-two-column">
 
-              {/* RECENT USERS */}
+              {/* USERS */}
 
               <div className="admin-card">
 
                 <div className="card-heading">
 
                   <div>
+
                     <h3>
                       Recent Users
                     </h3>
@@ -958,6 +906,7 @@ const Admin = () => {
                       Latest registered
                       accounts
                     </p>
+
                   </div>
 
                   <button
@@ -981,6 +930,7 @@ const Admin = () => {
                     <thead>
 
                       <tr>
+
                         <th>
                           User
                         </th>
@@ -996,6 +946,7 @@ const Admin = () => {
                         <th>
                           Joined
                         </th>
+
                       </tr>
 
                     </thead>
@@ -1086,13 +1037,14 @@ const Admin = () => {
 
               </div>
 
-              {/* PENDING WITHDRAWALS */}
+              {/* PENDING */}
 
               <div className="admin-card">
 
                 <div className="card-heading">
 
                   <div>
+
                     <h3>
                       Pending Withdrawals
                     </h3>
@@ -1101,6 +1053,7 @@ const Admin = () => {
                       Requests requiring
                       attention
                     </p>
+
                   </div>
 
                   <button
@@ -1208,9 +1161,7 @@ const Admin = () => {
           </section>
         )}
 
-        {/* =================================================
-            USERS
-        ================================================= */}
+        {/* USERS PAGE */}
 
         {activePage ===
           "users" && (
@@ -1219,6 +1170,7 @@ const Admin = () => {
             <div className="card-heading">
 
               <div>
+
                 <h3>
                   All Users
                 </h3>
@@ -1227,6 +1179,7 @@ const Admin = () => {
                   Manage and view
                   registered users.
                 </p>
+
               </div>
 
               <div className="count-pill">
@@ -1245,29 +1198,12 @@ const Admin = () => {
 
                   <tr>
 
-                    <th>
-                      User
-                    </th>
-
-                    <th>
-                      Email
-                    </th>
-
-                    <th>
-                      Balance
-                    </th>
-
-                    <th>
-                      Deposited
-                    </th>
-
-                    <th>
-                      Withdrawn
-                    </th>
-
-                    <th>
-                      Created
-                    </th>
+                    <th>User</th>
+                    <th>Email</th>
+                    <th>Balance</th>
+                    <th>Deposited</th>
+                    <th>Withdrawn</th>
+                    <th>Created</th>
 
                   </tr>
 
@@ -1369,9 +1305,7 @@ const Admin = () => {
           </section>
         )}
 
-        {/* =================================================
-            WITHDRAWALS
-        ================================================= */}
+        {/* WITHDRAWALS */}
 
         {activePage ===
           "withdrawals" && (
@@ -1380,6 +1314,7 @@ const Admin = () => {
             <div className="card-heading">
 
               <div>
+
                 <h3>
                   Withdrawal Requests
                 </h3>
@@ -1388,6 +1323,7 @@ const Admin = () => {
                   Review and update
                   withdrawal statuses.
                 </p>
+
               </div>
 
               <div className="count-pill">
@@ -1406,33 +1342,13 @@ const Admin = () => {
 
                   <tr>
 
-                    <th>
-                      User
-                    </th>
-
-                    <th>
-                      Amount
-                    </th>
-
-                    <th>
-                      Method
-                    </th>
-
-                    <th>
-                      Account
-                    </th>
-
-                    <th>
-                      Date
-                    </th>
-
-                    <th>
-                      Status
-                    </th>
-
-                    <th>
-                      Action
-                    </th>
+                    <th>User</th>
+                    <th>Amount</th>
+                    <th>Method</th>
+                    <th>Account</th>
+                    <th>Date</th>
+                    <th>Status</th>
+                    <th>Action</th>
 
                   </tr>
 
@@ -1618,9 +1534,7 @@ const Admin = () => {
           </section>
         )}
 
-        {/* =================================================
-            LIVE CHAT
-        ================================================= */}
+        {/* LIVE CHAT */}
 
         {activePage ===
           "chat" && (
@@ -1661,9 +1575,7 @@ const Admin = () => {
           </section>
         )}
 
-        {/* =================================================
-            LOADING
-        ================================================= */}
+        {/* LOADING */}
 
         {loading && (
           <div className="admin-loading">
