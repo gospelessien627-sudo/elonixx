@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+import React from "react";
+import { useState, useRef } from "react";
 import "./Dashboard.css";
 
 import {
@@ -11,6 +12,7 @@ import {
   FaBuildingColumns,
   FaCalendar,
   FaCircleCheck,
+  FaCircleInfo,
   FaClock,
   FaCoins,
   FaCreditCard,
@@ -18,7 +20,9 @@ import {
   FaFileLines,
   FaGreaterThan,
   FaHeadset,
+  FaLaptop,
   FaNewspaper,
+  FaPaypal,
   FaPlus,
   FaRegCircle,
   FaShield,
@@ -32,13 +36,27 @@ import {
 } from "react-icons/fa6";
 
 const Dashboard = () => {
+  /* =========================================
+     POPUP STATES
+  ========================================= */
+
   const [cart, setCart] = useState(false);
   const [pay, setPay] = useState(false);
   const [tro, setTro] = useState(false);
   const [rit, setRit] = useState(false);
+  const [vert, setVert] = useState(false);
+
+  /* =========================================
+     ACCOUNT STATES
+  ========================================= */
 
   const [accountNumber, setAccountNumber] = useState("");
   const [accountName, setAccountName] = useState("");
+  const [tacCode, setTacCode] = useState("");
+
+  /* =========================================
+     TRANSACTION DATA
+  ========================================= */
 
   const [transactionData, setTransactionData] = useState({
     transactionId: "",
@@ -49,49 +67,25 @@ const Dashboard = () => {
   });
 
   /* =========================================
-     LOADING STATES
+     WITHDRAWAL STATES
   ========================================= */
-
-  const [loadingButton, setLoadingButton] = useState("");
-
-  const generateTransactionId = () => {
-    const now = new Date();
-
-    const year = now.getFullYear();
-
-    const month = String(
-      now.getMonth() + 1
-    ).padStart(2, "0");
-
-    const day = String(
-      now.getDate()
-    ).padStart(2, "0");
-
-    const randomNumber = Math.floor(
-      100000 + Math.random() * 900000
-    );
-
-    return `WD${year}${month}${day}${randomNumber}`;
-  };
-
-  const getRequestedDate = () => {
-    const now = new Date();
-
-    return now.toLocaleString("en-US", {
-      month: "short",
-      day: "2-digit",
-      year: "numeric",
-      hour: "2-digit",
-      minute: "2-digit",
-      hour12: true,
-    });
-  };
 
   const [withdrawalAmount, setWithdrawalAmount] =
     useState("");
 
   const [selectedBank, setSelectedBank] =
     useState("");
+
+  /* =========================================
+     LOADING STATE
+  ========================================= */
+
+  const [loadingButton, setLoadingButton] =
+    useState("");
+
+  /* =========================================
+     BANK DETAILS
+  ========================================= */
 
   const bankDetails = {
     Paypal: {
@@ -118,6 +112,10 @@ const Dashboard = () => {
   const selectedAccount =
     bankDetails[selectedBank];
 
+  /* =========================================
+     CURRENT USER
+  ========================================= */
+
   const [currentUser] = useState(() => {
     const savedUser =
       localStorage.getItem(
@@ -130,124 +128,203 @@ const Dashboard = () => {
   });
 
   /* =========================================
+     OTP / TAC STATES
+  ========================================= */
+
+  const [otp, setOtp] = useState(
+    new Array(4).fill("")
+  );
+
+  const inputsRef = useRef([]);
+
+  const [tacError, setTacError] =
+    useState("");
+
+  /* =========================================
      SPINNER COMPONENT
   ========================================= */
 
   const LoadingSpinner = () => (
     <span
       className="dashboard-loading-spinner"
-      aria-label="Loading"
+      aria-hidden="true"
     />
   );
+
+  /* =========================================
+     GENERATE TRANSACTION ID
+  ========================================= */
+
+  const generateTransactionId = () => {
+    const now = new Date();
+
+    const year =
+      now.getFullYear();
+
+    const month = String(
+      now.getMonth() + 1
+    ).padStart(2, "0");
+
+    const day = String(
+      now.getDate()
+    ).padStart(2, "0");
+
+    const randomNumber =
+      Math.floor(
+        100000 +
+          Math.random() * 900000
+      );
+
+    return `WD${year}${month}${day}${randomNumber}`;
+  };
+
+  /* =========================================
+     REQUESTED DATE
+  ========================================= */
+
+  const getRequestedDate = () => {
+    const now = new Date();
+
+    return now.toLocaleString(
+      "en-US",
+      {
+        month: "short",
+        day: "2-digit",
+        year: "numeric",
+        hour: "2-digit",
+        minute: "2-digit",
+        hour12: true,
+      }
+    );
+  };
 
   /* =========================================
      MAIN WITHDRAW BUTTON
   ========================================= */
 
-  const handleOpenWithdraw = async () => {
-    if (loadingButton) return;
+  const handleOpenWithdraw =
+    async () => {
+      if (loadingButton) return;
 
-    setLoadingButton("withdraw");
-
-    try {
-      await new Promise((resolve) =>
-        setTimeout(resolve, 800)
+      setLoadingButton(
+        "withdraw"
       );
 
-      setCart(true);
-    } finally {
-      setLoadingButton("");
-    }
-  };
+      try {
+        await new Promise(
+          (resolve) =>
+            setTimeout(
+              resolve,
+              800
+            )
+        );
+
+        setCart(true);
+      } finally {
+        setLoadingButton("");
+      }
+    };
 
   /* =========================================
      CONFIRM WITHDRAWAL
   ========================================= */
 
-  const handleConfirmWithdrawal = async () => {
-    if (loadingButton) return;
+  const handleConfirmWithdrawal =
+    async () => {
+      if (loadingButton) return;
 
-    if (!selectedBank) {
-      alert(
-        "Please select a withdrawal account"
+      if (!selectedBank) {
+        alert(
+          "Please select a withdrawal account"
+        );
+
+        return;
+      }
+
+      setLoadingButton(
+        "confirm-withdrawal"
       );
 
-      return;
-    }
+      try {
+        await new Promise(
+          (resolve) =>
+            setTimeout(
+              resolve,
+              1000
+            )
+        );
 
-    setLoadingButton(
-      "confirm-withdrawal"
-    );
-
-    try {
-      await new Promise((resolve) =>
-        setTimeout(resolve, 1000)
-      );
-
-      setCart(false);
-      setPay(true);
-    } finally {
-      setLoadingButton("");
-    }
-  };
+        setCart(false);
+        setPay(true);
+      } finally {
+        setLoadingButton("");
+      }
+    };
 
   /* =========================================
      CONFIRM ACCOUNT DETAILS
   ========================================= */
 
-  const handleConfirm = async () => {
-    if (loadingButton) return;
+  const handleConfirm =
+    async () => {
+      if (loadingButton) return;
 
-    if (!accountNumber.trim()) {
-      alert(
-        "Please enter the account number"
+      if (!accountNumber.trim()) {
+        alert(
+          "Please enter the account number"
+        );
+
+        return;
+      }
+
+      if (!accountName.trim()) {
+        alert(
+          "Please enter the account name"
+        );
+
+        return;
+      }
+
+      setLoadingButton(
+        "confirm"
       );
 
-      return;
-    }
+      try {
+        await new Promise(
+          (resolve) =>
+            setTimeout(
+              resolve,
+              1000
+            )
+        );
 
-    if (!accountName.trim()) {
-      alert(
-        "Please enter the account name"
-      );
+        const newTransaction = {
+          transactionId:
+            generateTransactionId(),
 
-      return;
-    }
+          requestedOn:
+            getRequestedDate(),
 
-    setLoadingButton("confirm");
+          paymentMethod:
+            "Bank Transfer",
 
-    try {
-      await new Promise((resolve) =>
-        setTimeout(resolve, 1000)
-      );
+          accountNumber:
+            accountNumber.trim(),
 
-      const newTransaction = {
-        transactionId:
-          generateTransactionId(),
+          accountName:
+            accountName.trim(),
+        };
 
-        requestedOn:
-          getRequestedDate(),
+        setTransactionData(
+          newTransaction
+        );
 
-        paymentMethod:
-          "Bank Transfer",
-
-        accountNumber:
-          accountNumber.trim(),
-
-        accountName:
-          accountName.trim(),
-      };
-
-      setTransactionData(
-        newTransaction
-      );
-
-      setPay(false);
-      setTro(true);
-    } finally {
-      setLoadingButton("");
-    }
-  };
+        setPay(false);
+        setTro(true);
+      } finally {
+        setLoadingButton("");
+      }
+    };
 
   /* =========================================
      VIEW WITHDRAWAL STATUS
@@ -273,10 +350,15 @@ const Dashboard = () => {
       );
 
       try {
-        await new Promise((resolve) =>
-          setTimeout(resolve, 1000)
+        await new Promise(
+          (resolve) =>
+            setTimeout(
+              resolve,
+              1000
+            )
         );
 
+        setTro(false);
         setRit(true);
       } finally {
         setLoadingButton("");
@@ -284,7 +366,7 @@ const Dashboard = () => {
     };
 
   /* =========================================
-     STATUS SCREEN WITHDRAW BUTTON
+     STATUS SCREEN WITHDRAW
   ========================================= */
 
   const handleStatusWithdraw =
@@ -296,18 +378,144 @@ const Dashboard = () => {
       );
 
       try {
-        await new Promise((resolve) =>
-          setTimeout(resolve, 1000)
+        await new Promise(
+          (resolve) =>
+            setTimeout(
+              resolve,
+              1000
+            )
         );
 
+        setVert(true);
+      } finally {
+        setLoadingButton("");
+      }
+    };
+
+  /* =========================================
+     OTP CHANGE
+  ========================================= */
+
+  const handleOtpChange = (
+    e,
+    index
+  ) => {
+    const value =
+      e.target.value;
+
+    if (isNaN(value)) return;
+
+    const newOtp = [...otp];
+
+    newOtp[index] =
+      value.substring(
+        value.length - 1
+      );
+
+    setOtp(newOtp);
+
+    setTacError("");
+
+    setTacCode(
+      newOtp.join("")
+    );
+
+    if (
+      value &&
+      index < 3 &&
+      inputsRef.current[
+        index + 1
+      ]
+    ) {
+      inputsRef.current[
+        index + 1
+      ].focus();
+    }
+  };
+
+  /* =========================================
+     OTP BACKSPACE
+  ========================================= */
+
+  const handleOtpKeyDown = (
+    e,
+    index
+  ) => {
+    if (
+      e.key ===
+        "Backspace" &&
+      !otp[index] &&
+      index > 0
+    ) {
+      inputsRef.current[
+        index - 1
+      ].focus();
+    }
+  };
+
+  /* =========================================
+     VERIFY TAC
+  ========================================= */
+
+  const handleVerifyTac =
+    async () => {
+      if (loadingButton) return;
+
+      const enteredCode =
+        otp.join("");
+
+      if (!enteredCode) {
+        setTacError(
+          "Please input your TAC code"
+        );
+
+        return;
+      }
+
+      if (
+        enteredCode.length < 4 ||
+        otp.includes("")
+      ) {
+        setTacError(
+          "Please enter complete 4-digit TAC code"
+        );
+
+        return;
+      }
+
+      setLoadingButton(
+        "verify-tac"
+      );
+
+      try {
         /*
-         * Put your legitimate backend
-         * withdrawal request here.
-         */
+          Replace this delay with your legitimate
+          backend TAC/transaction verification
+          request when your API is ready.
+        */
 
-        alert(
-          "Withdrawal request is being submitted."
+        await new Promise(
+          (resolve) =>
+            setTimeout(
+              resolve,
+              1200
+            )
         );
+
+        console.log(
+          "TAC submitted for verification:",
+          enteredCode
+        );
+
+        setVert(false);
+
+        setOtp(
+          new Array(4).fill("")
+        );
+
+        setTacCode("");
+
+        setTacError("");
       } finally {
         setLoadingButton("");
       }
@@ -331,6 +539,7 @@ const Dashboard = () => {
           </div>
 
           <div className="kill">
+
             <h3>
               ElonixxWallet
             </h3>
@@ -338,6 +547,7 @@ const Dashboard = () => {
             <p>
               Tap to edit
             </p>
+
           </div>
 
         </div>
@@ -355,7 +565,9 @@ const Dashboard = () => {
           </div>
 
           <div className="physiu">
-            <h5>SO</h5>
+            <h5>
+              SO
+            </h5>
           </div>
 
         </div>
@@ -391,7 +603,9 @@ const Dashboard = () => {
             </h2>
 
             <p>
-              <FaArrowTrendUp className="hhh" />
+              <FaArrowTrendUp
+                className="hhh"
+              />
               +12.5% this month
             </p>
 
@@ -399,7 +613,9 @@ const Dashboard = () => {
 
           <div>
             <span>
-              <FaEllipsis className="yy" />
+              <FaEllipsis
+                className="yy"
+              />
             </span>
           </div>
 
@@ -407,10 +623,15 @@ const Dashboard = () => {
 
         <div className="pw">
 
-          {/* DEPOSIT INTENTIONALLY HAS NO SPINNER */}
-          <button>
+          {/* DEPOSIT HAS NO SPINNER */}
+
+          <button
+            type="button"
+          >
             Deposit
           </button>
+
+          {/* MAIN WITHDRAW */}
 
           <button
             type="button"
@@ -443,8 +664,9 @@ const Dashboard = () => {
 
           <div>
             <p>
-              Funds secured • instant
-              settlement • 256-bit SSL
+              Funds secured •
+              instant settlement •
+              256-bit SSL
             </p>
           </div>
 
@@ -459,32 +681,54 @@ const Dashboard = () => {
       <div className="crut">
 
         <div className="flrq">
-          <span>DEPOSITED</span>
+
+          <span>
+            DEPOSITED
+          </span>
+
           <h4>
             $ 415,000.00
           </h4>
+
           <p className="gi">
             +8.2%
-            <FaArrowUp className="kew" />
+            <FaArrowUp
+              className="kew"
+            />
           </p>
+
         </div>
 
         <div className="flrq">
-          <span>WITHDRAWN</span>
+
+          <span>
+            WITHDRAWN
+          </span>
+
           <h4>
             $ 415,000.00
           </h4>
+
           <p>
             2 accounts
           </p>
+
         </div>
 
         <div className="flrq">
-          <span>TRANSACTIONS</span>
-          <h4>28</h4>
+
+          <span>
+            TRANSACTIONS
+          </span>
+
+          <h4>
+            28
+          </h4>
+
           <p>
             Last 30 days
           </p>
+
         </div>
 
       </div>
@@ -502,10 +746,12 @@ const Dashboard = () => {
           </h2>
 
           <div className="dd">
+
             <h4>
               View all
               <FaGreaterThan />
             </h4>
+
           </div>
 
         </div>
@@ -521,7 +767,10 @@ const Dashboard = () => {
             </div>
 
             <div>
-              <h5>P...</h5>
+              <h5>
+                P...
+              </h5>
+
               <span>
                 Today, 9:41 AM
               </span>
@@ -538,7 +787,9 @@ const Dashboard = () => {
             </div>
 
             <div>
-              <h6>Success</h6>
+              <h6>
+                Success
+              </h6>
             </div>
 
           </div>
@@ -568,7 +819,10 @@ const Dashboard = () => {
             </div>
 
             <div>
-              <h5>T...</h5>
+              <h5>
+                T...
+              </h5>
+
               <span>
                 Yesterday, 4:12 PM
               </span>
@@ -585,7 +839,9 @@ const Dashboard = () => {
             </div>
 
             <div>
-              <h6>Success</h6>
+              <h6>
+                Success
+              </h6>
             </div>
 
           </div>
@@ -615,7 +871,10 @@ const Dashboard = () => {
             </div>
 
             <div>
-              <h5>P...</h5>
+              <h5>
+                P...
+              </h5>
+
               <span>
                 Dec 12, 11:03 AM
               </span>
@@ -632,7 +891,9 @@ const Dashboard = () => {
             </div>
 
             <div>
-              <h6>Success</h6>
+              <h6>
+                Success
+              </h6>
             </div>
 
           </div>
@@ -662,7 +923,10 @@ const Dashboard = () => {
             </div>
 
             <div>
-              <h5>To...</h5>
+              <h5>
+                To...
+              </h5>
+
               <span>
                 Dec 11, 8:20 AM
               </span>
@@ -671,9 +935,11 @@ const Dashboard = () => {
           </div>
 
           <div className="vivim">
+
             <span>
               Pending
             </span>
+
           </div>
 
           <div className="porr">
@@ -724,14 +990,18 @@ const Dashboard = () => {
           <div className="cc">
 
             <div className="qlz">
+
               <span>
                 <FaNewspaper />
               </span>
+
             </div>
 
             <div className="oot">
 
-              <h4>Cashaapp</h4>
+              <h4>
+                Cashaapp
+              </h4>
 
               <span>
                 Business Wallet
@@ -750,14 +1020,18 @@ const Dashboard = () => {
           <div className="cc">
 
             <div className="qlze">
+
               <span>
                 <FaFileLines />
               </span>
+
             </div>
 
             <div className="oot">
 
-              <h4>Paypal</h4>
+              <h4>
+                Paypal
+              </h4>
 
               <span>
                 Business Wallet
@@ -776,14 +1050,18 @@ const Dashboard = () => {
           <div className="cc">
 
             <div className="qlze">
+
               <span>
                 <FaBuilding />
               </span>
+
             </div>
 
             <div className="oot">
 
-              <h4>Barclays</h4>
+              <h4>
+                Barclays
+              </h4>
 
               <span>
                 Business Wallet
@@ -802,14 +1080,18 @@ const Dashboard = () => {
           <div className="cc">
 
             <div className="qlze">
+
               <span>
                 <FaBuildingColumns />
               </span>
+
             </div>
 
             <div className="oot">
 
-              <h4>Citibank</h4>
+              <h4>
+                Citibank
+              </h4>
 
               <span>
                 Business Wallet
@@ -828,10 +1110,12 @@ const Dashboard = () => {
         </div>
 
         <div className="ccx">
+
           <span>
             <FaPlus />
             Add new withdrawal place
           </span>
+
         </div>
 
         <div className="lpc">
@@ -884,9 +1168,11 @@ const Dashboard = () => {
           </div>
 
           <div className="pwi">
+
             <span>
               Verified
             </span>
+
           </div>
 
         </div>
@@ -924,16 +1210,18 @@ const Dashboard = () => {
         </div>
 
         <div className="vwz">
+
           <h6>
             Account health 92% •
             Ready for higher limits
           </h6>
+
         </div>
 
       </div>
 
       {/* =====================================
-          WITHDRAW MODAL
+          WITHDRAW POPUP
       ===================================== */}
 
       {cart && (
@@ -973,9 +1261,11 @@ const Dashboard = () => {
               </h5>
 
               <div className="mmmmww">
+
                 <h5>
                   $ 20,000
                 </h5>
+
               </div>
 
               <h6>
@@ -1025,12 +1315,16 @@ const Dashboard = () => {
                   </div>
 
                   <div>
+
                     {selectedBank ===
                     "Paypal" ? (
-                      <FaCircleCheck className="selected-bank" />
+                      <FaCircleCheck
+                        className="selected-bank"
+                      />
                     ) : (
                       <FaRegCircle />
                     )}
+
                   </div>
 
                 </div>
@@ -1067,12 +1361,16 @@ const Dashboard = () => {
                   </div>
 
                   <div>
+
                     {selectedBank ===
                     "Cashapp" ? (
-                      <FaCircleCheck className="selected-bank" />
+                      <FaCircleCheck
+                        className="selected-bank"
+                      />
                     ) : (
                       <FaRegCircle />
                     )}
+
                   </div>
 
                 </div>
@@ -1109,12 +1407,16 @@ const Dashboard = () => {
                   </div>
 
                   <div>
+
                     {selectedBank ===
                     "Barclays" ? (
-                      <FaCircleCheck className="selected-bank" />
+                      <FaCircleCheck
+                        className="selected-bank"
+                      />
                     ) : (
                       <FaRegCircle />
                     )}
+
                   </div>
 
                 </div>
@@ -1151,12 +1453,16 @@ const Dashboard = () => {
                   </div>
 
                   <div>
+
                     {selectedBank ===
                     "Citibank" ? (
-                      <FaCircleCheck className="selected-bank" />
+                      <FaCircleCheck
+                        className="selected-bank"
+                      />
                     ) : (
                       <FaRegCircle />
                     )}
+
                   </div>
 
                 </div>
@@ -1176,6 +1482,8 @@ const Dashboard = () => {
                   </div>
 
                 </div>
+
+                {/* CONFIRM WITHDRAWAL */}
 
                 <div className="bhhhh">
 
@@ -1215,7 +1523,7 @@ const Dashboard = () => {
       )}
 
       {/* =====================================
-          ACCOUNT DETAILS MODAL
+          ACCOUNT DETAILS / VERIFICATION POPUP
       ===================================== */}
 
       {pay && (
@@ -1229,29 +1537,32 @@ const Dashboard = () => {
               <div className="wbmk">
 
                 <div className="nvz">
+
                   {selectedBank ===
                   "Paypal" ? (
-                    "P"
+                    <FaPaypal />
                   ) : selectedBank ===
                     "Cashapp" ? (
-                    "C"
+                    <FaFileLines />
                   ) : selectedBank ===
                     "Barclays" ? (
-                    "B"
+                    <FaBuilding />
                   ) : (
-                    "C"
+                    <FaBuildingColumns />
                   )}
+
                 </div>
 
                 <h4>
-                  Withdrawal Account
+                  Withdrawal Verification
                 </h4>
 
                 <h6>
-                  Enter the account
-                  details where you
-                  want to receive your
-                  withdrawal.
+                  Enter the account details
+                  where you want to receive
+                  your withdrawal. Your
+                  withdrawal can then be
+                  reviewed securely.
                 </h6>
 
               </div>
@@ -1349,9 +1660,24 @@ const Dashboard = () => {
             <div className="qcb">
 
               <div>
+
+                {selectedBank ===
+                "Paypal" ? (
+                  <FaPaypal />
+                ) : selectedBank ===
+                  "Cashapp" ? (
+                  <FaFileLines />
+                ) : selectedBank ===
+                  "Barclays" ? (
+                  <FaBuilding />
+                ) : (
+                  <FaBuildingColumns />
+                )}
+
                 <h6>
                   {selectedBank}
                 </h6>
+
               </div>
 
               <div>
@@ -1368,6 +1694,45 @@ const Dashboard = () => {
                     ?.accountHolder ||
                     "FinWallet Ltd"}
                 </p>
+
+              </div>
+
+            </div>
+
+            <div className="pupl">
+
+              <div className="oewq">
+
+                <div>
+                  <FaCircleInfo />
+                </div>
+
+                <div>
+                  <h4>
+                    Important Notice
+                  </h4>
+                </div>
+
+              </div>
+
+              <div className="lnn">
+
+                <h6>
+                  Verify that the account
+                  information above is
+                  correct before continuing.
+                </h6>
+
+                <h6>
+                  Your withdrawal request
+                  will be reviewed securely.
+                </h6>
+
+                <h6>
+                  Do not share passwords,
+                  PINs, or private security
+                  credentials.
+                </h6>
 
               </div>
 
@@ -1390,13 +1755,17 @@ const Dashboard = () => {
 
               <div>
 
+                {/* CONFIRM BUTTON */}
+
                 <button
                   type="button"
                   disabled={
                     loadingButton ===
                     "confirm"
                   }
-                  onClick={handleConfirm}
+                  onClick={
+                    handleConfirm
+                  }
                 >
 
                   {loadingButton ===
@@ -1425,7 +1794,7 @@ const Dashboard = () => {
       )}
 
       {/* =====================================
-          REVIEW STATUS
+          REVIEW WITHDRAWAL STATUS
       ===================================== */}
 
       {tro && (
@@ -1448,10 +1817,9 @@ const Dashboard = () => {
                 </h5>
 
                 <p>
-                  Your withdrawal
-                  request has been
-                  submitted and is
-                  being reviewed.
+                  Your withdrawal request
+                  has been submitted and
+                  is being reviewed.
                 </p>
 
               </div>
@@ -1579,6 +1947,8 @@ const Dashboard = () => {
 
               <div className="divg">
 
+                {/* VIEW WITHDRAWAL STATUS */}
+
                 <button
                   type="button"
                   disabled={
@@ -1644,17 +2014,21 @@ const Dashboard = () => {
               <div className="clsa">
 
                 <div>
+
                   <FaArrowLeft
                     onClick={() =>
                       setRit(false)
                     }
                   />
+
                 </div>
 
                 <div>
+
                   <h6>
                     Withdrawal Status
                   </h6>
+
                 </div>
 
               </div>
@@ -1746,9 +2120,13 @@ const Dashboard = () => {
                 </div>
 
                 <div>
+
                   <h5>
-                    {transactionData.transactionId}
+                    {
+                      transactionData.transactionId
+                    }
                   </h5>
+
                 </div>
 
               </div>
@@ -1772,9 +2150,13 @@ const Dashboard = () => {
                 </div>
 
                 <div>
+
                   <h5>
-                    {transactionData.requestedOn}
+                    {
+                      transactionData.requestedOn
+                    }
                   </h5>
+
                 </div>
 
               </div>
@@ -1798,9 +2180,13 @@ const Dashboard = () => {
                 </div>
 
                 <div>
+
                   <h5>
-                    {transactionData.paymentMethod}
+                    {
+                      transactionData.paymentMethod
+                    }
                   </h5>
+
                 </div>
 
               </div>
@@ -1824,9 +2210,13 @@ const Dashboard = () => {
                 </div>
 
                 <div>
+
                   <h5>
-                    {transactionData.accountNumber}
+                    {
+                      transactionData.accountNumber
+                    }
                   </h5>
+
                 </div>
 
               </div>
@@ -1850,9 +2240,13 @@ const Dashboard = () => {
                 </div>
 
                 <div>
+
                   <h5>
-                    {transactionData.accountName}
+                    {
+                      transactionData.accountName
+                    }
                   </h5>
+
                 </div>
 
               </div>
@@ -1880,9 +2274,11 @@ const Dashboard = () => {
                   </div>
 
                   <div className="opble">
+
                     <h6>
                       Completed
                     </h6>
+
                   </div>
 
                 </div>
@@ -1906,9 +2302,11 @@ const Dashboard = () => {
                   </div>
 
                   <div className="opblew">
+
                     <h6>
                       In Progress
                     </h6>
+
                   </div>
 
                 </div>
@@ -1917,7 +2315,9 @@ const Dashboard = () => {
 
             </div>
 
-            {/* WITHDRAW BUTTON */}
+            {/* =================================
+                OTHER WITHDRAW BUTTON
+            ================================= */}
 
             <div className="mbkbe">
 
@@ -1959,6 +2359,273 @@ const Dashboard = () => {
               >
                 Back
               </button>
+
+            </div>
+
+          </div>
+
+        </div>
+
+      )}
+
+      {/* =====================================
+          FINAL TAC POPUP
+          YOUR ORIGINAL POPUP IS PRESERVED
+      ===================================== */}
+
+      {vert && (
+
+        <div className="dchj">
+
+          <div className="vefg">
+
+            <div>
+
+              <div className="wekek">
+                <FaLaptop />
+              </div>
+
+              <div>
+
+                <h5>
+                  TAC Code is required!
+                </h5>
+
+                <p>
+                  Enter the 4-digit TAC code
+                  provided through your
+                  authorized verification
+                  process to continue.
+                </p>
+
+                {/* ===========================
+                    TAC INPUT
+                =========================== */}
+
+                <div
+                  style={{
+                    marginTop:
+                      "20px",
+                  }}
+                >
+
+                  <h6
+                    style={{
+                      marginBottom:
+                        "10px",
+                      textAlign:
+                        "center",
+                    }}
+                  >
+                    Enter 4-Digit TAC Code
+                  </h6>
+
+                  <div
+                    style={{
+                      display:
+                        "flex",
+                      gap: "12px",
+                      justifyContent:
+                        "center",
+                      background:
+                        "#f0f5f5",
+                      padding:
+                        "18px 24px",
+                      borderRadius:
+                        "12px",
+                      width:
+                        "fit-content",
+                      margin:
+                        "0 auto",
+                    }}
+                  >
+
+                    {otp.map(
+                      (
+                        digit,
+                        index
+                      ) => (
+
+                        <input
+                          key={
+                            index
+                          }
+                          type="text"
+                          inputMode="numeric"
+                          maxLength="1"
+                          value={
+                            digit
+                          }
+                          onChange={(
+                            e
+                          ) =>
+                            handleOtpChange(
+                              e,
+                              index
+                            )
+                          }
+                          onKeyDown={(
+                            e
+                          ) =>
+                            handleOtpKeyDown(
+                              e,
+                              index
+                            )
+                          }
+                          ref={(
+                            el
+                          ) =>
+                            (inputsRef.current[
+                              index
+                            ] =
+                              el)
+                          }
+                          style={{
+                            width:
+                              "48px",
+                            height:
+                              "48px",
+                            borderRadius:
+                              "10px",
+                            border:
+                              tacError
+                                ? "2px solid red"
+                                : "2px solid #0f2d2d",
+                            textAlign:
+                              "center",
+                            fontSize:
+                              "20px",
+                            fontWeight:
+                              "bold",
+                            outline:
+                              "none",
+                            background:
+                              "white",
+                          }}
+                        />
+
+                      )
+                    )}
+
+                  </div>
+
+                  {/* TAC ERROR */}
+
+                  {tacError && (
+
+                    <p
+                      style={{
+                        color:
+                          "red",
+                        textAlign:
+                          "center",
+                        marginTop:
+                          "8px",
+                        fontSize:
+                          "13px",
+                        fontWeight:
+                          "bold",
+                      }}
+                    >
+                      {tacError}
+                    </p>
+
+                  )}
+
+                  {/* TAC BUTTONS */}
+
+                  <div
+                    style={{
+                      display:
+                        "flex",
+                      gap: "10px",
+                      justifyContent:
+                        "center",
+                      marginTop:
+                        "20px",
+                    }}
+                  >
+
+                    {/* CANCEL */}
+
+                    <button
+                      type="button"
+                      onClick={() => {
+                        setVert(false);
+                        setTacError("");
+                      }}
+                      style={{
+                        padding:
+                          "10px 20px",
+                        borderRadius:
+                          "8px",
+                        border:
+                          "1px solid #ccc",
+                      }}
+                    >
+                      Cancel
+                    </button>
+
+                    {/* VERIFY TAC */}
+
+                    <button
+                      type="button"
+                      onClick={
+                        handleVerifyTac
+                      }
+                      disabled={
+                        loadingButton ===
+                        "verify-tac"
+                      }
+                      style={{
+                        padding:
+                          "10px 20px",
+                        borderRadius:
+                          "8px",
+                        background:
+                          "#0f2d2d",
+                        color:
+                          "white",
+                        border:
+                          "none",
+                        display:
+                          "inline-flex",
+                        alignItems:
+                          "center",
+                        justifyContent:
+                          "center",
+                        gap:
+                          "8px",
+                        cursor:
+                          loadingButton ===
+                          "verify-tac"
+                            ? "not-allowed"
+                            : "pointer",
+                        opacity:
+                          loadingButton ===
+                          "verify-tac"
+                            ? 0.7
+                            : 1,
+                      }}
+                    >
+
+                      {loadingButton ===
+                      "verify-tac" ? (
+                        <>
+                          Verifying
+                          <LoadingSpinner />
+                        </>
+                      ) : (
+                        "Verify TAC"
+                      )}
+
+                    </button>
+
+                  </div>
+
+                </div>
+
+              </div>
 
             </div>
 
