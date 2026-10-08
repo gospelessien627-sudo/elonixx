@@ -1969,8 +1969,7 @@ const Dashboard = () => {
                   ) : (
                     <>
                       View Withdrawal
-                      Status
-                      <FaArrowRight />
+                      Status                      
                     </>
                   )}
 
