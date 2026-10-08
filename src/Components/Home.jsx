@@ -105,9 +105,9 @@ const Home = () => {
 
       <div className="iop">
         <button onClick={put}>
-          Elonixxwallet.link/
+          
           <span>
-            Elonixxwallet-dashboard <FaGreaterThan />
+            Elonixxwallet-Login <FaGreaterThan />
           </span>
         </button>
       </div>
