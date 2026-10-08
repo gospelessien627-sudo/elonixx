@@ -89,7 +89,7 @@ const Home = () => {
 
           <div className="off">
             <button onClick={put}>
-              Tap to open Dashboard <FaArrowRight />
+              Tap to open Login <FaArrowRight />
             </button>
           </div>
 
