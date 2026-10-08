@@ -22,7 +22,7 @@ const Home = () => {
   const navigate = useNavigate();
 
   const put = () => {
-    navigate("/dashboard");
+    navigate("/login");
   };
 
   return (
