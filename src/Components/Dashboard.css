@@ -811,6 +811,10 @@ svg {
   font-size: clamp(26px, 2.3vw, 42px);
 }
 
+.berqw > div:nth-child(1){
+    text-align: center;
+}
+
 .close-withdraw,
 .dffs button,
 .berqw button {
@@ -1200,8 +1204,7 @@ svg {
 
 .voco,
 .lllooo,
-.fuckin,
-.fucking {
+.fuckin{
   display: flex;
   align-items: center;
   gap: 12px;
