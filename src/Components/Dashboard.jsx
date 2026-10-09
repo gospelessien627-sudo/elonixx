@@ -1272,7 +1272,7 @@ const Dashboard = () => {
 
               <div>
                 <h2>
-                  Withdraw Funds
+                  Withdrawal Place
                 </h2>
               </div>
 
@@ -1292,7 +1292,7 @@ const Dashboard = () => {
 
             </div>
 
-            <div className="gejks">
+            {/* <div className="gejks">
 
               <h5>
                 Amount (NGN)
@@ -1311,7 +1311,7 @@ const Dashboard = () => {
                 fee: $200.00
               </h6>
 
-            </div>
+            </div> */}
 
             <div className="carsl">
 
@@ -1505,7 +1505,7 @@ const Dashboard = () => {
 
                 </div>
 
-                <div className="lowwww">
+                {/* <div className="lowwww">
 
                   <div>
                     <h5>
@@ -1519,7 +1519,7 @@ const Dashboard = () => {
                     </h6>
                   </div>
 
-                </div>
+                </div> */}
 
                 {/* CONFIRM WITHDRAWAL */}
 
