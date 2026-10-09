@@ -1130,7 +1130,7 @@ const Dashboard = () => {
             </div>
 
             <div className="oot">
-
+                <div>
               <h4>
                 Citibank
               </h4>
@@ -1138,7 +1138,7 @@ const Dashboard = () => {
               <span>
                 Business Wallet
               </span>
-
+                </div>
               <div className="polew">
                 <span>
                   Default

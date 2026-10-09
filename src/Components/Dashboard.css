@@ -576,6 +576,12 @@ svg {
   font-size: clamp(15px, 1.5vw, 26px);
 }
 
+.oot {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
 .polew {
   margin-top: 12px;
 }
