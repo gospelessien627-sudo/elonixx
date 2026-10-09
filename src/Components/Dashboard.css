@@ -3707,3 +3707,1060 @@ bottom: 1.9rem;
 }
 
 }
+/* =========================================================
+   RESPONSIVE LAYOUT
+   Existing CSS above is preserved. These rules complete the
+   layout for laptop, tablet and phone screens.
+========================================================= */
+
+@media (max-width: 1400px) {
+  .nn,
+  .pawap,
+  .crut,
+  .hyq,
+  .bne,
+  .folk {
+    width: min(94%, 1180px);
+    max-width: 1180px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .nn {
+    min-height: 100px;
+    height: auto;
+    padding: 1rem clamp(1rem, 3vw, 2.5rem);
+    gap: clamp(1rem, 3vw, 3rem);
+    justify-content: space-between;
+  }
+
+  .lke,
+  .poe {
+    min-width: 0;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin: 0;
+  }
+
+  .bob {
+    justify-content: space-between;
+    gap: 1rem;
+  }
+
+  .pw,
+  .fgtu {
+    margin-left: 0;
+  }
+
+  .pw button:nth-child(1),
+  .pw button:nth-child(2) {
+    max-width: 220px;
+  }
+
+  .crut {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: clamp(1rem, 3vw, 2.5rem);
+  }
+
+  .flrq {
+    width: 100%;
+    max-width: none;
+    min-width: 0;
+    height: auto;
+    min-height: 170px;
+    padding: 1.5rem 1rem;
+  }
+
+  .hyq,
+  .bne,
+  .folk {
+    height: auto;
+    padding: clamp(1.25rem, 3vw, 2.5rem);
+  }
+
+  .hyq,
+  .bne {
+    margin-top: clamp(2rem, 5vw, 4rem);
+  }
+
+  .owl {
+    max-width: 100%;
+  }
+
+  .poiw {
+    display: grid;
+    grid-template-columns: minmax(0, 1.4fr) minmax(90px, 0.8fr) minmax(0, 1fr);
+    gap: 0.75rem;
+    align-items: center;
+  }
+
+  .cvb,
+  .cvd {
+    min-width: 0;
+    align-items: center;
+    gap: 0.65rem;
+  }
+
+  .frd,
+  .frb {
+    flex: 0 0 44px;
+    width: 44px;
+    max-width: none;
+    height: 44px;
+  }
+
+  .frd svg,
+  .frb svg {
+    margin: 0.65rem;
+  }
+
+  .pore,
+  .porr {
+    min-width: 0;
+    text-align: right;
+  }
+
+  .pore h3,
+  .porr h3 {
+    overflow-wrap: anywhere;
+    font-size: clamp(1rem, 2.4vw, 1.5rem);
+  }
+
+  .pore h5,
+  .porr h5 {
+    right: auto;
+  }
+
+  .vivi,
+  .vivim {
+    width: fit-content;
+    max-width: none;
+    min-height: 36px;
+    height: auto;
+    margin: 0;
+    padding: 0.45rem 0.7rem;
+  }
+
+  .fgx {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 230px), 1fr));
+    gap: 1rem;
+  }
+
+  .cc {
+    width: 100%;
+    min-width: 0;
+  }
+
+  .ccx,
+  .lpc {
+    width: 100%;
+    max-width: 100%;
+  }
+
+  .lpc {
+    display: flex;
+    align-items: flex-start;
+    gap: 1rem;
+  }
+
+  .fgg {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+  }
+
+  .lod {
+    display: flex;
+    justify-content: space-around;
+    gap: 1rem;
+  }
+
+  .ppqqo,
+  .withdraw-overlay,
+  .ottp,
+  .ottpo {
+    position: fixed;
+    inset: 0;
+    width: 100%;
+    height: 100vh;
+    height: 100dvh;
+    padding: 16px;
+    overflow: hidden;
+  }
+
+  .footui,
+  .cbhg,
+  .creatv,
+  .creatvy {
+    position: relative;
+    inset: auto;
+    width: 100%;
+    max-width: min(900px, 100%);
+    max-height: calc(100vh - 32px);
+    max-height: calc(100dvh - 32px);
+    height: auto;
+    margin: auto;
+    overflow-x: hidden;
+    overflow-y: auto;
+  }
+
+  .creatv,
+  .creatvy {
+    bottom: auto;
+  }
+
+  .eokl {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 1rem;
+  }
+
+  .namies input,
+  .namie input,
+  .fifws input {
+    width: 100%;
+    max-width: 100%;
+  }
+
+  .qcb {
+    position: static;
+    bottom: auto;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    width: 100%;
+    margin: 1rem 0;
+  }
+
+  .qcb svg {
+    margin-left: 0;
+  }
+
+  .pupl {
+    position: static;
+    bottom: auto;
+    width: 100%;
+    padding: 1rem;
+    margin: 1rem 0;
+  }
+
+  .oewq {
+    position: static;
+    gap: 0.65rem;
+  }
+
+  .oewq > div:first-child {
+    display: grid;
+    place-items: center;
+    flex: 0 0 42px;
+    width: 42px;
+    max-width: none;
+    height: 42px;
+    position: static;
+  }
+
+  .lnn h6 {
+    position: relative;
+    margin: 0.6rem 0 0.6rem 1.4rem;
+    font-size: clamp(0.85rem, 1.5vw, 1rem);
+  }
+
+  .lnn h6::before {
+    content: "";
+    position: absolute;
+    top: 0.55em;
+    right: auto;
+    left: -1rem;
+    width: 0.45rem;
+    max-width: none;
+    height: 0.45rem;
+    margin: 0;
+    transform: none;
+  }
+
+  .plk {
+    display: flex;
+    justify-content: flex-end;
+    gap: 0.75rem;
+    margin-top: 1rem;
+  }
+
+  .plk > div {
+    min-width: 0;
+  }
+
+  .peter {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr);
+    align-items: center;
+    gap: 1rem;
+  }
+
+  .equater {
+    max-width: none;
+    width: 1px;
+    height: 5rem;
+  }
+
+  .for,
+  .divde,
+  .berqw,
+  .class,
+  .clsa,
+  .fifws,
+  .ime {
+    min-width: 0;
+  }
+
+  .fifws {
+    width: 100%;
+  }
+
+  .fifws input {
+    box-sizing: border-box;
+  }
+
+  .spopi {
+    right: 0.5rem;
+  }
+
+  .wekek {
+    width: fit-content;
+    max-width: 100%;
+    height: auto;
+    margin: 1rem auto;
+  }
+}
+
+@media (max-width: 900px) {
+  .pawap {
+    height: auto;
+    min-height: 0;
+    padding: clamp(1.25rem, 5vw, 2.5rem);
+    border-radius: 24px;
+  }
+
+  .beli {
+    min-width: 0;
+    margin-bottom: 1rem;
+  }
+
+  .beli h2 {
+    overflow-wrap: anywhere;
+    font-size: clamp(2rem, 7vw, 3rem);
+  }
+
+  .flioe {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+  .beli :nth-child(1) svg {
+    position: static;
+    flex: 0 0 auto;
+  }
+
+  .pw {
+    flex-wrap: wrap;
+  }
+
+  .pw button:nth-child(1),
+  .pw button:nth-child(2) {
+    flex: 1 1 180px;
+    width: auto;
+    max-width: none;
+    min-height: 48px;
+  }
+
+  .fgtu {
+    align-items: flex-start;
+    gap: 0.65rem;
+  }
+
+  .plk button,
+  .bhhhh button,
+  .divg button,
+  .vwmb button {
+    min-height: 44px;
+  }
+}
+
+@media (max-width: 600px) {
+  .love {
+    width: 100%;
+    min-width: 0;
+    overflow-x: clip;
+    padding-bottom: 1rem;
+  }
+
+  .nn,
+  .pawap,
+  .crut,
+  .hyq,
+  .bne,
+  .folk {
+    width: calc(100% - 24px);
+    max-width: none;
+    margin-left: 12px;
+    margin-right: 12px;
+  }
+
+  .nn {
+    min-height: 68px;
+    height: auto;
+    margin-bottom: 1rem;
+    padding: 0.7rem;
+    gap: 0.5rem;
+  }
+
+  .poe,
+  .lke {
+    min-width: 0;
+    gap: 0.5rem;
+  }
+
+  .lope {
+    width: 40px;
+    min-width: 40px;
+    height: 40px;
+    margin: 0;
+    border-radius: 12px;
+  }
+
+  .lope svg {
+    width: 23px;
+    height: 23px;
+    margin: 8px;
+  }
+
+  .kill h3 {
+    font-size: 0.98rem;
+  }
+
+  .kill p {
+    padding-left: 0;
+    font-size: 0.72rem;
+  }
+
+  .fy,
+  .physiu {
+    display: grid;
+    place-items: center;
+    width: 40px;
+    min-width: 40px;
+    height: 40px;
+    padding: 0;
+  }
+
+  .fy svg {
+    margin: 0;
+  }
+
+  .llq {
+    left: auto;
+    right: 1px;
+    bottom: 35px;
+    width: 8px;
+    max-width: none;
+    height: 8px;
+  }
+
+  .pawap {
+    padding: 1.1rem;
+    border-radius: 20px;
+  }
+
+  .bob {
+    gap: 0.4rem;
+  }
+
+  .flioe h4 {
+    min-width: 0;
+    font-size: 0.98rem;
+    overflow-wrap: anywhere;
+  }
+
+  .beli h2 {
+    margin-top: 0.45rem;
+    font-size: clamp(1.8rem, 9vw, 2.6rem);
+  }
+
+  .beli p {
+    font-size: 0.88rem;
+  }
+
+  .pw {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 0.6rem;
+    margin-top: 0.8rem;
+  }
+
+  .pw button:nth-child(1),
+  .pw button:nth-child(2) {
+    width: 100%;
+    min-width: 0;
+    min-height: 46px;
+    padding: 0.6rem 0.4rem;
+    font-size: 0.92rem;
+  }
+
+  .fgtu {
+    display: flex;
+    margin-top: 1rem;
+    gap: 0.5rem;
+  }
+
+  .fgtu p {
+    font-size: 0.76rem;
+    line-height: 1.45;
+  }
+
+  .crut {
+    grid-template-columns: 1fr;
+    gap: 0.7rem;
+    margin-top: 1rem;
+  }
+
+  .flrq {
+    min-height: 0;
+    padding: 0.95rem;
+    border-radius: 14px;
+  }
+
+  .flrq span {
+    display: block;
+    padding-bottom: 0.35rem;
+    font-size: 0.86rem;
+  }
+
+  .flrq h4 {
+    font-size: 1.25rem;
+  }
+
+  .hyq,
+  .bne,
+  .folk {
+    margin-top: 1.15rem;
+    padding: 1rem;
+    border-radius: 16px;
+  }
+
+  .hyq,
+  .bne,
+  .folk {
+    height: auto;
+  }
+
+  .gq {
+    justify-content: space-between;
+    gap: 0.5rem;
+  }
+
+  .gq h2,
+  .bnmo h3,
+  .fgg h4 {
+    font-size: 1.1rem;
+  }
+
+  .dd h4 {
+    gap: 0.25rem;
+    font-size: 0.82rem;
+    white-space: nowrap;
+  }
+
+  .owl {
+    height: 1px;
+    margin: 0.8rem 0;
+  }
+
+  .poiw {
+    grid-template-columns: minmax(0, 1fr) auto;
+    gap: 0.55rem;
+  }
+
+  .cvb,
+  .cvd {
+    grid-column: 1;
+    gap: 0.55rem;
+  }
+
+  .frd,
+  .frb {
+    flex-basis: 38px;
+    width: 38px;
+    height: 38px;
+  }
+
+  .frd svg,
+  .frb svg {
+    margin: 0.45rem;
+  }
+
+  .vivi,
+  .vivim {
+    grid-column: 2;
+    grid-row: 1;
+    justify-self: end;
+    min-height: 28px;
+    padding: 0.25rem 0.45rem;
+    font-size: 0.72rem;
+  }
+
+  .pore,
+  .porr {
+    grid-column: 1 / -1;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.5rem;
+    text-align: left;
+  }
+
+  .pore h3,
+  .porr h3 {
+    font-size: 0.98rem;
+  }
+
+  .pore h5,
+  .porr h5 {
+    margin: 0;
+    font-size: 0.82rem;
+  }
+
+  .bnmo {
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.75rem;
+    text-align: left;
+  }
+
+  .bnmo > div:first-child {
+    min-width: 0;
+  }
+
+  .bnmo span {
+    display: block;
+    font-size: 0.75rem;
+    line-height: 1.4;
+  }
+
+  .fgx {
+    grid-template-columns: 1fr;
+    gap: 0.7rem;
+  }
+
+  .cc {
+    width: 100%;
+    min-height: 82px;
+    padding: 0.8rem;
+  }
+
+  .ccx {
+    min-height: 52px;
+    padding: 0.6rem;
+  }
+
+  .ccx span {
+    font-size: 1rem;
+    text-align: center;
+  }
+
+  .lpc {
+    align-items: flex-start;
+    gap: 0.75rem;
+    padding: 0.9rem;
+  }
+
+  .lpc p {
+    line-height: 1.45;
+  }
+
+  .fgg {
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    gap: 0.75rem;
+  }
+
+  .fgg > div:nth-child(2) {
+    flex: 1 1 65%;
+  }
+
+  .pwi {
+    margin-left: auto;
+  }
+
+  .lod {
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    gap: 0.75rem 1rem;
+  }
+
+  .vwz h6 {
+    font-size: 0.82rem;
+    line-height: 1.4;
+  }
+
+  /* All withdrawal and verification dialogs */
+  .ppqqo,
+  .withdraw-overlay,
+  .ottp,
+  .ottpo {
+    align-items: center;
+    justify-content: center;
+    padding: 8px;
+    height: 100vh;
+    height: 100dvh;
+    overflow: hidden;
+  }
+
+  .footui,
+  .cbhg,
+  .creatv,
+  .creatvy {
+    position: relative;
+    inset: auto;
+    bottom: auto;
+    top: auto;
+    width: 100%;
+    max-width: 100%;
+    max-height: calc(100vh - 16px);
+    max-height: calc(100dvh - 16px);
+    height: auto;
+    margin: auto;
+    padding: 1rem;
+    border-radius: 14px;
+    overflow-x: hidden;
+    overflow-y: auto;
+  }
+
+  .vnew,
+  .berqw,
+  .class,
+  .clsa {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.6rem;
+  }
+
+  .vnew h2 {
+    font-size: 1.35rem;
+  }
+
+  .close-withdraw {
+    min-width: 40px;
+    min-height: 40px;
+  }
+
+  .gejks h5,
+  .carsl h5 {
+    font-size: 1rem;
+  }
+
+  .florty {
+    display: grid;
+    gap: 0.55rem;
+  }
+
+  .ooppp {
+    min-height: 64px;
+    padding: 0.65rem;
+    gap: 0.5rem;
+  }
+
+  .fjjjj {
+    min-width: 0;
+    align-items: center;
+    gap: 0.6rem;
+  }
+
+  .fjjjj h6,
+  .fjjjj p {
+    overflow-wrap: anywhere;
+    font-size: 0.88rem;
+  }
+
+  .fltu,
+  .klmnb {
+    display: grid;
+    place-items: center;
+    flex: 0 0 38px;
+    width: 38px;
+    max-width: none;
+    height: 38px;
+    margin: 0;
+  }
+
+  .lowwww {
+    display: flex;
+    justify-content: space-between;
+    gap: 0.6rem;
+    padding: 0.8rem 0;
+  }
+
+  .bhhhh button {
+    width: 100%;
+  }
+
+  .wbmk h4 {
+    font-size: 1.1rem;
+  }
+
+  .wbmk h6 {
+    font-size: 0.86rem;
+    line-height: 1.5;
+  }
+
+  .nvz {
+    margin: 0 auto 0.6rem;
+  }
+
+  .dffs {
+    top: 0.25rem;
+    right: 0.25rem;
+  }
+
+  .eokl {
+    grid-template-columns: 1fr;
+    gap: 0.85rem;
+  }
+
+  .ewolo {
+    gap: 0.5rem;
+  }
+
+  .ewolo h6 {
+    font-size: 0.92rem;
+  }
+
+  .namies input,
+  .namie input {
+    width: 100%;
+    min-width: 0;
+    box-sizing: border-box;
+  }
+
+  .qcb {
+    align-items: flex-start;
+    padding: 0.8rem;
+  }
+
+  .qcb h6,
+  .qcb h5,
+  .qcb p {
+    overflow-wrap: anywhere;
+    font-size: 0.86rem;
+  }
+
+  .pupl {
+    padding: 0.8rem;
+  }
+
+  .oewq h4 {
+    font-size: 1rem;
+  }
+
+  .plk {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 0.6rem;
+  }
+
+  .plk button {
+    width: 100%;
+    min-width: 0;
+    padding: 0.65rem 0.45rem;
+  }
+
+  .peter {
+    grid-template-columns: 1fr;
+    gap: 0.75rem;
+    padding: 0.8rem;
+  }
+
+  .equater {
+    display: none;
+  }
+
+  .voco,
+  .lllooo,
+  .fuckin,
+  .fucking {
+    min-width: 0;
+    gap: 0.5rem;
+  }
+
+  .lllooo h6,
+  .fuckin h6,
+  .fucking h6 {
+    font-size: 0.9rem;
+  }
+
+  .fifws {
+    padding: 0.8rem;
+  }
+
+  .fifws input {
+    width: 100%;
+    min-width: 0;
+    box-sizing: border-box;
+    padding-right: 2.5rem;
+  }
+
+  .spopi {
+    right: 0.45rem;
+  }
+
+  .ime {
+    display: grid;
+    gap: 0.6rem;
+  }
+
+  .divg button,
+  .vwmb button {
+    width: 100%;
+    min-height: 46px;
+  }
+
+  .class {
+    margin-bottom: 0.8rem;
+  }
+
+  .clsa {
+    justify-content: flex-start;
+  }
+
+  .toit,
+  .divde,
+  .for {
+    min-width: 0;
+    width: 100%;
+  }
+
+  .for {
+    display: flex;
+    align-items: center;
+    gap: 0.7rem;
+    padding: 0.8rem;
+  }
+
+  .for h5,
+  .for h6 {
+    overflow-wrap: anywhere;
+    font-size: 0.9rem;
+  }
+
+  .ottpo .creatvy {
+    max-width: 100%;
+  }
+
+  .wekek {
+    width: fit-content;
+    max-width: 100%;
+    height: auto;
+    margin: 0.8rem auto;
+  }
+}
+
+@media (max-width: 380px) {
+  .nn,
+  .pawap,
+  .crut,
+  .hyq,
+  .bne,
+  .folk {
+    width: calc(100% - 16px);
+    margin-left: 8px;
+    margin-right: 8px;
+  }
+
+  .nn {
+    padding: 0.55rem;
+    gap: 0.3rem;
+  }
+
+  .lope,
+  .fy,
+  .physiu {
+    width: 35px;
+    min-width: 35px;
+    height: 35px;
+  }
+
+  .kill h3 {
+    font-size: 0.82rem;
+  }
+
+  .kill p {
+    font-size: 0.65rem;
+  }
+
+  .pawap,
+  .hyq,
+  .bne,
+  .folk {
+    padding: 0.8rem;
+  }
+
+  .poiw {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .vivi,
+  .vivim {
+    grid-column: 1;
+    grid-row: auto;
+    justify-self: start;
+  }
+
+  .pore,
+  .porr {
+    grid-column: 1;
+  }
+
+  .ppqqo,
+  .withdraw-overlay,
+  .ottp,
+  .ottpo {
+    padding: 5px;
+  }
+
+  .footui,
+  .cbhg,
+  .creatv,
+  .creatvy {
+    padding: 0.75rem;
+    max-height: calc(100dvh - 10px);
+  }
+
+  .plk {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (min-width: 1600px) {
+  .nn,
+  .pawap,
+  .crut,
+  .hyq,
+  .bne,
+  .folk {
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .nn,
+  .pawap,
+  .crut,
+  .hyq,
+  .bne,
+  .folk {
+    max-width: 1440px;
+  }
+}
