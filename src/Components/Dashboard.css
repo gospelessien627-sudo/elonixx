@@ -2503,7 +2503,7 @@ button:disabled {
 
 }
 
-@media (width:360px) {
+@media (min-width:360px) {
     *{
         margin: 0;
         padding: 0;
