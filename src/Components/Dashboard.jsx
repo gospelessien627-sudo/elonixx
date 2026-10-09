@@ -1,5 +1,4 @@
-import React from "react";
-import { useState, useRef } from "react";
+import React, { useCallback, useEffect, useRef, useState } from "react";
 import "./Dashboard.css";
 
 import {
@@ -34,6 +33,8 @@ import {
   FaArrowTrendUp,
   FaE,
 } from "react-icons/fa6";
+
+const API_URL = "https://api.elonixx.com";
 
 const Dashboard = () => {
   /* =========================================
@@ -116,16 +117,53 @@ const Dashboard = () => {
      CURRENT USER
   ========================================= */
 
-  const [currentUser] = useState(() => {
-    const savedUser =
-      localStorage.getItem(
-        "finwalletCurrentUser"
-      );
-
-    return savedUser
-      ? JSON.parse(savedUser)
-      : null;
+  const [currentUser, setCurrentUser] = useState(() => {
+    try {
+      const savedUser = localStorage.getItem("finwalletCurrentUser");
+      return savedUser ? JSON.parse(savedUser) : null;
+    } catch {
+      return null;
+    }
   });
+
+  // localStorage is only a cached login record; the API returns the current balance.
+  const refreshDashboard = useCallback(async () => {
+    const token = localStorage.getItem("finwalletToken");
+    if (!token) return;
+    try {
+      const response = await fetch(`${API_URL}/api/dashboard`, {
+        headers: { Authorization: `Bearer ${token}` },
+      });
+      const data = await response.json().catch(() => ({}));
+      if (response.status === 401) {
+        localStorage.removeItem("finwalletToken");
+        return;
+      }
+      if (!response.ok || !data.user) {
+        throw new Error(data.message || "Unable to refresh account balance.");
+      }
+      setCurrentUser(data.user);
+      localStorage.setItem("finwalletCurrentUser", JSON.stringify(data.user));
+    } catch (error) {
+      console.error("Dashboard refresh error:", error);
+    }
+  }, []);
+
+  useEffect(() => {
+    refreshDashboard();
+    const intervalId = window.setInterval(refreshDashboard, 30000);
+    const onFocus = () => refreshDashboard();
+    const onVisibilityChange = () => {
+      if (document.visibilityState === "visible") refreshDashboard();
+    };
+    window.addEventListener("focus", onFocus);
+    document.addEventListener("visibilitychange", onVisibilityChange);
+    return () => {
+      window.clearInterval(intervalId);
+      window.removeEventListener("focus", onFocus);
+      document.removeEventListener("visibilitychange", onVisibilityChange);
+    };
+  }, [refreshDashboard]);
 
   /* =========================================
      OTP / TAC STATES
@@ -599,7 +637,7 @@ const Dashboard = () => {
             </div>
 
             <h2>
-              $ 000,000.00
+              $ {currentUser ? Number(currentUser.balance || 0).toLocaleString("en-US", { minimumFractionDigits: 2, maximumFractionDigits: 2 }) : "0.00"}
             </h2>
 
             <p>
