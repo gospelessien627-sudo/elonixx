@@ -32,7 +32,7 @@ html {
 body {
   min-width: 320px;
   margin: 0;
-  background: var(--page-bg);  
+  background: var(--page-bg);
   color: #f8f7fa;
   font-family: Georgia, "Times New Roman", serif;
 }
@@ -172,9 +172,7 @@ svg {
 .pawap {
   width: min(80vw, 1536px);
   min-height: 500px;
-  /* margin: 0 auto; */
-  position: relative;
-  left: 5rem;
+  margin: 0 auto;
   padding: 44px clamp(36px, 11.5vw, 220px) 40px;
   border-radius: 44px;
   background: radial-gradient(circle at 45% 0%, #30233a 0%, #2b2035 25%, #241c2c 50%, #1c1821 75%, #121112 100%);
@@ -295,10 +293,7 @@ svg {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: clamp(28px, 9vw, 172px);
-  position: relative;
-  left: 5rem;
-  /* margin: 118px auto 0; */
-  
+  margin: 118px auto 0;
 }
 
 .flrq {
@@ -1874,6 +1869,13 @@ svg {
 
 /* Restore desktop transaction and header sizing after mobile defaults. */
 @media (min-width: 900px) {
+  .hyq,
+  .bne,
+  .folk {
+    margin-left: auto;
+    margin-right: auto;
+  }
+
   .lope { width: 74px; height: 82px; }
   .fy, .physiu { width: 60px; min-width: 58px; height: 58px; }
   .pw { display: flex; }
