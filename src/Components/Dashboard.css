@@ -1919,3 +1919,62 @@ svg {
     margin-right: auto;
   }
 }
+
+/* Center the withdrawal account cards and information panel within .bne. */
+.fgx {
+  margin-left: auto;
+  margin-right: auto;
+  justify-items: center;
+}
+
+.cc,
+.ccx,
+.lpc {
+  margin-left: auto;
+  margin-right: auto;
+}
+
+@media (min-width: 600px) {
+  .fgx {
+    width: min(100%, 1000px);
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .cc,
+  .ccx,
+  .lpc {
+    margin-left: auto;
+    margin-right: auto;
+  }
+}
+
+@media (min-width: 900px) {
+  .fgx {
+    width: 84%;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .cc,
+  .ccx,
+  .lpc {
+    margin-left: auto;
+    margin-right: auto;
+  }
+}
+
+@media (min-width: 1200px) {
+  .fgx {
+    width: 84%;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .cc,
+  .ccx,
+  .lpc {
+    margin-left: auto;
+    margin-right: auto;
+  }
+}
