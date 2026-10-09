@@ -132,11 +132,7 @@ const Dashboard = () => {
     if (!token) return;
     try {
       const response = await fetch(`${API_URL}/api/dashboard`, {
-        method: "GET",
-        cache: "no-store",
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
+        headers: { Authorization: `Bearer ${token}` },
       });
       const data = await response.json().catch(() => ({}));
       if (response.status === 401) {
@@ -1040,7 +1036,7 @@ const Dashboard = () => {
             </div>
 
             <div className="oot">
-                <div>
+
               <h4>
                 Cashaapp
               </h4>
@@ -1048,7 +1044,7 @@ const Dashboard = () => {
               <span>
                 Business Wallet
               </span>
-                </div>
+
               <div className="polew">
                 <span>
                   Default
@@ -1070,7 +1066,7 @@ const Dashboard = () => {
             </div>
 
             <div className="oot">
-                <div>
+
               <h4>
                 Paypal
               </h4>
@@ -1078,7 +1074,7 @@ const Dashboard = () => {
               <span>
                 Business Wallet
               </span>
-              </div>
+
               <div className="polew">
                 <span>
                   Default
@@ -1100,7 +1096,7 @@ const Dashboard = () => {
             </div>
 
             <div className="oot">
-              <div>
+
               <h4>
                 Barclays
               </h4>
@@ -1108,7 +1104,7 @@ const Dashboard = () => {
               <span>
                 Business Wallet
               </span>
-              </div>
+
               <div className="polew">
                 <span>
                   Default
@@ -1130,7 +1126,7 @@ const Dashboard = () => {
             </div>
 
             <div className="oot">
-                <div>
+
               <h4>
                 Citibank
               </h4>
@@ -1138,7 +1134,7 @@ const Dashboard = () => {
               <span>
                 Business Wallet
               </span>
-                </div>
+
               <div className="polew">
                 <span>
                   Default

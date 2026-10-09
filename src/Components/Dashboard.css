@@ -576,10 +576,7 @@ svg {
   font-size: clamp(15px, 1.5vw, 26px);
 }
 
-.oot {
-    display: flex;
-    gap: 3rem;
-}
+
 
 .polew {
   margin-top: 12px;
