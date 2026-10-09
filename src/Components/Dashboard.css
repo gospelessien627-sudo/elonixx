@@ -197,6 +197,11 @@ svg {
     justify-content: space-between;
 }
 
+.fliy > div:nth-child(1){
+    display: flex;
+    gap: 0.3rem;
+}
+
 .flioe {
   display: flex;
   align-items: center;
