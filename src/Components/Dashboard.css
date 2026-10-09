@@ -3707,3 +3707,638 @@ bottom: 1.9rem;
 }
 
 }
+/* =========================================================
+   RESPONSIVE LAYOUT ADDITIONS
+   Original dashboard styles above are preserved unchanged.
+========================================================= */
+
+@media (max-width: 1400px) {
+  .nn,
+  .pawap,
+  .crut,
+  .hyq,
+  .bne {
+    width: min(94%, 1180px);
+    max-width: 1180px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .nn {
+    gap: clamp(1rem, 3vw, 3rem);
+    padding-inline: clamp(1rem, 3vw, 2.5rem);
+  }
+
+  .bob {
+    justify-content: space-between;
+    gap: 1rem;
+  }
+
+  .pw {
+    margin-left: 0;
+  }
+
+  .pw button:nth-child(1),
+  .pw button:nth-child(2) {
+    max-width: 220px;
+  }
+
+  .fgtu {
+    margin-left: 0;
+  }
+
+  .crut {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: clamp(1rem, 3vw, 2.5rem);
+  }
+
+  .flrq {
+    max-width: none;
+    min-width: 0;
+    height: auto;
+    min-height: 170px;
+    padding: 1.5rem 1rem;
+  }
+
+  .hyq,
+  .bne {
+    height: auto;
+    padding: clamp(1.25rem, 3vw, 2.5rem);
+  }
+
+  .hyq {
+    margin-top: clamp(2rem, 5vw, 4rem);
+  }
+
+  .bne {
+    margin-top: clamp(2rem, 5vw, 4rem);
+  }
+
+  .owl {
+    max-width: 100%;
+  }
+
+  .pore h5,
+  .porr h5 {
+    right: auto;
+  }
+
+  .vivi,
+  .vivim {
+    width: fit-content;
+    max-width: none;
+    min-height: 36px;
+    height: auto;
+    margin: 0;
+    padding: 0.45rem 0.7rem;
+  }
+
+  .fgx {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 220px), 1fr));
+    gap: 1rem;
+  }
+
+  .cc {
+    min-width: 0;
+  }
+
+  .wekkek {
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .wekek {
+    max-width: 120px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+}
+
+@media (max-width: 900px) {
+  .pawap {
+    height: auto;
+    min-height: 0;
+    padding: clamp(1.25rem, 5vw, 2.5rem);
+    border-radius: 24px;
+  }
+
+  .bob {
+    align-items: flex-start;
+  }
+
+  .beli {
+    min-width: 0;
+    margin-bottom: 1rem;
+  }
+
+  .beli h2 {
+    overflow-wrap: anywhere;
+    font-size: clamp(2rem, 7vw, 3rem);
+  }
+
+  .flioe {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+  .beli :nth-child(1) svg {
+    position: static;
+    flex: 0 0 auto;
+  }
+
+  .pw {
+    flex-wrap: wrap;
+  }
+
+  .pw button:nth-child(1),
+  .pw button:nth-child(2) {
+    flex: 1 1 180px;
+    width: auto;
+    max-width: none;
+    min-height: 48px;
+  }
+
+  .fgtu {
+    align-items: flex-start;
+    gap: 0.65rem;
+  }
+
+  .poiw {
+    display: grid;
+    grid-template-columns: minmax(0, 1.4fr) minmax(90px, 0.8fr) minmax(0, 1fr);
+    gap: 0.75rem;
+    align-items: center;
+  }
+
+  .cvb,
+  .cvd {
+    min-width: 0;
+    gap: 0.65rem;
+    align-items: center;
+  }
+
+  .frd,
+  .frb {
+    flex: 0 0 42px;
+    max-width: none;
+    width: 42px;
+    height: 42px;
+  }
+
+  .frd svg,
+  .frb svg {
+    margin: 0.6rem;
+  }
+
+  .vivi,
+  .vivim {
+    justify-self: center;
+  }
+
+  .pore,
+  .porr {
+    min-width: 0;
+    text-align: right;
+  }
+
+  .pore h3,
+  .porr h3 {
+    overflow-wrap: anywhere;
+    font-size: clamp(1rem, 2.5vw, 1.5rem);
+  }
+
+  .bnmo {
+    align-items: center;
+    gap: 1rem;
+    justify-content: space-between;
+  }
+
+  .ppqqo,
+  .withdraw-overlay,
+  .ottpo {
+    padding: 12px;
+    height: 100dvh;
+  }
+
+  .footui,
+  .cbhg {
+    top: auto;
+    bottom: auto;
+    max-width: 720px;
+    max-height: calc(100dvh - 24px);
+    padding: clamp(1rem, 4vw, 1.5rem);
+    border-radius: 16px;
+  }
+}
+
+@media (max-width: 600px) {
+  .love {
+    width: 100%;
+    min-width: 0;
+    overflow-x: clip;
+    padding-bottom: 1rem;
+  }
+
+  .nn,
+  .pawap,
+  .crut,
+  .hyq,
+  .bne {
+    width: calc(100% - 24px);
+    max-width: none;
+    margin-left: 12px;
+    margin-right: 12px;
+  }
+
+  .nn {
+    min-height: 72px;
+    height: auto;
+    margin-bottom: 1rem;
+    padding: 0.75rem;
+    gap: 0.75rem;
+    justify-content: space-between;
+  }
+
+  .poe,
+  .lke {
+    min-width: 0;
+    display: flex;
+    align-items: center;
+    gap: 0.55rem;
+    margin: 0;
+  }
+
+  .lope {
+    width: 42px;
+    min-width: 42px;
+    height: 42px;
+    margin: 0;
+    border-radius: 12px;
+  }
+
+  .lope svg {
+    width: 24px;
+    height: 24px;
+    margin: 8px;
+  }
+
+  .kill h3 {
+    font-size: 1rem;
+  }
+
+  .kill p {
+    font-size: 0.75rem;
+  }
+
+  .fy {
+    display: grid;
+    place-items: center;
+    width: 42px;
+    height: 42px;
+  }
+
+  .fy svg {
+    margin: 0;
+  }
+
+  .llq {
+    left: auto;
+    right: 2px;
+    bottom: 38px;
+    width: 8px;
+    max-width: none;
+    height: 8px;
+  }
+
+  .physiu {
+    display: grid;
+    place-items: center;
+    width: 42px;
+    min-width: 42px;
+    height: 42px;
+    padding: 0;
+  }
+
+  .pawap {
+    padding: 1.25rem;
+    border-radius: 20px;
+  }
+
+  .bob {
+    gap: 0.5rem;
+  }
+
+  .flioe h4 {
+    font-size: 1rem;
+    overflow-wrap: anywhere;
+  }
+
+  .beli h2 {
+    margin-top: 0.5rem;
+    font-size: clamp(1.8rem, 9vw, 2.6rem);
+  }
+
+  .beli p {
+    font-size: 0.9rem;
+  }
+
+  .pw {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 0.65rem;
+    margin-top: 1rem;
+  }
+
+  .pw button:nth-child(1),
+  .pw button:nth-child(2) {
+    width: 100%;
+    min-width: 0;
+    min-height: 46px;
+    padding: 0.65rem 0.5rem;
+    font-size: 0.95rem;
+  }
+
+  .fgtu {
+    display: flex;
+    margin-top: 1rem;
+    gap: 0.5rem;
+  }
+
+  .fgtu p {
+    font-size: 0.78rem;
+    line-height: 1.45;
+  }
+
+  .crut {
+    grid-template-columns: 1fr;
+    gap: 0.75rem;
+    margin-top: 1rem;
+  }
+
+  .flrq {
+    min-height: 0;
+    padding: 1rem;
+    border-radius: 14px;
+  }
+
+  .flrq span {
+    display: block;
+    padding-bottom: 0.4rem;
+    font-size: 0.9rem;
+  }
+
+  .flrq h4 {
+    font-size: 1.35rem;
+  }
+
+  .hyq,
+  .bne {
+    margin-top: 1.25rem;
+    padding: 1rem;
+    border-radius: 16px;
+  }
+
+  .hyq {
+    min-height: 0;
+  }
+
+  .gq {
+    justify-content: space-between;
+    gap: 0.5rem;
+  }
+
+  .gq h2,
+  .bnmo h3 {
+    font-size: 1.15rem;
+  }
+
+  .dd h4 {
+    gap: 0.3rem;
+    font-size: 0.85rem;
+    white-space: nowrap;
+  }
+
+  .owl {
+    height: 1px;
+    margin: 0.85rem 0;
+  }
+
+  .poiw {
+    grid-template-columns: minmax(0, 1fr) auto;
+    gap: 0.55rem;
+  }
+
+  .cvb,
+  .cvd {
+    grid-column: 1;
+  }
+
+  .vivi,
+  .vivim {
+    grid-column: 2;
+    grid-row: 1;
+    justify-self: end;
+    min-height: 30px;
+    padding: 0.3rem 0.5rem;
+    font-size: 0.75rem;
+  }
+
+  .pore,
+  .porr {
+    grid-column: 1 / -1;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.5rem;
+    text-align: left;
+  }
+
+  .pore h3,
+  .porr h3 {
+    font-size: 1rem;
+  }
+
+  .pore h5,
+  .porr h5 {
+    margin: 0;
+    font-size: 0.85rem;
+  }
+
+  .bnmo {
+    text-align: left;
+  }
+
+  .bnmo > div:first-child {
+    min-width: 0;
+  }
+
+  .bnmo span {
+    display: block;
+    font-size: 0.78rem;
+    line-height: 1.4;
+  }
+
+  .fgx {
+    grid-template-columns: 1fr;
+    gap: 0.75rem;
+  }
+
+  .cc {
+    width: 100%;
+    padding: 0.8rem;
+  }
+
+  .plk {
+    flex-wrap: wrap;
+    gap: 0.6rem;
+  }
+
+  .plk > div {
+    min-width: 0;
+  }
+
+  .ppqqo,
+  .withdraw-overlay,
+  .ottpo {
+    align-items: flex-start;
+    padding: 8px;
+  }
+
+  .footui,
+  .cbhg {
+    width: 100%;
+    max-height: calc(100dvh - 16px);
+    padding: 1rem;
+    border-radius: 14px;
+  }
+
+  .wbmk h4 {
+    font-size: 1.15rem;
+  }
+
+  .wbmk h6 {
+    font-size: 0.85rem;
+  }
+
+  .nvz {
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .lod {
+    flex-wrap: wrap;
+    gap: 1rem;
+  }
+
+  .wekkek,
+  .wekek {
+    max-width: 100%;
+    width: auto;
+    height: auto;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .fltu,
+  .klmnb {
+    min-width: 0;
+    max-width: 100%;
+  }
+
+  .fifws input,
+  .namies input,
+  .namie input {
+    max-width: 100%;
+  }
+
+  .foreq,
+  .foreqs,
+  .fore,
+  .forew,
+  .opble,
+  .opbl,
+  .opblew,
+  .ccaa,
+  .ccaae,
+  .ccaas {
+    min-width: 0;
+    max-width: 100%;
+  }
+}
+
+@media (max-width: 380px) {
+  .nn,
+  .pawap,
+  .crut,
+  .hyq,
+  .bne {
+    width: calc(100% - 16px);
+    margin-left: 8px;
+    margin-right: 8px;
+  }
+
+  .nn {
+    padding: 0.6rem;
+    gap: 0.35rem;
+  }
+
+  .lope,
+  .fy,
+  .physiu {
+    width: 36px;
+    min-width: 36px;
+    height: 36px;
+  }
+
+  .kill h3 {
+    font-size: 0.88rem;
+  }
+
+  .kill p {
+    font-size: 0.68rem;
+  }
+
+  .pawap,
+  .hyq,
+  .bne {
+    padding: 0.8rem;
+  }
+
+  .poiw {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .vivi,
+  .vivim {
+    grid-column: 1;
+    grid-row: auto;
+    justify-self: start;
+  }
+
+  .pore,
+  .porr {
+    grid-column: 1;
+  }
+}
+
+@media (min-width: 1600px) {
+  .nn,
+  .pawap,
+  .crut,
+  .hyq,
+  .bne {
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .nn,
+  .pawap,
+  .crut,
+  .hyq,
+  .bne {
+    max-width: 1440px;
+  }
+}
