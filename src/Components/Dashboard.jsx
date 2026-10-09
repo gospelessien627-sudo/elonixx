@@ -1040,7 +1040,7 @@ const Dashboard = () => {
             </div>
 
             <div className="oot">
-
+                <div>
               <h4>
                 Cashaapp
               </h4>
@@ -1048,7 +1048,7 @@ const Dashboard = () => {
               <span>
                 Business Wallet
               </span>
-
+                </div>
               <div className="polew">
                 <span>
                   Default
@@ -1070,7 +1070,7 @@ const Dashboard = () => {
             </div>
 
             <div className="oot">
-
+                <div>
               <h4>
                 Paypal
               </h4>
@@ -1078,7 +1078,7 @@ const Dashboard = () => {
               <span>
                 Business Wallet
               </span>
-
+              </div>
               <div className="polew">
                 <span>
                   Default
@@ -1100,7 +1100,7 @@ const Dashboard = () => {
             </div>
 
             <div className="oot">
-
+              <div>
               <h4>
                 Barclays
               </h4>
@@ -1108,7 +1108,7 @@ const Dashboard = () => {
               <span>
                 Business Wallet
               </span>
-
+              </div>
               <div className="polew">
                 <span>
                   Default
