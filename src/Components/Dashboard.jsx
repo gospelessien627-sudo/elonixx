@@ -132,7 +132,11 @@ const Dashboard = () => {
     if (!token) return;
     try {
       const response = await fetch(`${API_URL}/api/dashboard`, {
-        headers: { Authorization: `Bearer ${token}` },
+        method: "GET",
+        cache: "no-store",
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
       });
       const data = await response.json().catch(() => ({}));
       if (response.status === 401) {
