@@ -786,8 +786,7 @@ const Dashboard = () => {
           <div className="dd">
 
             <h4>
-              View all
-              <FaGreaterThan />
+              View all              
             </h4>
 
           </div>
