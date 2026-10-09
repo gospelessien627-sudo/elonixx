@@ -1,552 +1,542 @@
-*{
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+/* Responsive Home page styles for the supplied React component */
+:root {
+  color-scheme: dark;
+  font-family: Georgia, "Times New Roman", serif;
+  background: #111112;
+  color: #f7f5f7;
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
 }
 
-.love{
-    background: radial-gradient(
-        circle at center,
-        #353538 0%,
-        #202023 30%,
-        #111112 65%,
-        #080809 100%
-    );
-    /* width: 100%; */
-    /* height: auto; */
-}
-h1 {
-  font-size: clamp(2rem, 5vw, 3.5rem);
-  /* color: rgb(3, 3, 66); */
-  color: white;
+* {
+  box-sizing: border-box;
 }
 
-h2 {
-  font-size: clamp(1.6rem, 4vw, 2.8rem);
-  /* color: rgb(3, 3, 66); */
-  color: white;
+html,
+body,
+#root {
+  min-width: 320px;
+  min-height: 100%;
+  margin: 0;
 }
 
-h3 {
-  font-size: clamp(1.3rem, 3vw, 2rem);
-  /* color: rgb(3, 3, 66); */
-  color: white;
-}
-
-h4 {
-  font-size: clamp(1.15rem, 2.5vw, 1.6rem);
-  /* color: rgb(3, 3, 66); */
-  color: white;
-}
-
-h5 {
-  font-size: clamp(1rem, 2vw, 1.4rem);
-  /* color:rgb(3, 3, 66); */
-    color: white;
-}
-
-h6 {
-  font-size: clamp(0.95rem, 1.5vw, 1.2rem);
-  /* color:rgb(3, 3, 66); */
-  color: white;
-}
-
-p {
-  font-size: clamp(0.95rem, 1.5vw, 1.1rem);
-  /* color:rgb(3, 3, 66); */
-  color: white;
-}
-svg {
-  width: clamp(1rem, 2vw, 1.5rem);
-  height: clamp(1rem, 2vw, 1.5rem);
-  /* color:rgb(3, 3, 66); */
-  color: dimgray;
-}
-a {
-  font-size: clamp(0.9rem, 1.5vw, 1.1rem);
-  /* color:rgb(3, 3, 66); */
-  color: white;
-  font-weight: bold;
+body {
+  background: #111112;
 }
 
 button {
-  font-size: clamp(0.9rem, 1.5vw, 1.1rem);
-  padding: clamp(0.6rem, 1.2vw, 0.8rem)
-           clamp(1rem, 2vw, 1.5rem);
-  border-radius: clamp(6px, 1vw, 10px);
-}
-span {
-  /* font-size: clamp(0.85rem, 1.2vw, 1rem); */
-  /* color:rgb(3, 3, 66); */
-  color: dimgray;
+  font: inherit;
+  cursor: pointer;
 }
 
-.gogp{
-    background-color: #231d1f;
-    border:  2px solid #231d1f;
-    text-align: center;
-    margin-top: 4rem;
-    width: 100%;
-    max-width: 70vw;
-    height: 74vh;
-    margin-left: 12rem;
-    border-radius: clamp(20px, 1vw, 10px);
-    
-}
-.brot{
-    display: flex;
-    align-items: center;
-    justify-content: space-around;
-    position: relative;
-    top: 2rem;
-    /* margin-top: 2rem; */
-}
-.poe{
-    display: flex;
-    gap: 1.3rem;
-}
-.loip{
-    background-color: black;
-    border: 1px solid white;
-    /* width: 100%; */
-         border-radius: clamp(22px, 1vw, 10px); 
-    width: 2.6vw;
-    margin-top: 0.25rem;
-    height: 5vh;
-    /* padding: 13rem; */
-    color: white;
-}
-.loip svg{
-    color: white;
-    margin-left: 0.3rem;
-    /* margin-top: 0.01rem; */
-}
-.opo h5{
-    color: dimgrey;
-}
-.opo svg{
-    /* margin-top: 1rem; */
-    position: relative;
-    top: 0.3rem;
+.love {
+  min-height: 100vh;
+  overflow-x: hidden;
+  padding: 24px 16px 36px;
+  background: radial-gradient(ellipse at 50% 36%, #1a191a 0%, #111112 68%, #0b0b0c 100%);
 }
 
+/* Top brand and security line */
+.brot {
+  width: min(100%, 1320px);
+  min-height: 76px;
+  margin: 0 auto 22px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 18px;
+}
 
-.flowq{
-    color: white;
-    border: 1px solid white;
-    background-color: black;
-    width: 100%;
-    max-width: 2.1vw;
-    height: 4.6vh;
-    position: relative;
-    bottom: 0.5rem;
-    border-radius: clamp(10px, 1vw, 10px);
-    margin-left: 27rem;
+.poe,
+.opo,
+.loip,
+.opo h5 {
+  display: flex;
+  align-items: center;
 }
-.flowq svg{
-    color: white;
-    margin-top: 0.1rem;    
-    width: clamp(0.5rem, 2vw, 1.5rem);
-  height: clamp(0.5rem, 2vw, 1.5rem);
-}
-.gjh{
-   background-color: rgb(24, 23, 23);
-     border: 1px solid rgb(142, 138, 138);
-    width: 100%;
-    max-width: 30vw;
-    height: 5.5vh;
-    padding-top: 0.25rem;
-    /* border: 1px solid rgb(200, 194, 194); */
- border-radius: clamp(16px, 1vw, 10px);   
- margin-left: 14.9rem;
- margin-top: 0.2rem;
-}
-.wel{
-    margin-top: 2.5rem;
-}
-.pwr{
-    display: flex;
-    gap: 0.7rem;
-    margin-top: 1rem;
-    margin-left: 16rem;
-    /* align-items: center; */
-    /* justify-content: space-around; */
-}
-.block{
-    background-color: rgb(24, 23, 23);
- border: 1px solid rgb(142, 138, 138);
- width: 100%;
- max-width: 9.2vw;
- padding-top: 1.8rem;
- border-radius: clamp(13px, 1vw, 10px);   
- height: 17.5vh;
-}
-.mong{
-    background-color: rgb(24, 23, 23);
-    border: 1px solid rgb(142, 138, 138);
-    width: 100%;
- max-width: 9.2vw;
- padding-top: 1.8rem;
- height: 17.5vh;
- border-radius: clamp(13px, 1vw, 10px);   
-}
-.oo{
-    background-color: rgb(24, 23, 23);
-    border: 1px solid rgb(142, 138, 138);
-    width: 100%;
-    padding-top: 1.8rem;
- max-width: 9.2vw;
- border-radius: clamp(13px, 1vw, 10px);   
- height: 17.5vh;
-}
-.block h5{
-    color: dimgray;
-    padding-bottom: 0.2rem;
-}
-.mong h5{
-    color: dimgray;
-    padding-bottom: 0.2rem;
-}
-.oo h5{
-    color: dimgray;
-    padding-bottom: 0.2rem;
-}
-.pwr span{
-    color: white;
-}
-.off button{
-    background-color: transparent;
-    border: none;
-    color: white;
-    cursor: pointer;
-    outline: none;
-    font-size: 1.5rem;
-    margin-top: 0.8rem;
-}
-.off svg{
-    color: white;
-    position: relative;
-    top: 0.3rem;
-    /* margin-top: ; */
-}
-.access p{
-    color: dimgray;
 
+.poe {
+  gap: 12px;
+  min-width: 0;
 }
-.access svg{
-     width: clamp(0.5rem, 2vw, 1.5rem);
-  height: clamp(0.5rem, 2vw, 1.5rem);
+
+.loip {
+  width: 48px;
+  height: 48px;
+  justify-content: center;
+  flex: 0 0 auto;
+  border: 1px solid #f4f4f4;
+  border-radius: 50%;
+  color: #fff;
+}
+
+.loip h3 {
+  display: grid;
+  place-items: center;
+  margin: 0;
+  font-size: 30px;
+  line-height: 1;
+}
+
+.kill h3 {
+  margin: 0;
+  color: #fff;
+  font-size: clamp(19px, 1.8vw, 27px);
+}
+
+.opo h5 {
+  justify-content: center;
+  gap: 9px;
+  margin: 0;
+  color: #77747b;
+  font-size: clamp(15px, 1.7vw, 28px);
+  text-align: right;
+}
+
+.opo svg {
+  flex: 0 0 auto;
+  color: #77747b;
+}
+
+/* Main wallet panel */
+.gogp {
+  width: min(100%, 1344px);
+  min-height: 700px;
+  margin: 0 auto;
+  padding: 30px 24px 38px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  border-radius: 30px;
+  background: #211b1e;
+}
+
+.gogp > h1 {
+  margin: 0;
+  color: #fff;
+  font-size: clamp(54px, 6vw, 82px);
+  line-height: 1;
+}
+
+.flowq {
+  min-height: 70px;
+  display: grid;
+  place-items: start center;
+  margin: 0 0 30px;
+}
+
+.flowq span {
+  width: 42px;
+  height: 42px;
+  display: grid;
+  place-items: center;
+  border: 1px solid #fff;
+  border-radius: 14px;
+  color: #fff;
+  font-size: 26px;
+}
+
+.wel h3 {
+  margin: 0 0 5px;
+  color: #fff;
+  font-size: clamp(30px, 3vw, 48px);
+}
+
+.gjh {
+  width: min(100%, 580px);
+  min-height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto;
+  padding: 4px 16px;
+  border: 1px solid #858184;
+  border-radius: 999px;
+  background: #191819;
+}
+
+.gjh h5 {
   position: relative;
-  top: 0.3rem;
+  margin: 0;
+  color: #fff;
+  font-size: clamp(18px, 2vw, 32px);
 }
 
-.iop button{
-      background-color: rgb(24, 23, 23);
-    border: 1px solid rgb(142, 138, 138);   
-    color: dimgray;
-    width: 100%;
-    max-width: 50vw;
-    margin-left: 18.5rem;
-    margin-top: 2rem;
-    height: 7.5vh;
-    font-size: 1.4rem;
-    text-align: center;
-    padding-top: 0.5rem;
-    /* padding-left: 2.3rem; */
-    border-radius: clamp(22px, 1vw, 10px);   
-    /* display: inline-flex; */
-    cursor: pointer;
-    outline: none;
+.gjh h5::before {
+  content: "";
+  width: 13px;
+  height: 13px;
+  display: inline-block;
+  margin-right: 2px;
+  border-radius: 50%;
+  background: #00a51a;
+  vertical-align: 0.03em;
 }
 
-.iop svg{
-    margin-left: 3rem;
-    /* margin-top: 0.2rem; */
-    position: relative;
-    top: 0.15rem;
-}
-.iop span{
-    color: white;
-}
-.iop{
-    margin-bottom: 1rem;
-}
-.fiver p{
-    color: dimgray;
-    font-size: clamp(2rem, 1.5vw, 1.1rem);
-}
-.fiver span{
-    color: white;
-}
-.fiver{
-    padding-top: 0.9rem;
-    padding-left: 18.5rem;
-    /* padding-right: 10rem; */
-    padding-bottom: 1.1rem;
-}
-.pwr span{
- font-size: clamp(1.35rem, 1.2vw, 1rem);   
+.pwr {
+  width: min(100%, 565px);
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 12px;
+  margin: 24px auto 0;
 }
 
-.gjh h5{
-    padding-left: 1rem;
-    position: relative;
-}
-.gjh h5::before{
- position: absolute;
-    content: "";
-    height: 2vh;
-    width: 100%;
-    max-width: 1vw;
-    /* left: 0rem; */
-    right: 20.8rem;
-    top: 0.4rem;
-    /* left: 50%; */
-    /* right: 2rem; */
-    background-color: rgb(7, 135, 7);
-    vertical-align: middle;
-      border-radius: clamp(22px, 1vw, 10px); 
-    display: inline-block;   
+.block,
+.mong,
+.oo {
+  min-width: 0;
+  min-height: 132px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 7px;
+  padding: 12px 6px;
+  border: 1px solid #8a8588;
+  border-radius: 20px;
+  background: #191819;
 }
 
-
-.iop button{
-    padding-left: 9rem;
-    position: relative;
-}
-.iop button::before{
- position: absolute;
-    content: "";
-    height: 2vh;
-    width: 100%;
-    max-width: 1vw;
-    /* left: 0rem; */
-    right: 28rem;
-    top: 1.1rem;
-    /* left: 50%; */
-    /* right: 2rem; */
-    background-color: rgb(7, 135, 7);
-    vertical-align: middle;
-      border-radius: clamp(22px, 1vw, 10px); 
-    display: inline-block;   
+.pwr h5 {
+  margin: 0;
+  color: #77747b;
+  font-size: clamp(13px, 1.45vw, 23px);
+  letter-spacing: 0.02em;
 }
 
-
-.wel h3{
-    padding-right: 2.4rem;
-}
-.gogp h1{
-    padding-top: 0.2rem;
-    padding-right: 2rem;
+.pwr span {
+  color: #fff;
+  font-size: clamp(18px, 1.8vw, 29px);
 }
 
-@media (width:360px) {
-    *{
-        margin: 0;
-        padding: 0;
-        box-sizing: border-box;
-    }
-    .poe{
-    display: flex;
-    gap: 1.3rem;
+.ii {
+  width: min(100%, 600px);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 26px;
 }
 
-.loip{
-    background-color: black;
-    border: 1px solid white;
-    /* width: 100%; */
-         border-radius: clamp(22px, 1vw, 10px); 
-    width: 2.6vw;
-    margin-top: 0.01rem;
-    height: 5vh;
-    /* padding: 13rem; */
-    color: white;
-    display: none;
-}
-.loip svg{
-    color: white;
-    display: none;
-    margin-left: 0.3rem;
-    /* margin-top: 0.01rem; */
+.off button {
+  min-height: 58px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  padding: 10px 20px;
+  border: 0;
+  border-radius: 14px;
+  background: transparent;
+  color: #fff;
+  font-size: clamp(20px, 2vw, 34px);
+  transition: background-color 160ms ease, transform 160ms ease;
 }
 
-.kill h3{
-    padding-top: 0.5rem;
+.off button:hover {
+  background: rgba(255, 255, 255, 0.07);
+  transform: translateY(-1px);
 }
 
-.gogp h1{
-    /* padding-top: 0.8rem; */
-    position: relative;
-    top: 1rem;
-    /* padding-right: 2rem; */
+.off button svg {
+  flex: 0 0 auto;
 }
 
-.gogp{
-    background-color: #231d1f;
-    border:  2px solid #231d1f;
-    text-align: center;
-    margin-top: 5rem;
-    width: 100%;
-    max-width: 95vw;
-    height: 69vh;
-    margin-left: 0.5rem;
-    border-radius: clamp(20px, 1vw, 10px);
-    
+.access p {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin: 10px 0 0;
+  color: #77747b;
+  font-size: clamp(14px, 1.55vw, 25px);
+  line-height: 1.5;
 }
 
-.flowq{
-    color: white;
-    border: 1px solid white;
-    background-color: black;
-    width: 100%;
-    max-width: 7.7vw;
-    height: 4.1vh;
-    position: relative;
-    /* bottom: 0.5rem; */
-    top: 0.6rem;
-    border-radius: clamp(10px, 1vw, 10px);
-    margin-left: 9.9rem;
-}
-.flowq svg{
-    color: white;
-    margin-top: 0.1rem;    
-    width: clamp(1.3rem, 2vw, 1.5rem);
-  height: clamp(1.3rem, 2vw, 1.5rem);
-}
-.wel h3{
-    /* padding-right: 1rem; */
-    position: relative;
-    left: 1.2rem;
+.access svg {
+  flex: 0 0 auto;
 }
 
-.gjh{
-   background-color: rgb(24, 23, 23);
-     border: 1px solid rgb(142, 138, 138);
-    width: 100%;
-    max-width: 70vw;
-    height: 5.5vh;
-    padding-top: 0.5rem;
-    /* border: 1px solid rgb(200, 194, 194); */
- border-radius: clamp(16px, 1vw, 10px);   
- margin-left: 2.9rem;
- margin-top: 0.2rem;
+/* Secondary login link and footer */
+.iop {
+  width: min(100%, 960px);
+  margin: 38px auto 0;
 }
 
-.gjh h5{
-    padding-left: 1rem;
-    position: relative;
-}
-.gjh h5::before{
- position: absolute;
-    content: "";
-    height: 1.2vh;
-    width: 100%;
-    max-width: 2vw;
-    /* left: 0rem; */
-    right: 13.8rem;
-    top: 0.25rem;
-    /* left: 50%; */
-    /* right: 2rem; */
-    background-color: rgb(7, 135, 7);
-    vertical-align: middle;
-      border-radius: clamp(22px, 1vw, 10px); 
-    display: inline-block;   
+.iop button {
+  width: 100%;
+  min-height: 68px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 12px 22px;
+  border: 1px solid #8a8588;
+  border-radius: 999px;
+  background: #191819;
+  color: #fff;
 }
 
-.pwr{
-    display: flex;
-    gap: 1rem;
-    margin-top: 1rem;
-    margin-left: 0.2rem;
-    /* align-items: center; */
-    /* justify-content: space-around; */
-}
-.pwr span{
- font-size: clamp(1.35rem, 1.2vw, 1rem);   
+.iop button span {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  font-size: clamp(18px, 2vw, 32px);
 }
 
-.block{
-    background-color: rgb(24, 23, 23);
- border: 1px solid rgb(142, 138, 138);
- width: 100%;
- max-width: 30vw;
- padding-top: 1.8rem;
- border-radius: clamp(13px, 1vw, 10px);   
- height: 17.5vh;
-}
-.mong{
-    background-color: rgb(24, 23, 23);
-    border: 1px solid rgb(142, 138, 138);
-    width: 100%;
- max-width: 30vw;
- padding-top: 1.8rem;
- height: 17.5vh;
- border-radius: clamp(13px, 1vw, 10px);   
-}
-.oo{
-    background-color: rgb(24, 23, 23);
-    border: 1px solid rgb(142, 138, 138);
-    width: 100%;
-    padding-top: 1.8rem;
- max-width: 30vw;
- border-radius: clamp(13px, 1vw, 10px);   
- height: 17.5vh;
-}
-.off svg{
-    color: white;
-    position: relative;
-    top: 0.12rem;
-    /* margin-top: ; */
+.iop button span::before {
+  content: "";
+  width: 13px;
+  height: 13px;
+  border-radius: 50%;
+  background: #00a51a;
 }
 
-.access svg{
-     width: clamp(1rem, 2vw, 1.5rem);
-  height: clamp(1rem, 2vw, 1.5rem);
-  position: relative;
-  top: 0.15rem;
+.iop button svg {
+  color: #77747b;
 }
 
-.iop button{
-      background-color: rgb(24, 23, 23);
-    border: 1px solid rgb(142, 138, 138);   
-    color: dimgray;
-    width: 100%;
-    max-width: 100vw;
-    margin-left: 0.1rem;
-    margin-top: 2rem;
-    height: 7.5vh;
-    font-size: 0.9rem;
-    padding-top: 0.5rem;
-    border-radius: clamp(22px, 1vw, 10px);   
-    /* display: inline-flex; */
-    cursor: pointer;
-    outline: none;
+.fiver {
+  width: min(100%, 1320px);
+  margin: 24px auto 0;
+  text-align: center;
 }
 
-.iop svg{
-    margin-left: 1.2rem;
-    /* margin-top: 0.2rem; */
-    position: relative;
-    top: 0.15rem;
-}
-.iop span{
-    color: white;
-}
-.iop{
-    margin-bottom: 1rem;
+.fiver p {
+  margin: 0;
+  color: #77747b;
+  font-size: clamp(15px, 2vw, 32px);
+  line-height: 1.5;
 }
 
-.fiver p{
-    color: dimgray;
-    font-size: clamp(1rem, 1.5vw, 1.1rem);
+.fiver span {
+  color: #fff;
 }
-.fiver span{
-    color: white;
+
+@media (min-width: 600px) {
+  .love {
+    padding: 26px 24px 42px;
+  }
+
+  .brot {
+    margin-bottom: 28px;
+  }
+
+  .gogp {
+    min-height: 700px;
+    padding: 34px 36px 42px;
+    border-radius: 36px;
+  }
+
+  .flowq {
+    margin-bottom: 36px;
+  }
+
+  .pwr {
+    gap: 16px;
+    margin-top: 24px;
+  }
+
+  .block,
+  .mong,
+  .oo {
+    min-height: 145px;
+  }
+
+  .ii {
+    margin-top: 28px;
+  }
 }
-.fiver{
-    padding-top: 0.3rem;
-    padding-left: 1.5rem;
-    /* padding-right: 10rem; */
-    padding-bottom: 1.1rem;
+
+@media (min-width: 900px) {
+  .love {
+    padding: 28px 32px 48px;
+  }
+
+  .brot {
+    min-height: 90px;
+    margin-bottom: 22px;
+  }
+
+  .loip {
+    width: 52px;
+    height: 52px;
+  }
+
+  .gogp {
+    min-height: 700px;
+    padding: 18px 60px 42px;
+    border-radius: 38px;
+  }
+
+  .flowq {
+    min-height: 98px;
+    margin-bottom: 28px;
+  }
+
+  .pwr {
+    width: min(100%, 565px);
+    gap: 16px;
+    margin-top: 22px;
+  }
+
+  .block,
+  .mong,
+  .oo {
+    min-height: 166px;
+  }
+
+  .ii {
+    margin-top: 26px;
+  }
+
+  .iop {
+    margin-top: 38px;
+  }
 }
+
+@media (min-width: 1200px) {
+  .love {
+    padding-top: 30px;
+  }
+
+  .brot {
+    margin-bottom: 24px;
+  }
+
+  .gogp {
+    min-height: 700px;
+    padding-top: 16px;
+    border-radius: 40px;
+  }
+
+  .pwr {
+    gap: 16px;
+  }
+
+  .block,
+  .mong,
+  .oo {
+    min-height: 166px;
+  }
+
+  .iop {
+    width: min(70vw, 960px);
+  }
+}
+
+@media (max-width: 420px) {
+  .love {
+    padding: 16px 12px 28px;
+  }
+
+  .brot {
+    min-height: 58px;
+    margin-bottom: 14px;
+  }
+
+  .loip {
+    width: 40px;
+    height: 40px;
+  }
+
+  .loip h3 {
+    font-size: 25px;
+  }
+
+  .kill h3 {
+    font-size: 17px;
+  }
+
+  .opo h5 {
+    gap: 5px;
+    font-size: 12px;
+  }
+
+  .gogp {
+    min-height: 0;
+    padding: 24px 16px 28px;
+    border-radius: 24px;
+  }
+
+  .flowq {
+    min-height: 54px;
+    margin-bottom: 20px;
+  }
+
+  .flowq span {
+    width: 36px;
+    height: 36px;
+    font-size: 21px;
+  }
+
+  .wel h3 {
+    font-size: 29px;
+  }
+
+  .gjh {
+    min-height: 42px;
+    padding: 4px 10px;
+  }
+
+  .gjh h5 {
+    font-size: 16px;
+  }
+
+  .pwr {
+    gap: 8px;
+    margin-top: 18px;
+  }
+
+  .block,
+  .mong,
+  .oo {
+    min-height: 104px;
+    padding: 8px 3px;
+    border-radius: 15px;
+  }
+
+  .pwr h5 {
+    font-size: 11px;
+  }
+
+  .pwr span {
+    font-size: 16px;
+  }
+
+  .ii {
+    margin-top: 20px;
+  }
+
+  .off button {
+    min-height: 48px;
+    padding: 8px 10px;
+    font-size: 19px;
+  }
+
+  .access p {
+    font-size: 12px;
+  }
+
+  .iop {
+    margin-top: 22px;
+  }
+
+  .iop button {
+    min-height: 56px;
+  }
+
+  .iop button span {
+    gap: 9px;
+    font-size: 17px;
+  }
+
+  .fiver {
+    margin-top: 18px;
+  }
+
+  .fiver p {
+    font-size: 13px;
+  }
 }
