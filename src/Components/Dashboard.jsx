@@ -1315,9 +1315,9 @@ const Dashboard = () => {
 
             <div className="carsl">
 
-              <h5>
+              {/* <h5>
                 Withdrawal place
-              </h5>
+              </h5> */}
 
               <div className="florty">
 
