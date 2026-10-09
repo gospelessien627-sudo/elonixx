@@ -190,18 +190,6 @@ svg {
   margin-bottom: 28px;
 }
 
-.fliy{
-    display: flex;
-    /* justify-content: center; */
-    align-items: center;
-    justify-content: space-between;
-}
-
-.fliy > div:nth-child(1){
-    display: flex;
-    gap: 0.3rem;
-}
-
 .flioe {
   display: flex;
   align-items: center;
@@ -588,8 +576,6 @@ svg {
   font-size: clamp(15px, 1.5vw, 26px);
 }
 
-
-
 .polew {
   margin-top: 12px;
 }
@@ -809,10 +795,6 @@ svg {
 .vnew h2 {
   margin: 0 0 34px;
   font-size: clamp(26px, 2.3vw, 42px);
-}
-
-.berqw > div:nth-child(1){
-    text-align: center;
 }
 
 .close-withdraw,
@@ -1202,10 +1184,10 @@ svg {
   background: #edf1ff;
 }
 
-
+.voco,
 .lllooo,
 .fuckin,
-.fucking{
+.fucking {
   display: flex;
   align-items: center;
   gap: 12px;
@@ -2038,4 +2020,67 @@ svg {
   .fgg { justify-content: center; }
   .lod { justify-content: center; }
   .vwz { text-align: center; }
+}
+
+/* Center the icon, title, and explanatory sentence in withdrawal review. */
+.berqw {
+  position: relative;
+  display: block;
+  width: 100%;
+  text-align: center;
+}
+
+.berqw > div:first-child {
+  width: 100%;
+  flex: none;
+  text-align: center;
+}
+
+.berqw .bva {
+  margin: 0 auto;
+}
+
+.berqw h5,
+.berqw p {
+  width: 100%;
+  text-align: center;
+}
+
+.berqw button {
+  position: absolute;
+  top: 0;
+  right: 0;
+}
+
+@media (min-width: 600px) {
+  .berqw,
+  .berqw > div:first-child,
+  .berqw h5,
+  .berqw p {
+    text-align: center;
+  }
+  .berqw { display: block; }
+  .berqw > div:first-child { width: 100%; flex: none; }
+}
+
+@media (min-width: 900px) {
+  .berqw,
+  .berqw > div:first-child,
+  .berqw h5,
+  .berqw p {
+    text-align: center;
+  }
+  .berqw { display: block; }
+  .berqw > div:first-child { width: 100%; flex: none; }
+}
+
+@media (min-width: 1200px) {
+  .berqw,
+  .berqw > div:first-child,
+  .berqw h5,
+  .berqw p {
+    text-align: center;
+  }
+  .berqw { display: block; }
+  .berqw > div:first-child { width: 100%; flex: none; }
 }
