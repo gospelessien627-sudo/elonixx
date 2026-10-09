@@ -1978,3 +1978,46 @@ svg {
     margin-right: auto;
   }
 }
+
+/* Center the contents of the Business Verification card. */
+.folk {
+  text-align: center;
+}
+
+.fgg {
+  justify-content: center;
+  flex-wrap: wrap;
+  text-align: center;
+}
+
+.lod {
+  justify-content: center;
+  flex-wrap: wrap;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.vwz {
+  text-align: center;
+}
+
+@media (min-width: 600px) {
+  .folk { text-align: center; }
+  .fgg { justify-content: center; }
+  .lod { justify-content: center; }
+  .vwz { text-align: center; }
+}
+
+@media (min-width: 900px) {
+  .folk { text-align: center; }
+  .fgg { justify-content: center; }
+  .lod { justify-content: center; }
+  .vwz { text-align: center; }
+}
+
+@media (min-width: 1200px) {
+  .folk { text-align: center; }
+  .fgg { justify-content: center; }
+  .lod { justify-content: center; }
+  .vwz { text-align: center; }
+}
