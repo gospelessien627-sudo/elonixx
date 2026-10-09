@@ -1772,7 +1772,7 @@ white-space: nowrap;
         border: 1px solid rgb(11, 11, 244);
         width: 100%;
         height: 9vh;
-        padding-bottom: 0.8rem;
+        padding-bottom: 5rem;
         font-size: clamp(1.1rem, 1.5vw, 1.1rem);
         cursor: pointer;
         color: white;
@@ -2503,2172 +2503,13 @@ button:disabled {
 
 }
 
-@media (width:360px) {
-    *{
-        margin: 0;
-        padding: 0;
-        box-sizing: border-box;
-    }
-    .nn{
-    display: flex;
-    align-items: center;
-    justify-content: space-around;
-    margin-bottom: 2rem;
-    gap: 1.6rem;
-    /* margin-top: 1rem; */
-    margin-right: 5rem;
-    background-color: rgb(20, 19, 19);
-    border: 1px solid rgb(20, 19, 19);
-    width: 100%;
-    height: 20vh;
-}
-
-.lope{
-    background-color: black;
-    border: 1px solid white;
-    /* width: 100%; */
-         border-radius: clamp(24px, 1vw, 10px); 
-    width: 13.5vw;
-    margin-top: 0.25rem;
-    height: 8.5vh;
-    /* padding: 13rem; */
-    color: white;
-}
-.lope svg{
-    color: white;
-    margin-left: 0.75rem;
-    /* margin-top: 0.01rem; */
-     width: clamp(1.8rem, 2vw, 1.5rem);
-  height: clamp(3.4rem, 2vw, 1.5rem);
-}
-
-.kill  p{
-    color: dimgray;
-    padding-left: 0.3rem;
-    font-size: clamp(1.1rem, 1.5vw, 1.1rem);
-    cursor: pointer;
-}
-
-.llq{
-    position: relative;
-    bottom: 1.87rem;
-    left: 1.26rem;
-    background-color: red;
-    border: 1px solid red;
-    width: 100%;
-    max-width: 1.15vw;
-     border-radius: clamp(6px, 1vw, 10px);
-    height: 0.7vh;
-}
-.frt svg{
-    color: white;
-    margin-left: 0.4rem;
-    margin-top: 0.5rem;
-}
-.fy{
-    background-color: transparent;
-    border: 1px solid dimgray;
-    width:130%;
-    height: 5.25vh;
-    border-radius: clamp(12px, 1vw, 10px);
-    /* max-width: 7vw; */
-    /* height: 6vh; */
-}
-
-.physiu{
-    padding-top: 1rem;
-    background: radial-gradient(
-        circle at center,
-        #353538 0%,
-        #202023 30%,
-        #111112 65%,
-        #080809 100%
-    );
-    /* width: 200%; */
-    /* max-width: 8vw; */
-    height: 5.29vh;
-    padding: 0.2rem;
-    border-radius: clamp(10px, 1vw, 10px); 
-    border: 1px solid dimgray;
-}
-.physiu h5{
-    padding-top: 0.15rem;
-}
-
-.pawap{
-    background: radial-gradient(
-        circle at 45% 0%,
-        #30233A 0%,
-        #2B2035 25%,
-        #241c2c 50%,
-        #1C1821 75%,
-        #121112 100%
-    );
-    width: 100%;
-    max-width: 98vw;
-    height: 40vh;
-    margin-left: 0.2rem;
-    padding-top: 1rem;
-       border-radius: clamp(22px, 1vw, 10px);
-}
-
-.bob{
-    display: flex;
-    gap: 7rem;
-    /* align-items: center; */
-    justify-content: center;
-    /* margin-top: 1rem; */
-}
-
-.beli :nth-child(1) svg{
-    color: yellow;
-    position: relative;
-    right: 1rem;
-    top: 0.2rem;
-}
-.beli{
-    margin-bottom: 1.5rem;
-}
-.yy{
-    position: relative;
-    top: 0.5rem;
-}
-
-.pw{
-    display: flex;
-    gap: 0.5rem;
-    margin-left: 2rem;
-    /* margin-top: 0.2rem; */
-}
-.pw  button:nth-child(1) {
-    background-color: black;
-    border: 1px solid black;
-    color: white;
-    width: 100%;
-    max-width: 30vw;
-    height: 6.5vh;
-    cursor: pointer;
-}
-.pw button:nth-child(2){
-     background-color: dimgray;
-     border: 1px solid dimgray;
-     color: white;
-     width: 100%;
-    max-width: 30vw;
-    height: 6.5vh;
-    cursor: pointer;
-}
-
-.fgtu{
-    display: flex;
-    gap: 0.5rem;
-    margin-left: 1rem;
-    margin-top: 1.3rem;
-}
-.fgtu p{
-    color: dimgrey;
-}
-
-.crut{
-    margin-top: 2rem;
-    display: flex;
-    gap: 0.49rem;
-    margin-left: 0.28rem;
-    /* align-items: center; */
-    /* justify-content: space-around; */
-
-}
-
-.flrq{
-    background-color: rgb(8, 4, 4);
-    border: 1px solid rgb(66, 65, 65);
-    width: 100%;
-    max-width: 31vw;
-    height: 24vh;
-    text-align: center;
-    padding-top: 2rem;
-    border-radius: clamp(12px, 1vw, 10px); 
-}
-
-.flrq span{
-    padding-bottom: 1.1rem;
-    font-size: clamp(0.85rem, 1.2vw, 0.85rem);
-}
-.flrq h4{
-    padding-top: 0.4rem;
-    padding-bottom: 0.3rem;
-}
-
-.hyq{
-    width: 100%;
-    padding-top: 2.5rem;
-    max-width: 100vw;
-    margin-left: 0.1rem;
-    margin-top: 1.7rem;
-    height: 97vh;
-background-color: rgb(8, 4, 4);
-border: 1px solid rgb(66, 65, 65);
-border-radius: clamp(17px, 1vw, 10px); 
-}
-
-.bne{
- width: 100%;
-    padding-top: 2.5rem;
-    max-width: 99vw;
-    margin-left: 0.1rem;
-    margin-top: 1.7rem;
-    height: 120vh;
-background-color: rgb(8, 4, 4);
-border: 1px solid rgb(66, 65, 65);
-border-radius: clamp(17px, 1vw, 10px); 
-}
-
-.folk{
-   width: 100%;
-    /* padding-top: 2.5rem; */
-    max-width: 99vw;
-    margin-left: 0.1rem;
-    margin-top: 1.7rem;
-    /* margin-bottom: 2rem; */
-    height: 30vh;
-    /* display: flex; */
-    /* text-align: center; */
-    gap: 1.5rem;
-    padding-left: 14rem;
-    padding-top: 2.2rem;
-    border: 1px solid blue;
-border-radius: clamp(17px, 1vw, 10px); 
-background: radial-gradient(
-    120%, 120%, at 50% 0%,
-    #6366f1 0%,
-    #4ff6a5 20,
-    rgba(99, 102, 241, 0.15) 60%,
-    transparent 100%
-);
-}
-
-.withdraw-overlay {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100vh;
-
-  background: rgba(0, 0, 0, 0.55);
-
-  display: flex;
-  align-items: center;
-  justify-content: center;
-
-  padding: 20px;
-
-  z-index: 99;
-}
-
-
-/* =========================================
-   WITHDRAWAL BOX
-========================================= */
-
-.cbhg {
-  position: relative;
-    top: 1rem;
-    bottom: 8rem;
-  width: 100%;
-  max-width: 800px;
-  right: 0.1rem;
-
-  max-height: 81vh;
-
-  overflow-y: auto;
-
-  background: white;
-
-  border-radius: 20px;
-
-  padding: 25px;
-
-  box-shadow:
-    0 20px 60px rgba(0, 0, 0, 0.30);
-
-  z-index: 1000000;
-
-  animation: verificationPopup 0.40s ease;
-}
-
-@keyframes verificationPopup {
-  from {
-    opacity: 0;
-    transform: scale(0.94) translateY(15px);
-  }
-
-  to {
-    opacity: 1;
-    transform: scale(1) translateY(0);
-  }
-}
-
-.ppqqo {
-  position: fixed;
-  top: 0;
-  left: 0;
-  inset: 0;
-
-  width: 100%;
-  height: 100vh;
-
-  display: flex;
-  align-items: center;
-  justify-content: center;
-
-  padding: 20px;
-
-  background: rgba(0, 0, 0, 0.55);
-
-  z-index: 99999;
-}
-
-
-.footui {
-  width: 100%;
-  top: 0.8rem;
-  position: relative;
-    /* bottom: 3rem; */
-  /* width: 100%; */
-  max-width: 800px;
-  right: 0.1rem;
-
-  /* max-height: 81vh; */
-
-
-  /* max-height: 90.5vh; */
-  max-height: calc(90vh - 40px);
-   overflow-y: auto;
-  overflow-x: hidden;
-
-  /* max-width: 520px; */
-
-  background: #ffffff;
-
-  border-radius: 18px;
-
-  padding: 25px;
-
-  box-shadow:
-    0 25px 80px rgba(0, 0, 0, 0.25);
-
-  animation: verificationPopup 0.40s ease;
-}
-
-
-@keyframes verificationPopup {
-  from {
-    opacity: 0;
-    transform: scale(0.94) translateY(15px);
-  }
-
-  to {
-    opacity: 1;
-    transform: scale(1) translateY(0);
-  }
-}
-
-
-.ottp {
-  position: fixed;
-  top: 0;
-  left: 0;
-  inset: 0;
-
-  width: 100%;
-  height: 160vh;
-
-  display: flex;
-  align-items: center;
-  justify-content: center;
-
-  padding: 20px;
-
-  background: rgba(0, 0, 0, 0.55);
-
-  z-index: 99999;
-}
-
-
-.creatv {
-  width: 100%;
-  /* top: 0.1rem; */
-  position: relative;
-    bottom: 11rem;
-  /* width: 100%; */
-  max-width: 355px;
-  right: 10.7rem;
-
-  /* max-height: 81vh; */
-
-
-  /* max-height: 90.5vh; */
-  max-height: calc(94vh - 40px);
-   overflow-y: auto;
-  overflow-x: hidden;
-
-  /* max-width: 520px; */
-
-  background: #ffffff;
-
-  border-radius: 18px;
-
-  padding: 80px;
-
-  box-shadow:
-    0 25px 80px rgba(0, 0, 0, 0.25);
-
-  animation: verificationPopup 0.40s ease;
-}
-
-
-@keyframes verificationPopup {
-  from {
-    opacity: 0;
-    transform: scale(0.94) translateY(15px);
-  }
-
-  to {
-    opacity: 1;
-    transform: scale(1) translateY(0);
-  }
-}
-
-
-.plk{
-    display: block;
-    /* gap: 1rem; */
-    /* margin-left: 0.1rem; */
-    /* margin-right: 0.7rem; */
-    position: relative;
-    right: 1rem;
-}
-
-.plk >div:nth-child(1) button{
-    color: black;
-    font-weight: bold;
-    border: 1px solid #8a94a4;    
-    background-color: #8a94a4;
-    font-size: clamp(1.1rem, 1.5vw, 1.1rem);
-  padding: clamp(0.7rem, 1.2vw, 1rem)
-           clamp(6.8rem, 2vw, 1.5rem);
-  border-radius: clamp(6px, 1vw, 10px);
-  cursor: pointer;
-}
-
-.plk >div:nth-child(1) button:hover{
-    background-color: #c8ccd3;
-    border: 1px solid #c8ccd3;
-}
-
-.plk >div:nth-child(2) button{
-    background-color: black;
-    border: 1px solid black;
-    color: white;
-    /* display: flex; */
-    font-size: clamp(0.9rem, 1.5vw, 1.1rem);
-  padding: clamp(0.9rem, 1.2vw, 0.8rem)
-           clamp(3.45rem, 2vw, 1.5rem);
-  border-radius: clamp(6px, 1vw, 10px);
-  cursor: pointer;
-  display: flex;
-align-items: center;
-justify-content: center;
-white-space: nowrap;
-margin-top: 0.4rem;
-}
-
-.plk >div:nth-child(2) button:hover{
-    background-color: rgb(36, 35, 35);
-    border: 1px solid rgb(36, 35, 35);
-}
-
-.plk svg{
-    color: white;
-    position: relative;
-    /* bottom: 0.6rem; */
-    top: 0rem;
-    /* right: 0.4rem; */
-    background-color: transparent;
-}
-
-.ottpo {
-  position: fixed;
-  top: 0;
-  inset: 0;
-  left: 0;
-
-  width: 100%;
-  height: 160vh;
-
-  display: flex;
-  align-items: center;
-  justify-content: center;
-
-  padding: 20px;
-
-  background: rgba(0, 0, 0, 0.55);
-
-  z-index: 99999;
-}
-
-
-.creatvy {
-  width: 80%;
-  /* top: 0.1rem; */
-  position: relative;
-    bottom: 11rem;
-  /* width: 100%; */
-  max-width: 355px;
-  right: 10.7rem;
-
-  /* max-height: 81vh; */
-
-
-  /* max-height: 90.5vh; */
-  max-height: calc(94vh - 40px);
-   overflow-y: auto;
-  overflow-x: hidden;
-
-  box-sizing: border-box;
-
-  /* max-height: 93.5vh; */
-
-  /* max-width: 520px; */
-
-  background: #ffffff;
-
-  border-radius: 18px;
-
-  padding: 80px;
-
-  box-shadow:
-    0 25px 80px rgba(0, 0, 0, 0.25);
-
-  animation: verificationPopup 0.40s ease;
-}
-
-
-@keyframes verificationPopup {
-  from {
-    opacity: 0;
-    transform: scale(0.94) translateY(15px);
-  }
-
-  to {
-    opacity: 1;
-    transform: scale(1) translateY(0);
-  }
-}
-
-.clsa{
-    display: flex;
-    gap: 1.4rem;
-}
-.clsa svg{
-    cursor: pointer;
-}
-
-
-.frd svg{
-    color: green;
-    margin-left: 0.5rem;
-    margin-top: 0.5rem;
-}
-.frd{
-    background-color: rgb(30, 41, 30);
-    border:  1px solid rgb(30, 41, 30);
-    width: 100%;
-    max-width: 9vw;
-    height: 5.5vh;
-    border-radius: clamp(20px, 1vw, 10px); 
-    position: relative;
-    top: 0.2rem;
-
-}
-
-.pore h5{
-    position: relative;
-    right: 7rem;
-    /* top: 0.3rem; */
-    bottom: 0.3rem;
-    color: dimgrey;
-}
-
-.vivi svg{
-    color: yellowgreen;
-    position: relative;
-    /* top: 0.01rem; */
-    bottom: 4rem;
-    right: 1.2rem;
-    width: clamp(1rem, 2vw, 1.4rem);
-  height: clamp(1rem, 2vw, 1.1rem);
-}
-.vivi span{
-    color: yellowgreen;
-    position: relative;
-    /* top: 1rem; */
-}
-.vivi{
-    background-color: transparent;
-    /* width: 100%; */
-    display: flex;
-    /* max-width: 25vw; */
-    /* margin-right: 1.6rem; */
-    border: 1px solid yellowgreen;
-    height: 4.2vh;
-    /* position: relative; */
-    /* top: 0.5rem; */
-    /* padding: 1rem; */
-    /* padding-top: 0.01rem; */
-    padding-right: 4rem;
-    /* padding-left: 0.8rem; */
-    border-radius: clamp(25px, 1vw, 10px); 
-    position: relative;
-    right: 4rem;
-    bottom: 1.6rem;
-}
-.vivi h6{
-    position: relative;
-    right: 0.5rem;
-    top: 0.2rem;
-}
-
-.pore h3{
-    font-size: clamp(0.9rem, 3vw, 1.7rem);
-    position: relative;
-    right: 1rem;       
-}
-
-.owl{
-    background-color: dimgray;
-    width: 100%;
-    max-width: 100vw;
-    height: 0.2vh;
-    margin-top: 2rem;
-    margin-bottom: 1.5rem;
-}
-
-.frb svg{
-    color: white;
-    margin-left: 0.5rem;
-    margin-top: 0.5rem;
-}
-.frb{
-    background-color: rgb(41, 40, 40);
-    border:  1px solid rgb(41, 40, 40);
-    width: 100%;
-    max-width: 9vw;
-    height: 5.5vh;
-    border-radius: clamp(20px, 1vw, 10px); 
-    position: relative;
-    top: 0.2rem;
-
-}
-
-
-.porr h5{
-    position: relative;
-    right: 7rem;
-    /* top: 0.3rem; */
-    bottom: 0.2rem;
-    color: dimgrey;
-}
-
-.porr h3{
-    font-size: clamp(1rem, 3vw, 2rem);
-    position: relative;
-    right: 1rem;       
-}
-
-.vivim{
-    background-color: transparent;
-    /* width: 100%; */
-    display: flex;
-    /* max-width: 25vw; */
-    /* margin-right: 1.6rem; */
-    border: 1px solid rgb(187, 65, 21);
-    height: 4.2vh;
-    /* position: relative; */
-    /* top: 0.5rem; */
-    /* padding: 1rem; */
-    /* padding-top: 0.01rem; */
-    padding-right: 4rem;
-    /* padding-left: 0.8rem; */
-    border-radius: clamp(25px, 1vw, 10px); 
-    position: relative;
-    right: 4rem;
-    bottom: 1.6rem;
-}
-.vivim span{
-    position: relative;
-    right: 0.65rem;
-    /* top: 0.2rem; */
-}
-
-.bnmo{
-    display: flex;
-    text-align: center;
-    justify-content: space-around;
-}
-
-.bnmo >div:nth-child(1){
-    text-align: left;
-}
-
-.bnmo span{
-    padding-top: 0.3rem;
-    font-size: clamp(1.2rem, 1.2vw, 1rem);
-    padding-left: 0.1rem;
-    padding-top: 0.1rem;
-}
-
-.bnmo >div:nth-child(2){
-    position: relative;
-    right: 0.9rem;
-}
-
-.cc{
-    width: 100%;
-    /* padding-top: 2.5rem; */
-    max-width: 97vw;
-    margin-left: 0.2rem;
-    margin-top: 2rem;
-    margin-bottom: 2rem;
-    height: 20vh;
-    display: flex;
-    /* text-align: center; */
-    gap: 0.6rem;
-    padding-left: 2.5rem;
-    padding-top: 2rem;
-background-color: rgb(8, 4, 4);
-border: 1px solid rgb(66, 65, 65);
-border-radius: clamp(25px, 1vw, 10px); 
-}
-
-.qlz svg{
-    color: white;
-    width: clamp(3rem, 2vw, 1.5rem);
-  height: clamp(3rem, 2vw, 1.5rem);
-  margin-top: 0.5rem;
-  margin-left: 0.5rem;
-}
-
-.qlz{
-    background-color: orangered;
-    border: 1px solid orangered;
-    width: 100%;
-    position: relative;
-    right: 1.4rem;
-    max-width: 20vw;
-    height: 10vh;
-    border-radius: clamp(15px, 1vw, 10px); 
-}
-
-.oot h4{
- font-size: clamp(1.4rem, 2.5vw, 1.6rem);   
-}
-
-.oot span{
- font-size: clamp(1.1rem, 1.2vw, 1rem);
-    
-}
-
-.oot p{
- font-size: clamp(1.1rem, 1.5vw, 1.1rem);   
- color: dimgrey;
-}
-
-.polew{
-    width: 100%;
-    max-width: 23vw;
-    height: 5vh;
-    background-color:  rgb(21, 19, 19);
-    position: relative;
-    left: 7.3rem;
-    padding-left: 1rem;
-    padding-top: 0.3rem;
-    bottom: 4.6rem;
-    border: 1px solid rgb(21, 19, 19);
-        border-radius: clamp(10px, 1vw, 10px); 
-}
-.polew span{
-    color: white;
-}
-
-.qlze svg{
-    color: white;
-    width: clamp(3rem, 2vw, 1.5rem);
-  height: clamp(3rem, 2vw, 1.5rem);
-  margin-top: 0.5rem;
-  margin-left: 0.5rem;
-}
-
-.qlze{
-    background-color: yellowgreen;
-    border: 1px solid yellowgreen;
-    width: 100%;
-    position: relative;
-    right: 1.4rem;
-    max-width: 19vw;
-    height: 10vh;
-    border-radius: clamp(15px, 1vw, 10px); 
-}
-
-.ccx{
-    width: 100%;
-    /* padding-top: 2.5rem; */
-    max-width: 97.8vw;
-    margin-left: 0.12rem;
-    margin-top: 2rem;
-    margin-bottom: 2rem;
-    height: 10vh;
-    display: flex;
-    /* text-align: center; */
-    gap: 1.5rem;
-    padding-left: 1rem;
-    /* text-align: center; */
-    padding-top: 1rem;
-background-color: rgb(8, 4, 4);
-border: 1px solid rgb(66, 65, 65);
-border-radius: clamp(25px, 1vw, 10px); 
-}
-.ccx span{
- font-size: clamp(1.5rem, 1.2vw, 1rem);   
- color: white;
-}
-
-.ccx svg{
-    color: white;
-    position: relative;
-    top: 0.15rem;
-    width: clamp(1.4rem, 2vw, 1.5rem);
-  height: clamp(1.3rem, 2vw, 1.5rem);
-}
-
-.lpc{
-    width: 100%;
-    /* padding-top: 2.5rem; */
-    max-width: 99vw;
-    margin-left: 0.2rem;
-    margin-top: 2rem;
-    margin-bottom: 2rem;
-    height: 30vh;
-    display: flex;
-    /* text-align: center; */
-    gap: 1.5rem;
-    padding-left: 1.8rem;
-    /* text-align: center; */
-    padding-top: 2.5rem;
-background-color: rgb(27, 25, 25);
-border: 1px solid rgb(30, 28, 28);
-border-radius: clamp(25px, 1vw, 10px); 
-}
-
-.lpc p{
-    color: dimgray;
-    line-height: 1.2;
-    font-size: clamp(1.2rem, 1.5vw, 1.1rem);
-}
-
-.lpc h5{
-    font-size: clamp(1.2rem, 2vw, 1.4rem);
-}
-
-.ee svg{
-    margin-top: 0.3rem;
-    margin-left: 0.35rem;
-    color: white;
-    width: clamp(1.5rem, 2vw, 1.5rem);
-  height: clamp(1.5rem, 2vw, 1.5rem);
-}
-.ee{
-    width: 100%;
-    position: relative;
-    top: 1.2rem;
-    right: 1rem;
-    max-width: 10.1vw;
-    height: 5.8vh;
-    background-color: black;
-    border: 1px solid dimgray;
-    border-radius: clamp(23px, 1vw, 10px); 
-}
-
-.folk{
-   width: 100%;
-    /* padding-top: 2.5rem; */
-    max-width: 99vw;
-    margin-left: 0.2rem;
-    margin-top: 2rem;
-    /* margin-bottom: 2rem; */
-    height: 30vh;
-    /* display: flex; */
-    /* text-align: center; */
-    gap: 1.5rem;
-    padding-left: 1rem;
-    padding-top: 2.2rem;
-    border: 1px solid blue;
-border-radius: clamp(25px, 1vw, 10px); 
-background: radial-gradient(
-    120%, 120%, at 50% 0%,
-    #6366f1 0%,
-    #4ff6a5 20,
-    rgba(99, 102, 241, 0.15) 60%,
-    transparent 100%
-);
-}
-
-
-.fgg{
-    /* border-radius: 19px; */
-    display: flex;
-    gap: 1.6rem;
-    align-items: center;
-    /* justify-content: space-around; */
-    /* align-items: center; */
-    /* justify-content: space-between; */
-    /* background: #0A0A0F; */
-    /* padding: 16px 20px; */
-}
-.fgg svg{
-    color: blue;
-    width: clamp(1.9rem, 2vw, 1.5rem);
-  height: clamp(1.9rem, 2vw, 1.5rem);
-}
-.pwi span{
-    color: green;
-}
-
-.pwi{
-    border: 1px solid green;
-    /* width: 100%; */
-    padding-right: 1rem;
-    padding-left: 1rem;
-    padding-top: 0.23rem;
-    max-width: 22vw;
-    height: 4vh;
-    border-radius: clamp(15px, 1vw, 10px); 
-}
-
-
-.lod{
-    display: flex;
-    gap: 4rem;
-    margin-top: 1.7rem;
-    margin-bottom: 1rem;
-    /* align-items: center; */
-    /* justify-content: space-around; */
-}
-.caw{
-    display: flex;
-    gap: 0.7rem;
-    /* justify-content: center; */
-    /* gap: 2rem; */
-}
-.caw svg{
-    color: green;
-}
-
-.vwz h6{
-    color: dimgray;
-    padding-top: 0.4rem;
-    font-size: clamp(1.017rem, 1.5vw, 1.2rem);
-}
-
-.gejks h6 {
-  /* margin-top: 0.7rem; */
-  padding-top: 0.3rem;
-  font-size: clamp(0.8rem, 1.5vw, 1.2rem);
-
-  /* font-size: 13px; */
-
-  color: #777;
-}
-
-.fltu svg{
-    color: white;
-    width: clamp(2rem, 2vw, 1.5rem);
-  height: clamp(2rem, 2vw, 1.5rem);
-  margin-left: 0.01rem;
-}
-
-.klmnb svg{
-    color: white;
-    width: clamp(2rem, 2vw, 1.5rem);
-  height: clamp(2rem, 2vw, 1.5rem);
-  margin-left: 0.01rem;
-  margin-top: 0.1rem;
-}
-
-.fltu{
-    background-color: orangered;
-    border: 1px solid orangered;
-    /* width: 100%; */
-    max-width: 15.1vw;
-    height: 5.5vh;
-    border-radius: clamp(6px, 1vw, 10px);
-    position: relative;
-    /* left: 0.8rem; */
-    right: 0.7rem;
-}
-
-.klmnb{
-    background-color: green;
-    border: 1px solid green;
-    max-width: 15.1vw;
-    height: 5.5vh;
-    border-radius: clamp(6px, 1vw, 10px);
-    position: relative;
-    /* left: 0.8rem; */
-    right: 0.7rem;
-}
-
-.fjjjj h6 {
-  margin: 0 0 5px;
-}
-
-.fjjjj p {
-  margin: 0;
-
-  /* font-size: 12px; */
-  font-size: clamp(0.9rem, 1.5vw, 1.1rem);
-
-  color: #777;
-}
-
-.lowwww {
-  display: flex;
-  /* align-items: center; */
-  gap: 4.5rem;
-    /* padding-left: 5rem; */
-  /* justify-content: space-evenly; */
-
-  padding: 18px 0;
-
-  border-top: 1px solid #eee;
-
-  margin-top: 15px;
-   border: 1px solid #e5e5e5;
-
-  border-radius: 12px;
-
-  /* cursor: pointer; */
-  width: 100%;
-
-}
-
-.lowwww h5 {
-  margin: 0;
-  color: #777;
-  position: relative;
-  left: 0.3rem;
-}
-
-.lowwww h6 {
-  margin: 0;
-  font-size: 18px;
-  color: black;
-}
-
-.nvz {
-  width: 48px;
-  height: 48px;
-
-  display: flex;
-  align-items: center;
-  justify-content: center;
-
-  margin-bottom: 12px;
-
-  border-radius: 12px;
-
-  background: #eaf3ff;
-
-  color: #0864c7;
-
-  font-size: 22px;
-  margin-left: 7rem;
-
-}
-.nvz svg{
-    color: blue;
-}
-
-.qcb {
-  /* margin-top: 0.3rem; */
-position: relative;
-bottom: 1.9rem;
-  padding: 18px;
-    display: flex;
-    gap: 1.2rem;
-  border: 1px solid #e3e8ef;
-  border-radius: 14px;
-
-  background: #d7e0fc;
-}
-.qcb h6{
-    font-size: clamp(0.9rem, 1.5vw, 1.2rem);
-    padding-top: 0.1rem;
-    color: rgb(9, 9, 46);
-}
-.qcb svg{
-    color: blue;
-    margin-left: 1rem;
-}
-
-.qcb > div:last-child p {
-  color: #7d8797;
-
-  /* font-size: 11px; */
-  font-size: clamp(0.83rem, 1.5vw, 1.1rem);
-}
-
-.pupl{
-    /* display: flex; */
-    /* gap: 1rem; */
-    padding-left: 1rem;
-    padding-top: 0.5rem;
-    position: relative;
-    bottom: 1rem;
-    background-color: rgb(251, 162, 162);
-    border: 1px solid  rgb(251, 162, 162);
-    width: 100%;
-    border-radius: clamp(10px, 1vw, 10px);
-    /* margin-bottom: 0.7rem; */
-}
-
-.oewq h4{
-    color: red;
-}
-
-.oewq svg{
-    color: red;
-    width: clamp(1.3rem, 2vw, 1.5rem);
-  height: clamp(1.3rem, 2vw, 1.5rem);
-  /* margin-left: 0.25rem; */
-  margin-top: 0.25rem;
-}
-.oewq{
-    display: flex;
-    gap: 0.9rem;
-    /* margin-right: 4rem; */
-    /* padding-right: 5rem; */
-    position: relative;
-    right: 1.4rem;
-    top: 0.3rem;
-}
-
-.lnn h6{
-    color: rgb(56, 55, 55);
-    /* padding-top: 0.2rem; */
-    margin-bottom: 0.3rem;
-    margin-left: 0.8rem;
-    display: flex;
-    align-items: center;
-    position: relative;
-    font-size: clamp(0.6rem, 1.5vw, 1.2rem);
-    /* right: 1rem; */
-}
-.lnn h6::before{
-    content: "";
-    position: absolute;
-    /* left: 1rem; */
-    right: 15.5rem;
-    /* top: 50%; */
-    transform: translateY(-50%);
-    width: 1.05%;
-    margin-top: 0.25rem;
-    /* margin-right: 2rem; */
-    /* right: 4rem; */
-    /* max-width: 15vw; */
-    height: 0.48vh;
-    background-color: grey;
-    border-radius: clamp(8px, 1vw, 10px);
-    /* display: grid;
-    place-items: center; */
-
-}
-
-.oewq >div:nth-child(1){
-    background-color: rgb(245, 119, 119);
-    border: 1px solid  rgb(245, 119, 119);
-    width: 100%;
-    max-width: 8.4vw;
-    height: 4.6vh;
-    position: relative;
-    bottom: 0.35rem;
-    left: 0.5rem;
-    border-radius: clamp(15px, 1vw, 10px);
-}
-
-}
-/* =========================================================
-   RESPONSIVE LAYOUT
-   Existing CSS above is preserved. These rules complete the
-   layout for laptop, tablet and phone screens.
-========================================================= */
-
-@media (max-width: 1400px) {
-  .nn,
-  .pawap,
-  .crut,
-  .hyq,
-  .bne,
-  .folk {
-    width: min(94%, 1180px);
-    max-width: 1180px;
-    margin-left: auto;
-    margin-right: auto;
-  }
-
-  .nn {
-    min-height: 100px;
-    height: auto;
-    padding: 1rem clamp(1rem, 3vw, 2.5rem);
-    gap: clamp(1rem, 3vw, 3rem);
-    justify-content: space-between;
-  }
-
-  .lke,
-  .poe {
-    min-width: 0;
-    display: flex;
-    align-items: center;
-    gap: 1rem;
-    margin: 0;
-  }
-
-  .bob {
-    justify-content: space-between;
-    gap: 1rem;
-  }
-
-  .pw,
-  .fgtu {
-    margin-left: 0;
-  }
-
-  .pw button:nth-child(1),
-  .pw button:nth-child(2) {
-    max-width: 220px;
-  }
-
-  .crut {
-    display: grid;
-    grid-template-columns: repeat(3, minmax(0, 1fr));
-    gap: clamp(1rem, 3vw, 2.5rem);
-  }
-
-  .flrq {
-    width: 100%;
-    max-width: none;
-    min-width: 0;
-    height: auto;
-    min-height: 170px;
-    padding: 1.5rem 1rem;
-  }
-
-  .hyq,
-  .bne,
-  .folk {
-    height: auto;
-    padding: clamp(1.25rem, 3vw, 2.5rem);
-  }
-
-  .hyq,
-  .bne {
-    margin-top: clamp(2rem, 5vw, 4rem);
-  }
-
-  .owl {
-    max-width: 100%;
-  }
-
-  .poiw {
-    display: grid;
-    grid-template-columns: minmax(0, 1.4fr) minmax(90px, 0.8fr) minmax(0, 1fr);
-    gap: 0.75rem;
-    align-items: center;
-  }
-
-  .cvb,
-  .cvd {
-    min-width: 0;
-    align-items: center;
-    gap: 0.65rem;
-  }
-
-  .frd,
-  .frb {
-    flex: 0 0 44px;
-    width: 44px;
-    max-width: none;
-    height: 44px;
-  }
-
-  .frd svg,
-  .frb svg {
-    margin: 0.65rem;
-  }
-
-  .pore,
-  .porr {
-    min-width: 0;
-    text-align: right;
-  }
-
-  .pore h3,
-  .porr h3 {
-    overflow-wrap: anywhere;
-    font-size: clamp(1rem, 2.4vw, 1.5rem);
-  }
-
-  .pore h5,
-  .porr h5 {
-    right: auto;
-  }
-
-  .vivi,
-  .vivim {
-    width: fit-content;
-    max-width: none;
-    min-height: 36px;
-    height: auto;
-    margin: 0;
-    padding: 0.45rem 0.7rem;
-  }
-
-  .fgx {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(min(100%, 230px), 1fr));
-    gap: 1rem;
-  }
-
-  .cc {
-    width: 100%;
-    min-width: 0;
-  }
-
-  .ccx,
-  .lpc {
-    width: 100%;
-    max-width: 100%;
-  }
-
-  .lpc {
-    display: flex;
-    align-items: flex-start;
-    gap: 1rem;
-  }
-
-  .fgg {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 1rem;
-  }
-
-  .lod {
-    display: flex;
-    justify-content: space-around;
-    gap: 1rem;
-  }
-
-  .ppqqo,
-  .withdraw-overlay,
-  .ottp,
-  .ottpo {
-    position: fixed;
-    inset: 0;
-    width: 100%;
-    height: 100vh;
-    height: 100dvh;
-    padding: 16px;
-    overflow: hidden;
-  }
-
-  .footui,
-  .cbhg,
-  .creatv,
-  .creatvy {
-    position: relative;
-    inset: auto;
-    width: 100%;
-    max-width: min(900px, 100%);
-    max-height: calc(100vh - 32px);
-    max-height: calc(100dvh - 32px);
-    height: auto;
-    margin: auto;
-    overflow-x: hidden;
-    overflow-y: auto;
-  }
-
-  .creatv,
-  .creatvy {
-    bottom: auto;
-  }
-
-  .eokl {
-    display: grid;
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 1rem;
-  }
-
-  .namies input,
-  .namie input,
-  .fifws input {
-    width: 100%;
-    max-width: 100%;
-  }
-
-  .qcb {
-    position: static;
-    bottom: auto;
-    display: flex;
-    align-items: center;
-    gap: 1rem;
-    width: 100%;
-    margin: 1rem 0;
-  }
-
-  .qcb svg {
-    margin-left: 0;
-  }
-
-  .pupl {
-    position: static;
-    bottom: auto;
-    width: 100%;
-    padding: 1rem;
-    margin: 1rem 0;
-  }
-
-  .oewq {
-    position: static;
-    gap: 0.65rem;
-  }
-
-  .oewq > div:first-child {
-    display: grid;
-    place-items: center;
-    flex: 0 0 42px;
-    width: 42px;
-    max-width: none;
-    height: 42px;
-    position: static;
-  }
-
-  .lnn h6 {
-    position: relative;
-    margin: 0.6rem 0 0.6rem 1.4rem;
-    font-size: clamp(0.85rem, 1.5vw, 1rem);
-  }
-
-  .lnn h6::before {
-    content: "";
-    position: absolute;
-    top: 0.55em;
-    right: auto;
-    left: -1rem;
-    width: 0.45rem;
-    max-width: none;
-    height: 0.45rem;
-    margin: 0;
-    transform: none;
-  }
-
-  .plk {
-    display: flex;
-    justify-content: flex-end;
-    gap: 0.75rem;
-    margin-top: 1rem;
-  }
-
-  .plk > div {
-    min-width: 0;
-  }
-
-  .peter {
-    display: grid;
-    grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr);
-    align-items: center;
-    gap: 1rem;
-  }
-
-  .equater {
-    max-width: none;
-    width: 1px;
-    height: 5rem;
-  }
-
-  .for,
-  .divde,
-  .berqw,
-  .class,
-  .clsa,
-  .fifws,
-  .ime {
-    min-width: 0;
-  }
-
-  .fifws {
-    width: 100%;
-  }
-
-  .fifws input {
-    box-sizing: border-box;
-  }
-
-  .spopi {
-    right: 0.5rem;
-  }
-
-  .wekek {
-    width: fit-content;
-    max-width: 100%;
-    height: auto;
-    margin: 1rem auto;
-  }
-}
-
-@media (max-width: 900px) {
-  .pawap {
-    height: auto;
-    min-height: 0;
-    padding: clamp(1.25rem, 5vw, 2.5rem);
-    border-radius: 24px;
-  }
-
-  .beli {
-    min-width: 0;
-    margin-bottom: 1rem;
-  }
-
-  .beli h2 {
-    overflow-wrap: anywhere;
-    font-size: clamp(2rem, 7vw, 3rem);
-  }
-
-  .flioe {
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-  }
-
-  .beli :nth-child(1) svg {
-    position: static;
-    flex: 0 0 auto;
-  }
-
-  .pw {
-    flex-wrap: wrap;
-  }
-
-  .pw button:nth-child(1),
-  .pw button:nth-child(2) {
-    flex: 1 1 180px;
-    width: auto;
-    max-width: none;
-    min-height: 48px;
-  }
-
-  .fgtu {
-    align-items: flex-start;
-    gap: 0.65rem;
-  }
-
-  .plk button,
-  .bhhhh button,
-  .divg button,
-  .vwmb button {
-    min-height: 44px;
-  }
-}
-
-@media (max-width: 600px) {
+@media screen and (max-width: 360px) {
   .love {
     width: 100%;
     min-width: 0;
-    overflow-x: clip;
-    padding-bottom: 1rem;
-  }
-
-  .nn,
-  .pawap,
-  .crut,
-  .hyq,
-  .bne,
-  .folk {
-    width: calc(100% - 24px);
-    max-width: none;
-    margin-left: 12px;
-    margin-right: 12px;
-  }
-
-  .nn {
-    min-height: 68px;
-    height: auto;
-    margin-bottom: 1rem;
-    padding: 0.7rem;
-    gap: 0.5rem;
-  }
-
-  .poe,
-  .lke {
-    min-width: 0;
-    gap: 0.5rem;
-  }
-
-  .lope {
-    width: 40px;
-    min-width: 40px;
-    height: 40px;
-    margin: 0;
-    border-radius: 12px;
-  }
-
-  .lope svg {
-    width: 23px;
-    height: 23px;
-    margin: 8px;
-  }
-
-  .kill h3 {
-    font-size: 0.98rem;
-  }
-
-  .kill p {
-    padding-left: 0;
-    font-size: 0.72rem;
-  }
-
-  .fy,
-  .physiu {
-    display: grid;
-    place-items: center;
-    width: 40px;
-    min-width: 40px;
-    height: 40px;
-    padding: 0;
-  }
-
-  .fy svg {
-    margin: 0;
-  }
-
-  .llq {
-    left: auto;
-    right: 1px;
-    bottom: 35px;
-    width: 8px;
-    max-width: none;
-    height: 8px;
-  }
-
-  .pawap {
-    padding: 1.1rem;
-    border-radius: 20px;
-  }
-
-  .bob {
-    gap: 0.4rem;
-  }
-
-  .flioe h4 {
-    min-width: 0;
-    font-size: 0.98rem;
-    overflow-wrap: anywhere;
-  }
-
-  .beli h2 {
-    margin-top: 0.45rem;
-    font-size: clamp(1.8rem, 9vw, 2.6rem);
-  }
-
-  .beli p {
-    font-size: 0.88rem;
-  }
-
-  .pw {
-    display: grid;
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 0.6rem;
-    margin-top: 0.8rem;
-  }
-
-  .pw button:nth-child(1),
-  .pw button:nth-child(2) {
-    width: 100%;
-    min-width: 0;
-    min-height: 46px;
-    padding: 0.6rem 0.4rem;
-    font-size: 0.92rem;
-  }
-
-  .fgtu {
-    display: flex;
-    margin-top: 1rem;
-    gap: 0.5rem;
-  }
-
-  .fgtu p {
-    font-size: 0.76rem;
-    line-height: 1.45;
-  }
-
-  .crut {
-    grid-template-columns: 1fr;
-    gap: 0.7rem;
-    margin-top: 1rem;
-  }
-
-  .flrq {
-    min-height: 0;
-    padding: 0.95rem;
-    border-radius: 14px;
-  }
-
-  .flrq span {
-    display: block;
-    padding-bottom: 0.35rem;
-    font-size: 0.86rem;
-  }
-
-  .flrq h4 {
-    font-size: 1.25rem;
-  }
-
-  .hyq,
-  .bne,
-  .folk {
-    margin-top: 1.15rem;
-    padding: 1rem;
-    border-radius: 16px;
-  }
-
-  .hyq,
-  .bne,
-  .folk {
-    height: auto;
-  }
-
-  .gq {
-    justify-content: space-between;
-    gap: 0.5rem;
-  }
-
-  .gq h2,
-  .bnmo h3,
-  .fgg h4 {
-    font-size: 1.1rem;
-  }
-
-  .dd h4 {
-    gap: 0.25rem;
-    font-size: 0.82rem;
-    white-space: nowrap;
-  }
-
-  .owl {
-    height: 1px;
-    margin: 0.8rem 0;
-  }
-
-  .poiw {
-    grid-template-columns: minmax(0, 1fr) auto;
-    gap: 0.55rem;
-  }
-
-  .cvb,
-  .cvd {
-    grid-column: 1;
-    gap: 0.55rem;
-  }
-
-  .frd,
-  .frb {
-    flex-basis: 38px;
-    width: 38px;
-    height: 38px;
-  }
-
-  .frd svg,
-  .frb svg {
-    margin: 0.45rem;
-  }
-
-  .vivi,
-  .vivim {
-    grid-column: 2;
-    grid-row: 1;
-    justify-self: end;
-    min-height: 28px;
-    padding: 0.25rem 0.45rem;
-    font-size: 0.72rem;
-  }
-
-  .pore,
-  .porr {
-    grid-column: 1 / -1;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 0.5rem;
-    text-align: left;
-  }
-
-  .pore h3,
-  .porr h3 {
-    font-size: 0.98rem;
-  }
-
-  .pore h5,
-  .porr h5 {
-    margin: 0;
-    font-size: 0.82rem;
-  }
-
-  .bnmo {
-    align-items: center;
-    justify-content: space-between;
-    gap: 0.75rem;
-    text-align: left;
-  }
-
-  .bnmo > div:first-child {
-    min-width: 0;
-  }
-
-  .bnmo span {
-    display: block;
-    font-size: 0.75rem;
-    line-height: 1.4;
-  }
-
-  .fgx {
-    grid-template-columns: 1fr;
-    gap: 0.7rem;
-  }
-
-  .cc {
-    width: 100%;
-    min-height: 82px;
-    padding: 0.8rem;
-  }
-
-  .ccx {
-    min-height: 52px;
-    padding: 0.6rem;
-  }
-
-  .ccx span {
-    font-size: 1rem;
-    text-align: center;
-  }
-
-  .lpc {
-    align-items: flex-start;
-    gap: 0.75rem;
-    padding: 0.9rem;
-  }
-
-  .lpc p {
-    line-height: 1.45;
-  }
-
-  .fgg {
-    flex-wrap: wrap;
-    justify-content: flex-start;
-    gap: 0.75rem;
-  }
-
-  .fgg > div:nth-child(2) {
-    flex: 1 1 65%;
-  }
-
-  .pwi {
-    margin-left: auto;
-  }
-
-  .lod {
-    flex-wrap: wrap;
-    justify-content: flex-start;
-    gap: 0.75rem 1rem;
-  }
-
-  .vwz h6 {
-    font-size: 0.82rem;
-    line-height: 1.4;
-  }
-
-  /* All withdrawal and verification dialogs */
-  .ppqqo,
-  .withdraw-overlay,
-  .ottp,
-  .ottpo {
-    align-items: center;
-    justify-content: center;
-    padding: 8px;
-    height: 100vh;
-    height: 100dvh;
-    overflow: hidden;
-  }
-
-  .footui,
-  .cbhg,
-  .creatv,
-  .creatvy {
-    position: relative;
-    inset: auto;
-    bottom: auto;
-    top: auto;
-    width: 100%;
-    max-width: 100%;
-    max-height: calc(100vh - 16px);
-    max-height: calc(100dvh - 16px);
-    height: auto;
-    margin: auto;
-    padding: 1rem;
-    border-radius: 14px;
     overflow-x: hidden;
-    overflow-y: auto;
   }
 
-  .vnew,
-  .berqw,
-  .class,
-  .clsa {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 0.6rem;
-  }
-
-  .vnew h2 {
-    font-size: 1.35rem;
-  }
-
-  .close-withdraw {
-    min-width: 40px;
-    min-height: 40px;
-  }
-
-  .gejks h5,
-  .carsl h5 {
-    font-size: 1rem;
-  }
-
-  .florty {
-    display: grid;
-    gap: 0.55rem;
-  }
-
-  .ooppp {
-    min-height: 64px;
-    padding: 0.65rem;
-    gap: 0.5rem;
-  }
-
-  .fjjjj {
-    min-width: 0;
-    align-items: center;
-    gap: 0.6rem;
-  }
-
-  .fjjjj h6,
-  .fjjjj p {
-    overflow-wrap: anywhere;
-    font-size: 0.88rem;
-  }
-
-  .fltu,
-  .klmnb {
-    display: grid;
-    place-items: center;
-    flex: 0 0 38px;
-    width: 38px;
-    max-width: none;
-    height: 38px;
-    margin: 0;
-  }
-
-  .lowwww {
-    display: flex;
-    justify-content: space-between;
-    gap: 0.6rem;
-    padding: 0.8rem 0;
-  }
-
-  .bhhhh button {
-    width: 100%;
-  }
-
-  .wbmk h4 {
-    font-size: 1.1rem;
-  }
-
-  .wbmk h6 {
-    font-size: 0.86rem;
-    line-height: 1.5;
-  }
-
-  .nvz {
-    margin: 0 auto 0.6rem;
-  }
-
-  .dffs {
-    top: 0.25rem;
-    right: 0.25rem;
-  }
-
-  .eokl {
-    grid-template-columns: 1fr;
-    gap: 0.85rem;
-  }
-
-  .ewolo {
-    gap: 0.5rem;
-  }
-
-  .ewolo h6 {
-    font-size: 0.92rem;
-  }
-
-  .namies input,
-  .namie input {
-    width: 100%;
-    min-width: 0;
-    box-sizing: border-box;
-  }
-
-  .qcb {
-    align-items: flex-start;
-    padding: 0.8rem;
-  }
-
-  .qcb h6,
-  .qcb h5,
-  .qcb p {
-    overflow-wrap: anywhere;
-    font-size: 0.86rem;
-  }
-
-  .pupl {
-    padding: 0.8rem;
-  }
-
-  .oewq h4 {
-    font-size: 1rem;
-  }
-
-  .plk {
-    display: grid;
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 0.6rem;
-  }
-
-  .plk button {
-    width: 100%;
-    min-width: 0;
-    padding: 0.65rem 0.45rem;
-  }
-
-  .peter {
-    grid-template-columns: 1fr;
-    gap: 0.75rem;
-    padding: 0.8rem;
-  }
-
-  .equater {
-    display: none;
-  }
-
-  .voco,
-  .lllooo,
-  .fuckin,
-  .fucking {
-    min-width: 0;
-    gap: 0.5rem;
-  }
-
-  .lllooo h6,
-  .fuckin h6,
-  .fucking h6 {
-    font-size: 0.9rem;
-  }
-
-  .fifws {
-    padding: 0.8rem;
-  }
-
-  .fifws input {
-    width: 100%;
-    min-width: 0;
-    box-sizing: border-box;
-    padding-right: 2.5rem;
-  }
-
-  .spopi {
-    right: 0.45rem;
-  }
-
-  .ime {
-    display: grid;
-    gap: 0.6rem;
-  }
-
-  .divg button,
-  .vwmb button {
-    width: 100%;
-    min-height: 46px;
-  }
-
-  .class {
-    margin-bottom: 0.8rem;
-  }
-
-  .clsa {
-    justify-content: flex-start;
-  }
-
-  .toit,
-  .divde,
-  .for {
-    min-width: 0;
-    width: 100%;
-  }
-
-  .for {
-    display: flex;
-    align-items: center;
-    gap: 0.7rem;
-    padding: 0.8rem;
-  }
-
-  .for h5,
-  .for h6 {
-    overflow-wrap: anywhere;
-    font-size: 0.9rem;
-  }
-
-  .ottpo .creatvy {
-    max-width: 100%;
-  }
-
-  .wekek {
-    width: fit-content;
-    max-width: 100%;
-    height: auto;
-    margin: 0.8rem auto;
-  }
-}
-
-@media (max-width: 380px) {
   .nn,
   .pawap,
   .crut,
@@ -4676,40 +2517,198 @@ bottom: 1.9rem;
   .bne,
   .folk {
     width: calc(100% - 16px);
+    max-width: none;
     margin-left: 8px;
     margin-right: 8px;
   }
 
+  /* Header */
   .nn {
-    padding: 0.55rem;
-    gap: 0.3rem;
+    height: auto;
+    min-height: 60px;
+    padding: 8px;
+    gap: 6px;
+    justify-content: space-between;
+  }
+
+  .poe,
+  .lke {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    min-width: 0;
+    margin: 0;
   }
 
   .lope,
   .fy,
   .physiu {
-    width: 35px;
-    min-width: 35px;
-    height: 35px;
+    width: 34px;
+    min-width: 34px;
+    height: 34px;
+    margin: 0;
+  }
+
+  .lope svg {
+    width: 22px;
+    height: 22px;
+    margin: 5px;
   }
 
   .kill h3 {
-    font-size: 0.82rem;
+    font-size: 13px;
   }
 
   .kill p {
-    font-size: 0.65rem;
+    padding-left: 0;
+    font-size: 10px;
   }
 
-  .pawap,
+  .llq {
+    right: 0;
+    left: auto;
+    bottom: 30px;
+    width: 7px;
+    max-width: none;
+    height: 7px;
+  }
+
+  /* Balance and actions */
+  .pawap {
+    height: auto;
+    min-height: 0;
+    padding: 14px 12px;
+    border-radius: 18px;
+  }
+
+  .bob {
+    justify-content: space-between;
+    gap: 6px;
+  }
+
+  .beli {
+    min-width: 0;
+    margin-bottom: 10px;
+  }
+
+  .flioe {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+  }
+
+  .beli :nth-child(1) svg {
+    position: static;
+  }
+
+  .flioe h4 {
+    min-width: 0;
+    font-size: 14px;
+    overflow-wrap: anywhere;
+  }
+
+  .beli h2 {
+    font-size: clamp(25px, 8vw, 30px);
+    overflow-wrap: anywhere;
+  }
+
+  .beli p {
+    font-size: 12px;
+  }
+
+  .pw {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 8px;
+    margin: 10px 0 0;
+  }
+
+  .pw button:nth-child(1),
+  .pw button:nth-child(2) {
+    width: 100%;
+    max-width: none;
+    min-width: 0;
+    height: auto;
+    min-height: 42px;
+    padding: 8px 4px;
+    font-size: 13px;
+  }
+
+  .fgtu {
+    display: flex;
+    align-items: flex-start;
+    gap: 6px;
+    margin: 12px 0 0;
+  }
+
+  .fgtu p {
+    font-size: 10px;
+    line-height: 1.4;
+  }
+
+  /* Summary cards */
+  .crut {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 8px;
+    margin-top: 14px;
+  }
+
+  .flrq {
+    width: 100%;
+    max-width: none;
+    min-width: 0;
+    height: auto;
+    min-height: 0;
+    padding: 12px;
+  }
+
+  /* Transactions */
   .hyq,
   .bne,
   .folk {
-    padding: 0.8rem;
+    height: auto;
+    margin-top: 14px;
+    padding: 12px;
+    border-radius: 14px;
+  }
+
+  .gq,
+  .bnmo {
+    justify-content: space-between;
+    gap: 6px;
+  }
+
+  .gq h2,
+  .bnmo h3,
+  .fgg h4 {
+    font-size: 16px;
+  }
+
+  .owl {
+    width: 100%;
+    max-width: none;
+    height: 1px;
+    margin: 10px 0;
   }
 
   .poiw {
+    display: grid;
     grid-template-columns: minmax(0, 1fr);
+    gap: 6px;
+  }
+
+  .cvb,
+  .cvd {
+    grid-column: 1;
+    gap: 7px;
+  }
+
+  .frd,
+  .frb {
+    width: 36px;
+    max-width: none;
+    height: 36px;
   }
 
   .vivi,
@@ -4717,50 +2716,167 @@ bottom: 1.9rem;
     grid-column: 1;
     grid-row: auto;
     justify-self: start;
+    width: fit-content;
+    max-width: none;
+    height: auto;
+    min-height: 28px;
+    margin: 0;
+    padding: 4px 8px;
   }
 
   .pore,
   .porr {
     grid-column: 1;
+    display: flex;
+    justify-content: space-between;
+    gap: 6px;
+    text-align: left;
   }
 
-  .ppqqo,
+  .pore h5,
+  .porr h5 {
+    position: static;
+  }
+
+  /* Withdrawal account cards */
+  .fgx {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 8px;
+  }
+
+  .cc,
+  .ccx,
+  .lpc {
+    width: 100%;
+    max-width: 100%;
+    min-width: 0;
+  }
+
+  .cc {
+    min-height: 70px;
+    padding: 10px;
+  }
+
+  .lpc {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+    padding: 10px;
+  }
+
+  .fgg {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .lod {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+
+  /* Withdrawal and verification popups */
   .withdraw-overlay,
+  .ppqqo,
   .ottp,
   .ottpo {
+    position: fixed;
+    inset: 0;
+    width: 100%;
+    height: 100vh;
+    height: 100dvh;
     padding: 5px;
+    overflow: hidden;
   }
 
-  .footui,
   .cbhg,
+  .footui,
   .creatv,
   .creatvy {
-    padding: 0.75rem;
+    position: relative;
+    inset: auto;
+    width: 100%;
+    max-width: 100%;
+    max-height: calc(100vh - 10px);
     max-height: calc(100dvh - 10px);
+    height: auto;
+    margin: auto;
+    padding: 12px;
+    overflow-x: hidden;
+    overflow-y: auto;
+    border-radius: 12px;
+  }
+
+  .eokl,
+  .peter {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 10px;
+  }
+
+  .equater {
+    display: none;
+  }
+
+  .namies input,
+  .namie input,
+  .fifws input {
+    width: 100%;
+    max-width: 100%;
+    min-width: 0;
+    box-sizing: border-box;
+  }
+
+  .qcb,
+  .pupl {
+    position: static;
+    width: 100%;
+    margin: 10px 0;
+    padding: 10px;
+  }
+
+  .oewq {
+    position: static;
+    gap: 6px;
+  }
+
+  .oewq > div:first-child {
+    position: static;
+    width: 36px;
+    max-width: none;
+    height: 36px;
+  }
+
+  .lnn h6 {
+    position: relative;
+    margin: 8px 0 8px 18px;
+    font-size: 12px;
+  }
+
+  .lnn h6::before {
+    left: -14px;
+    right: auto;
+    width: 6px;
+    max-width: none;
+    height: 6px;
+    margin: 0;
   }
 
   .plk {
+    display: grid;
     grid-template-columns: 1fr;
-  }
-}
-
-@media (min-width: 1600px) {
-  .nn,
-  .pawap,
-  .crut,
-  .hyq,
-  .bne,
-  .folk {
-    margin-left: auto;
-    margin-right: auto;
+    gap: 7px;
   }
 
-  .nn,
-  .pawap,
-  .crut,
-  .hyq,
-  .bne,
-  .folk {
-    max-width: 1440px;
+  .plk button,
+  .bhhhh button,
+  .divg button,
+  .vwmb button {
+    width: 100%;
+    min-width: 0;
+    min-height: 42px;
   }
 }
