@@ -540,3 +540,45 @@ button {
     font-size: 13px;
   }
 }
+
+/* Slightly reduce the main wallet card while keeping it centered. */
+.gogp {
+  width: min(94%, 1180px);
+  min-height: 620px;
+  padding-top: 22px;
+  padding-bottom: 32px;
+}
+
+@media (min-width: 600px) {
+  .gogp {
+    width: min(92%, 1120px);
+    min-height: 620px;
+    padding-top: 24px;
+    padding-bottom: 34px;
+  }
+}
+
+@media (min-width: 900px) {
+  .gogp {
+    width: min(86vw, 1180px);
+    min-height: 620px;
+    padding-top: 18px;
+    padding-bottom: 34px;
+  }
+}
+
+@media (min-width: 1200px) {
+  .gogp {
+    width: min(76vw, 1180px);
+    min-height: 620px;
+  }
+}
+
+@media (max-width: 420px) {
+  .gogp {
+    width: 100%;
+    min-height: 0;
+    padding-top: 20px;
+    padding-bottom: 26px;
+  }
+}
