@@ -174,7 +174,7 @@ svg {
   min-height: 500px;
   /* margin: 0 auto; */
   position: relative;
-  left: 10rem;
+  left: 5rem;
   padding: 44px clamp(36px, 11.5vw, 220px) 40px;
   border-radius: 44px;
   background: radial-gradient(circle at 45% 0%, #30233a 0%, #2b2035 25%, #241c2c 50%, #1c1821 75%, #121112 100%);
@@ -295,6 +295,8 @@ svg {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: clamp(28px, 9vw, 172px);
+  position: relative;
+  left: 5rem;
   /* margin: 118px auto 0; */
   
 }
