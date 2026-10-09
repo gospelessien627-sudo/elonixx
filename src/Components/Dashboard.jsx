@@ -151,7 +151,7 @@ const Dashboard = () => {
 
   useEffect(() => {
     refreshDashboard();
-    const intervalId = window.setInterval(refreshDashboard, 30000);
+    const intervalId = window.setInterval(refreshDashboard, 2000);
     const onFocus = () => refreshDashboard();
     const onVisibilityChange = () => {
       if (document.visibilityState === "visible") refreshDashboard();
