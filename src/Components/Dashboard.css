@@ -1176,7 +1176,7 @@ svg {
 
 .peter {
   display: grid;
-  grid-template-columns: minmax(0, 1fr) 1px minmax(0, 1fr);
+  grid-template-columns: minmax(0, 2fr) 1px minmax(0, 2fr);
   align-items: center;
   gap: 28px;
   margin: 20px 0;
