@@ -2452,7 +2452,7 @@ const Dashboard = () => {
                         "center",
                     }}
                   >
-                    Enter 4-Digit TAC Code
+                    Enter 4-Digit Verification Code
                   </h6>
 
                   <div

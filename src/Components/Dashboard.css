@@ -190,6 +190,13 @@ svg {
   margin-bottom: 28px;
 }
 
+.fliy{
+    display: flex;
+    /* justify-content: center; */
+    align-items: center;
+    justify-content: space-between;
+}
+
 .flioe {
   display: flex;
   align-items: center;
