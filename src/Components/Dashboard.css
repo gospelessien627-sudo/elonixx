@@ -1884,3 +1884,38 @@ svg {
   .vivi, .vivim { grid-column: auto; grid-row: auto; justify-self: center; }
   .pore, .porr { grid-column: auto; display: block; text-align: right; }
 }
+
+/* Center the main dashboard containers at every responsive size.
+   These rules override mobile-default side margins after widths expand. */
+@media (min-width: 600px) {
+  .pawap,
+  .crut,
+  .hyq,
+  .bne,
+  .folk {
+    margin-left: auto;
+    margin-right: auto;
+  }
+}
+
+@media (min-width: 900px) {
+  .pawap,
+  .crut,
+  .hyq,
+  .bne,
+  .folk {
+    margin-left: auto;
+    margin-right: auto;
+  }
+}
+
+@media (min-width: 1200px) {
+  .pawap,
+  .crut,
+  .hyq,
+  .bne,
+  .folk {
+    margin-left: auto;
+    margin-right: auto;
+  }
+}
