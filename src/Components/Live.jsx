@@ -1,168 +1,146 @@
-import { useState, useEffect, useRef } from 'react';
-import { io } from 'socket.io-client';
-import './Live.css';
+import { useEffect, useRef, useState } from "react";
+import { io } from "socket.io-client";
+import "./Live.css";
 
-export default function Live({ role = 'client' }) {
+const CHAT_URL = "https://elonixx-chat-backend.onrender.com";
+
+export default function Live({ role = "client", token }) {
   const [isOpen, setIsOpen] = useState(false);
   const [messages, setMessages] = useState([]);
-  const [unread, setUnread] = useState(0);
-  const [input, setInput] = useState('');
-
-  const bottomRef = useRef(null);
+  const [input, setInput] = useState("");
+  const [connected, setConnected] = useState(false);
+  const [error, setError] = useState("");
+  const [sending, setSending] = useState(false);
   const socketRef = useRef(null);
-  const isOpenRef = useRef(isOpen);
+  const bottomRef = useRef(null);
 
   useEffect(() => {
-    isOpenRef.current = isOpen;
-  }, [isOpen]);
+    if (!isOpen || role !== "client" || !token) return undefined;
 
-  // Connect to the Render Socket.IO backend
-  useEffect(() => {
-    socketRef.current = io(
-      'https://elonixx-chat-backend.onrender.com',
-      {
-        transports: ['websocket']
-      }
-    );
-
-    const socket = socketRef.current;
-
-    socket.on('connect', () => {
-      console.log('Connected to chat server:', socket.id);
+    const socket = io(CHAT_URL, {
+      transports: ["websocket"],
+      auth: { token },
+      reconnection: true,
     });
+    socketRef.current = socket;
 
-    socket.on('chat-history', (history) => {
-      setMessages(history);
+    const openConversation = () => {
+      setConnected(true);
+      setError("");
+      socket.emit("support:open", (result) => {
+        if (!result?.ok) {
+          setError(result?.error || "Could not open support chat.");
+          return;
+        }
+        setMessages(Array.isArray(result.messages) ? result.messages : []);
+      });
+    };
+
+    socket.on("connect", openConversation);
+    socket.on("disconnect", () => setConnected(false));
+    socket.on("connect_error", (err) => {
+      setConnected(false);
+      setError(err?.message || "Could not connect to support chat.");
     });
-
-    socket.on('new-message', (newMsg) => {
-      setMessages((prev) => [...prev, newMsg]);
-
-      if (
-        !isOpenRef.current &&
-        newMsg.from === 'client' &&
-        role === 'admin'
-      ) {
-        setUnread((prev) => prev + 1);
-      }
+    socket.on("support:error", (message) => setError(message || "Chat request failed."));
+    socket.on("support:history", (payload) => {
+      setMessages(Array.isArray(payload?.messages) ? payload.messages : []);
     });
-
-    socket.on('connect_error', (err) => {
-      console.error('Socket connection error:', err.message);
-    });
-
-    socket.on('disconnect', (reason) => {
-      console.log('Disconnected from chat server:', reason);
+    socket.on("support:message", (message) => {
+      if (!message?.id) return;
+      setMessages((current) => current.some((item) => item.id === message.id)
+        ? current
+        : [...current, message]);
     });
 
     return () => {
       socket.disconnect();
+      socketRef.current = null;
     };
-  }, [role]);
+  }, [isOpen, role, token]);
 
-  // Automatically scroll to the newest message
   useEffect(() => {
-    bottomRef.current?.scrollIntoView({
-      behavior: 'smooth'
-    });
+    if (isOpen) bottomRef.current?.scrollIntoView({ behavior: "smooth", block: "end" });
   }, [messages, isOpen]);
 
-  const toggleChat = () => {
-    setIsOpen((prev) => !prev);
-
-    if (!isOpen) {
-      setUnread(0);
-    }
-  };
-
-  const sendReply = () => {
+  const sendMessage = () => {
     const text = input.trim();
+    const socket = socketRef.current;
+    if (!text || !socket?.connected || sending) return;
 
-    if (!text) return;
-
-    if (!socketRef.current) {
-      console.error('Socket is not available.');
-      return;
-    }
-
-    if (!socketRef.current.connected) {
-      console.error('Chat server is not connected.');
-      return;
-    }
-
-    const newMsg = {
-      id: Date.now(),
-      from: role,
-      text
-    };
-
-    // Send message to the Socket.IO server.
-    // The server will broadcast it back to all connected users.
-    socketRef.current.emit('send-message', newMsg);
-
-    setInput('');
+    setSending(true);
+    setError("");
+    socket.emit("support:send", { text }, (result) => {
+      setSending(false);
+      if (!result?.ok) {
+        setError(result?.error || "Message could not be sent.");
+        return;
+      }
+      setInput("");
+    });
   };
 
   return (
     <>
       <button
+        type="button"
         className="chat-bubble"
-        onClick={toggleChat}
+        onClick={() => setIsOpen((open) => !open)}
+        aria-label={isOpen ? "Close support chat" : "Open support chat"}
+        aria-expanded={isOpen}
       >
-        <span className="chat-icon">💬</span>
-
-        {unread > 0 && (
-          <span className="chat-badge">
-            {unread > 9 ? '9+' : unread}
-          </span>
-        )}
+        <span className="chat-icon" aria-hidden="true">💬</span>
       </button>
 
       {isOpen && (
-        <div className="chat-window">
+        <section className="chat-window" aria-label="Customer support chat">
           <header className="chat-header">
-            <h4>
-              Live Chat {role === 'admin' ? '(Admin)' : ''}
-            </h4>
-
+            <div>
+              <h4>Customer Support</h4>
+              <small>{connected ? "Connected" : "Connecting…"}</small>
+            </div>
             <button
+              type="button"
               className="close-btn"
-              onClick={toggleChat}
-            >
-              ×
-            </button>
+              onClick={() => setIsOpen(false)}
+              aria-label="Close support chat"
+            >×</button>
           </header>
 
-          <div className="chat-body">
-            {messages.map((msg) => (
+          <p className="chat-safety-note">
+            Support will never ask for your password, PIN, one-time code, or a payment to release funds.
+          </p>
+
+          {!token && <p className="chat-error">Sign in to start a support conversation.</p>}
+          {error && <p className="chat-error" role="alert">{error}</p>}
+
+          <div className="chat-body" aria-live="polite">
+            {messages.map((message) => (
               <div
-                key={msg.id}
-                className={`msg ${msg.from}`}
+                key={message.id}
+                className={`msg ${message.senderRole === "admin" ? "admin" : "client"}`}
               >
-                {msg.text}
+                {message.text}
+                <small>{message.createdAt ? new Date(message.createdAt).toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" }) : ""}</small>
               </div>
             ))}
-
             <div ref={bottomRef} />
           </div>
 
-          <footer className="chat-footer">
+          <form className="chat-footer" onSubmit={(event) => { event.preventDefault(); sendMessage(); }}>
             <input
               value={input}
-              onChange={(e) => setInput(e.target.value)}
-              placeholder="Type a message..."
-              onKeyDown={(e) => {
-                if (e.key === 'Enter') {
-                  sendReply();
-                }
-              }}
+              onChange={(event) => setInput(event.target.value)}
+              placeholder="Type a message…"
+              maxLength={2000}
+              aria-label="Type a support message"
+              disabled={!connected || !token}
             />
-
-            <button onClick={sendReply}>
-              Send
+            <button type="submit" disabled={!connected || !token || sending || !input.trim()}>
+              {sending ? "…" : "Send"}
             </button>
-          </footer>
-        </div>
+          </form>
+        </section>
       )}
     </>
   );

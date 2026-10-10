@@ -19,7 +19,7 @@ import {
 } from "react-icons/fa6";
 
 import { useNavigate } from "react-router-dom";
-import Live from "./Live";
+import SupportInbox from "./SupportInbox";
 import "./Admin.css";
 
 const API_URL = "https://api.elonixx.com";
@@ -713,7 +713,7 @@ const Admin = () => {
             <div className="chat-admin-heading">
               <div>
                 <h2>Live Customer Support</h2>
-                <p>Communicate with customers through the live chat.</p>
+                <p>Reply to client-started support conversations.</p>
               </div>
               <div className="online-indicator">
                 <span /> Support online
@@ -721,7 +721,7 @@ const Admin = () => {
             </div>
 
             <div className="admin-live-container">
-              <Live role="admin" />
+              <SupportInbox token={adminToken} />
             </div>
           </section>
         )}
@@ -738,3 +738,4 @@ const Admin = () => {
 };
 
 export default Admin;
+

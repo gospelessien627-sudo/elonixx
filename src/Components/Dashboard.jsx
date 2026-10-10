@@ -1,5 +1,6 @@
 import React, { useCallback, useEffect, useRef, useState } from "react";
 import "./Dashboard.css";
+import Live from "./Live";
 
 import {
   FaArrowDown,
@@ -2668,7 +2669,10 @@ const Dashboard = () => {
         </div>
 
       )}
-
+          <Live
+  role="client"
+  token={localStorage.getItem("finwalletToken")}
+/>
     </div>
   );
 };
