@@ -781,7 +781,6 @@ const Admin = () => {
             </div>
           </section>
         )}
-
         {loading && (
           <div className="admin-loading">
             <div className="admin-spinner" />
