@@ -46,6 +46,7 @@ const Admin = () => {
   const [loading, setLoading] = useState(true);
   const [updatingId, setUpdatingId] = useState("");
   const [updatingBalanceId, setUpdatingBalanceId] = useState("");
+  const [updatingAccountId, setUpdatingAccountId] = useState("");
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const [dashboardError, setDashboardError] = useState("");
   const [adminEmail, setAdminEmail] = useState(
@@ -243,6 +244,46 @@ const Admin = () => {
       alert(error?.message || "Unable to update user balance.");
     } finally {
       setUpdatingBalanceId("");
+    }
+  };
+
+  /* ================= DEACTIVATE / REACTIVATE USER ================= */
+
+  const updateUserAccountStatus = async (user) => {
+    if (!user?._id) return;
+
+    const currentlyActive = user.isActive !== false;
+    const nextIsActive = !currentlyActive;
+    const action = nextIsActive ? "reactivate" : "deactivate";
+    const confirmed = window.confirm(
+      `${nextIsActive ? "Reactivate" : "Deactivate"} ${user.name || "this client's"} account? ${
+        nextIsActive
+          ? "The client will be able to sign in again."
+          : "The client will lose access, while transaction records are retained."
+      }`
+    );
+
+    if (!confirmed) return;
+
+    setUpdatingAccountId(String(user._id));
+    try {
+      const data = await adminFetch(`/api/admin/users/${user._id}/status`, {
+        method: "PATCH",
+        body: JSON.stringify({ isActive: nextIsActive }),
+      });
+
+      setUsers((currentUsers) =>
+        currentUsers.map((item) =>
+          String(item._id) === String(user._id)
+            ? { ...item, isActive: data.user?.isActive ?? nextIsActive }
+            : item
+        )
+      );
+    } catch (error) {
+      console.error("UPDATE USER STATUS ERROR:", error);
+      alert(error?.message || `Unable to ${action} this account.`);
+    } finally {
+      setUpdatingAccountId("");
     }
   };
 
@@ -569,7 +610,8 @@ const Admin = () => {
                     <th>Deposited</th>
                     <th>Withdrawn</th>
                     <th>Created</th>
-                    <th>Action</th>
+                    <th>Account status</th>
+                    <th>Actions</th>
                   </tr>
                 </thead>
 
@@ -590,6 +632,7 @@ const Admin = () => {
                       <td>${formatMoney(user.deposited)}</td>
                       <td>${formatMoney(user.withdrawn)}</td>
                       <td>{formatDate(user.createdAt)}</td>
+                      <td>{user.isActive === false ? "Deactivated" : "Active"}</td>
 
                       <td>
                         <button
@@ -608,12 +651,25 @@ const Admin = () => {
                             ? "Updating..."
                             : "Edit Balance"}
                         </button>
+                        <button
+                          type="button"
+                          className="edit-balance-button account-status-button"
+                          disabled={updatingAccountId === String(user._id)}
+                          onClick={() => updateUserAccountStatus(user)}
+                          style={{ marginLeft: 8 }}
+                        >
+                          {updatingAccountId === String(user._id)
+                            ? "Saving..."
+                            : user.isActive === false
+                            ? "Reactivate"
+                            : "Remove account"}
+                        </button>
                       </td>
                     </tr>
                   ))}
 
                   {users.length === 0 && (
-                    <tr><td colSpan="7">No users found.</td></tr>
+                    <tr><td colSpan="8">No users found.</td></tr>
                   )}
                 </tbody>
               </table>
