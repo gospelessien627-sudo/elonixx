@@ -680,7 +680,7 @@ const Login = () => {
                     </>
                   ) : (
                     <>
-                      <span>
+                      <span className="drezx">
                         Login
                       </span>
 
@@ -913,7 +913,7 @@ const Login = () => {
                     </>
                   ) : (
                     <>
-                      <span>
+                      <span className="drezx">
                         Create Account
                       </span>
 
