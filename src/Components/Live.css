@@ -31,7 +31,8 @@
   font-size: 26px;
 }
 
-.chat-badge {
+/* Unread admin-message count */
+.chat-unread-badge {
   position: absolute;
   top: -2px;
   right: -2px;
@@ -47,6 +48,7 @@
   color: #fff;
   font-size: 12px;
   font-weight: 700;
+  line-height: 1;
 }
 
 /* Chat window */

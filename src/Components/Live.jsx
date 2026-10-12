@@ -4,8 +4,42 @@ import "./Live.css";
 
 const CHAT_URL = "https://elonixx-chat-backend.onrender.com";
 
+function getReadKey(token) {
+  try {
+    const payload = JSON.parse(atob(token.split(".")[1].replace(/-/g, "+").replace(/_/g, "/")));
+    return `supportChatLastRead:${payload.userId || "client"}`;
+  } catch {
+    return "supportChatLastRead:client";
+  }
+}
+
+function saveLastReadMessage(messages, readKey) {
+  const lastAdminMessage = [...messages].reverse().find((message) => message.senderRole === "admin");
+  if (!lastAdminMessage?.id) return;
+  try {
+    localStorage.setItem(readKey, lastAdminMessage.id);
+  } catch {
+    // Chat still works if browser storage is unavailable.
+  }
+}
+
+function countUnreadAdminMessages(messages, readKey) {
+  let lastReadId = "";
+  try {
+    lastReadId = localStorage.getItem(readKey) || "";
+  } catch {
+    return 0;
+  }
+  if (!lastReadId) return messages.filter((message) => message.senderRole === "admin").length;
+
+  const lastReadIndex = messages.findIndex((message) => message.id === lastReadId);
+  if (lastReadIndex < 0) return 0;
+  return messages.slice(lastReadIndex + 1).filter((message) => message.senderRole === "admin").length;
+}
+
 export default function Live({ role = "client", token }) {
   const [isOpen, setIsOpen] = useState(false);
+  const [unreadCount, setUnreadCount] = useState(0);
   const [messages, setMessages] = useState([]);
   const [input, setInput] = useState("");
   const [connected, setConnected] = useState(false);
@@ -13,9 +47,26 @@ export default function Live({ role = "client", token }) {
   const [sending, setSending] = useState(false);
   const socketRef = useRef(null);
   const bottomRef = useRef(null);
+  const isOpenRef = useRef(isOpen);
+  const messagesRef = useRef(messages);
+  const readKey = token ? getReadKey(token) : "";
 
   useEffect(() => {
-    if (!isOpen || role !== "client" || !token) return undefined;
+    isOpenRef.current = isOpen;
+  }, [isOpen]);
+
+  useEffect(() => {
+    messagesRef.current = messages;
+  }, [messages]);
+
+  // Stay connected while the chat is closed so admin replies can update the badge immediately.
+  useEffect(() => {
+    if (role !== "client" || !token) {
+      setConnected(false);
+      setUnreadCount(0);
+      setMessages([]);
+      return undefined;
+    }
 
     const socket = io(CHAT_URL, {
       transports: ["websocket"],
@@ -32,7 +83,15 @@ export default function Live({ role = "client", token }) {
           setError(result?.error || "Could not open support chat.");
           return;
         }
-        setMessages(Array.isArray(result.messages) ? result.messages : []);
+        const history = Array.isArray(result.messages) ? result.messages : [];
+        messagesRef.current = history;
+        setMessages(history);
+        if (isOpenRef.current) {
+          saveLastReadMessage(history, readKey);
+          setUnreadCount(0);
+        } else {
+          setUnreadCount(countUnreadAdminMessages(history, readKey));
+        }
       });
     };
 
@@ -44,24 +103,53 @@ export default function Live({ role = "client", token }) {
     });
     socket.on("support:error", (message) => setError(message || "Chat request failed."));
     socket.on("support:history", (payload) => {
-      setMessages(Array.isArray(payload?.messages) ? payload.messages : []);
+      const history = Array.isArray(payload?.messages) ? payload.messages : [];
+      messagesRef.current = history;
+      setMessages(history);
+      if (isOpenRef.current) {
+        saveLastReadMessage(history, readKey);
+        setUnreadCount(0);
+      } else {
+        setUnreadCount(countUnreadAdminMessages(history, readKey));
+      }
     });
     socket.on("support:message", (message) => {
       if (!message?.id) return;
-      setMessages((current) => current.some((item) => item.id === message.id)
-        ? current
-        : [...current, message]);
+      const current = messagesRef.current;
+      if (current.some((item) => item.id === message.id)) return;
+      const updated = [...current, message];
+      messagesRef.current = updated;
+      setMessages(updated);
+
+      if (message.senderRole === "admin") {
+        if (isOpenRef.current) {
+          saveLastReadMessage(updated, readKey);
+        } else {
+          setUnreadCount((count) => count + 1);
+        }
+      }
     });
 
     return () => {
       socket.disconnect();
       socketRef.current = null;
     };
-  }, [isOpen, role, token]);
+  }, [role, token, readKey]);
 
   useEffect(() => {
-    if (isOpen) bottomRef.current?.scrollIntoView({ behavior: "smooth", block: "end" });
-  }, [messages, isOpen]);
+    if (!isOpen) return;
+    setUnreadCount(0);
+    saveLastReadMessage(messagesRef.current, readKey);
+    bottomRef.current?.scrollIntoView({ behavior: "smooth", block: "end" });
+  }, [isOpen, readKey, messages]);
+
+  const toggleChat = () => {
+    if (!isOpen) {
+      setUnreadCount(0);
+      saveLastReadMessage(messagesRef.current, readKey);
+    }
+    setIsOpen((open) => !open);
+  };
 
   const sendMessage = () => {
     const text = input.trim();
@@ -85,11 +173,16 @@ export default function Live({ role = "client", token }) {
       <button
         type="button"
         className="chat-bubble"
-        onClick={() => setIsOpen((open) => !open)}
-        aria-label={isOpen ? "Close support chat" : "Open support chat"}
+        onClick={toggleChat}
+        aria-label={unreadCount ? `Open support chat, ${unreadCount} unread admin messages` : isOpen ? "Close support chat" : "Open support chat"}
         aria-expanded={isOpen}
       >
         <span className="chat-icon" aria-hidden="true">💬</span>
+        {unreadCount > 0 && (
+          <span className="chat-unread-badge" aria-label={`${unreadCount} unread messages`}>
+            {unreadCount > 99 ? "99+" : unreadCount}
+          </span>
+        )}
       </button>
 
       {isOpen && (
